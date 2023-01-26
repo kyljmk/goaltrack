@@ -5,7 +5,7 @@ import Home from "./screens/Home";
 import Game from "./screens/Game";
 import "./Index.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
