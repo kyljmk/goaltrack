@@ -16,6 +16,6 @@ export interface ILiveResults {
 }
 
 export interface InfoContextType {
-    liveResults: ILiveResults[],
-    setLiveResults: Dispatch<SetStateAction<ILiveResults[]>>,
+    liveResults: any,
+    setLiveResults: Dispatch<SetStateAction<any>>,
 }
