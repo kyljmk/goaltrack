@@ -1,5 +1,6 @@
 import React from "react";
 import { ILiveResultsProps } from "../Types";
+import "../styles/LiveScore.css";
 
 function LiveScore({
   homeName,
@@ -17,12 +18,12 @@ function LiveScore({
       />
       <div className="liveScore-text">
         <div className="liveScore-text-home">
-          <h1 className="liveScore-text-home-name">{homeName}</h1>
-          <h2 className="liveScore-text-home-score">{homeScore}</h2>
+          <span className="liveScore-text-home-name">{homeName}</span>
+          <span className="liveScore-text-home-score">{homeScore}</span>
         </div>
         <div className="liveScore-text-away">
-          <h1 className="liveScore-text-away-name">{awayName}</h1>
-          <h2 className="liveScore-text-away-score">{awayScore}</h2>
+          <span className="liveScore-text-away-name">{awayName}</span>
+          <span className="liveScore-text-away-score">{awayScore}</span>
         </div>
       </div>
     </div>

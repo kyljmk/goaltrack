@@ -1,0 +1,25 @@
+.liveScore {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    border-radius: 10px;
+    border: solid black 1px;
+    margin-bottom: 15px;
+}
+
+.liveScore-img {
+    width: 100px;
+}
+
+.liveScore-text {
+    width: 100%;
+}
+
+.liveScore-text-home, .liveScore-text-away {
+    display: flex;
+    justify-content: space-between;
+    height: 50%;
+    align-items: center;
+    padding: 0 15px;
+}
+
