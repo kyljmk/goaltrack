@@ -1,4 +1,13 @@
 .header {
-    background-color: blue;
+    background-color: #28231d;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.header-title {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
 }
