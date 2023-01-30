@@ -19,8 +19,8 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
         flag: "https://media-3.api-sports.io/flags/gb.svg",
       },
       teams: {
-        home: "Manchester United",
-        away: "Arsenal",
+        home: { name: "Manchester United" },
+        away: { name: "Arsenal" },
       },
       goals: {
         home: 2,

@@ -3,12 +3,13 @@
     justify-content: flex-start;
     width: 100%;
     border-radius: 10px;
-    border: solid black 1px;
     margin-bottom: 15px;
+    background-color: antiquewhite;
 }
 
 .liveScore-img {
     width: 100px;
+    border-radius: 10px;
 }
 
 .liveScore-text {

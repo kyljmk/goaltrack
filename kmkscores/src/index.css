@@ -5,6 +5,17 @@
   align-items: center;
 }
 
+.livescoreContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+body {
+  margin: 0;
+}
+
 * {
   box-sizing: border-box;
 }
