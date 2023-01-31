@@ -34,9 +34,30 @@ function Header() {
           >
             Settings
           </li>
-          <li className="header-dropdown-item">Favourites</li>
-          <li className="header-dropdown-item">Leagues</li>
-          <li className="header-dropdown-item">Contact</li>
+          <li
+            onClick={() => {
+              navigate("/favourites");
+            }}
+            className="header-dropdown-item"
+          >
+            Favourites
+          </li>
+          <li
+            onClick={() => {
+              navigate("/leagues");
+            }}
+            className="header-dropdown-item"
+          >
+            Leagues
+          </li>
+          <li
+            onClick={() => {
+              navigate("/contact");
+            }}
+            className="header-dropdown-item"
+          >
+            Contact
+          </li>
         </ul>
       )}
       <FontAwesomeIcon

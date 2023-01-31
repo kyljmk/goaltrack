@@ -1,16 +1,25 @@
 import React from "react";
 import { ILiveResultsProps } from "../Types";
 import "../styles/LiveScore.css";
+import { useNavigate } from "react-router-dom";
 
 function LiveScore({
+  id,
   homeName,
   awayName,
   homeScore,
   awayScore,
   flagUrl,
 }: ILiveResultsProps) {
+  const navigate = useNavigate();
+
   return (
-    <div className="liveScore">
+    <div
+      onClick={() => {
+        navigate("/game", { state: { id: id } });
+      }}
+      className="liveScore"
+    >
       <img
         className="liveScore-img"
         src={flagUrl}

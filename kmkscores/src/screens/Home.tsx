@@ -12,6 +12,7 @@ function Home() {
     return (
       <LiveScore
         key={x.fixture.id}
+        id={x.fixture.id}
         homeName={x.teams.home.name}
         awayName={x.teams.away.name}
         homeScore={x.goals.home}

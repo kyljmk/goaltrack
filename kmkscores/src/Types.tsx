@@ -8,12 +8,15 @@ export interface ITeamInfo {
 }
 
 export interface ILiveResultsProps {
+  id: number;
   homeName: string;
   awayName: string;
   homeScore: number;
   awayScore: number;
   flagUrl: string;
 }
+
+export interface IFixtureDetails {}
 
 export interface InfoContextType {
   liveResults: any;

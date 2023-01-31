@@ -13,7 +13,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
   const [liveResults, setLiveResults] = useState<any>([
     {
       fixture: {
-        id: 0,
+        id: 12345,
       },
       league: {
         flag: "https://media-3.api-sports.io/flags/gb.svg",
