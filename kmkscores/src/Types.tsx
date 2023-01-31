@@ -16,7 +16,17 @@ export interface ILiveResultsProps {
   flagUrl: string;
 }
 
-export interface IFixtureDetails {}
+export type Team = {
+  name: string;
+  logo: string;
+  score: number;
+};
+
+export interface IFixtureDetails {
+  home: Team;
+  away: Team;
+  minutesPlayed: number;
+}
 
 export interface InfoContextType {
   liveResults: any;

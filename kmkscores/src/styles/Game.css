@@ -1,0 +1,30 @@
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game {
+  display: flex;
+  justify-content: space-between;
+  border: solid 2px goldenrod;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.game-home,
+.game-score,
+.game-away {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
