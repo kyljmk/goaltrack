@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,9 +8,32 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const handleOpen = () => {
+    setOpenMenu(true);
+  };
+  const handleClose = () => {
+    setOpenMenu(false);
+  };
   return (
     <div className="header">
-      <FontAwesomeIcon className="header-menuIcon" icon={faBars} size="2xl" />
+      {openMenu && (
+        <ul className="header-dropdown">
+          <li onClick={handleClose} className="header-dropdown-item">
+            X
+          </li>
+          <li className="header-dropdown-item">Settings</li>
+          <li className="header-dropdown-item">Favourites</li>
+          <li className="header-dropdown-item">Leagues</li>
+          <li className="header-dropdown-item">Contact</li>
+        </ul>
+      )}
+      <FontAwesomeIcon
+        className="header-menuIcon"
+        onClick={handleOpen}
+        icon={faBars}
+        size="2xl"
+      />
       <h1 className="header-title">kmkScores</h1>
       <FontAwesomeIcon
         className="header-searchIcon"

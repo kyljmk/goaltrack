@@ -1,12 +1,14 @@
 .liveScore {
     display: flex;
     justify-content: flex-start;
-    width: 100%;
     border-radius: 10px;
     margin-bottom: 15px;
-    background-color: #28231d;
-    border: 1px solid goldenrod;
+    max-width: 600px;
+    width: 100%;
+
+    border: 2px solid goldenrod;
 }
+
 
 .liveScore-img {
     width: 100px;

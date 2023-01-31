@@ -1,13 +1,46 @@
 .header {
-    background-color: #28231d;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
+  background-color: #28231d;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  position: relative;
+  top: 0;
+}
+
+.header-dropdown {
+  position: absolute;
+  margin-left: -30px;
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid grey;
+  width: 200px;
+  height: 100vh;
+  background-color: #28231d;
+  top: -15px;
+}
+
+.header-dropdown-item {
+  padding: 20px;
+  border-bottom: 2px solid goldenrod;
+  cursor: pointer;
+}
+
+.header-dropdown-item:hover {
+  border-bottom: 2px solid goldenrod;
+  background-color: black;
+}
+
+.header-menuIcon {
+  cursor: pointer;
+}
+
+.header-searchIcon {
+  cursor: pointer;
 }
 
 .header-title {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 700;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
 }

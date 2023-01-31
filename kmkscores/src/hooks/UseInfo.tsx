@@ -29,17 +29,17 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
     },
   ]);
 
-  useEffect(() => {
-    fetch("https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all", {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => setLiveResults(data.response));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all", {
+  //     method: "GET",
+  //     headers: {
+  //       "X-RapidAPI-Key": "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
+  //       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => setLiveResults(data.response));
+  // }, []);
 
   return (
     <InfoContext.Provider value={{ liveResults, setLiveResults }}>
