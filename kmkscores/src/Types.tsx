@@ -25,7 +25,12 @@ export type Team = {
 export interface IFixtureDetails {
   home: Team;
   away: Team;
+  matchStatus: string;
   minutesPlayed: number;
+  league: string;
+  leagueLogo: string;
+  round: string;
+  dateTime: string;
 }
 
 export interface InfoContextType {

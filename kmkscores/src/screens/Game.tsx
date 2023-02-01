@@ -5,7 +5,8 @@ import { IFixtureDetails } from "../Types";
 import "../styles/Game.css";
 
 function Game() {
-  const location = useLocation();
+  const fixtureId: number = useLocation().state.id;
+
   const [fixtureDetails, setFixtureDetails] = useState<IFixtureDetails>({
     home: {
       name: "",
@@ -17,7 +18,12 @@ function Game() {
       logo: "",
       score: 0,
     },
+    matchStatus: "",
     minutesPlayed: 0,
+    league: "",
+    leagueLogo: "",
+    round: "",
+    dateTime: "",
   });
   useEffect(() => {
     const options = {
@@ -29,7 +35,7 @@ function Game() {
     };
 
     fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${location.state.id}`,
+      `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
       options
     )
       .then((response) => response.json())
@@ -45,29 +51,51 @@ function Game() {
             logo: data.response[0].teams.away.logo,
             score: data.response[0].goals.away,
           },
+          matchStatus: data.response[0].fixture.status.short,
           minutesPlayed: data.response[0].fixture.status.elapsed,
+          league: data.response[0].league.name,
+          leagueLogo: data.response[0].league.logo,
+          round: data.response[0].league.round,
+          dateTime: data.response[0].fixture.data,
         })
       )
       .catch((err) => console.error(err));
   }, []);
 
-  const { home, away, minutesPlayed } = fixtureDetails;
+  const {
+    home,
+    away,
+    matchStatus,
+    minutesPlayed,
+    league,
+    leagueLogo,
+    round,
+    dateTime,
+  } = fixtureDetails;
 
   return (
-    <div className="gameContainer">
+    <div>
       <Header />
-      <div className="game">
-        <div className="game-home">
-          <img src={home.logo} alt="home teams logo" />
-          <h1>{home.name}</h1>
-        </div>
-        <div className="game-score">
-          <h1>{`${home.score} - ${away.score}`}</h1>
-          <span>{`${minutesPlayed}'`}</span>
-        </div>
-        <div className="game-away">
-          <img src={away.logo} alt="home teams logo" />
-          <h1>{away.name}</h1>
+      <div className="gameContainer">
+        <div className="game">
+          <div className="game-home">
+            <img src={home.logo} alt="home teams logo" />
+            <h1>{home.name}</h1>
+          </div>
+          <div className="game-score">
+            <img
+              src={leagueLogo}
+              alt="logo of the league"
+              className="game-leagueLogo"
+            />
+            <span>{`${league} | Round ${round.split("- ")[1]}`}</span>
+            <h1>{`${home.score} - ${away.score}`}</h1>
+            <span>{`${minutesPlayed}'`}</span>
+          </div>
+          <div className="game-away">
+            <img src={away.logo} alt="home teams logo" />
+            <h1>{away.name}</h1>
+          </div>
         </div>
       </div>
     </div>

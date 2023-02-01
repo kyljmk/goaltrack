@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import LiveScore from "../components/LiveScore";
 import useInfo from "../hooks/UseInfo";
@@ -6,7 +5,6 @@ import { InfoContextType } from "../Types";
 
 function Home() {
   const { liveResults } = useInfo() as InfoContextType;
-  const navigate = useNavigate();
 
   const scoreElements: any = liveResults.map((x: any) => {
     return (

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 40px;
 }
 
 .game {
@@ -10,9 +11,8 @@
   border: solid 2px goldenrod;
   border-radius: 15px;
   padding: 20px;
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
-  margin-top: 50px;
 }
 
 .game-home,
@@ -23,8 +23,12 @@
   align-items: center;
 }
 
+.game-leagueLogo {
+  width: 40px;
+}
+
 .game-score {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
