@@ -31,9 +31,33 @@ export interface IFixtureDetails {
   leagueLogo: string;
   round: string;
   dateTime: string;
+  events: IMatchEvent[] | null;
 }
 
 export interface InfoContextType {
   liveResults: any;
   setLiveResults: Dispatch<SetStateAction<any>>;
+}
+
+export interface IMatchEvent {
+  time: {
+    elapsed: number;
+    extra: number;
+  };
+  team: {
+    id: number;
+    name: string;
+    logo: string;
+  };
+  player: {
+    id: number;
+    name: string;
+  };
+  assist: {
+    id: number;
+    name: string;
+  };
+  type: string;
+  detail: string;
+  comment: string;
 }

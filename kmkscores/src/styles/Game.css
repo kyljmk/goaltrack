@@ -6,13 +6,17 @@
 }
 
 .game {
-  display: flex;
-  justify-content: space-between;
   border: solid 2px goldenrod;
   border-radius: 15px;
   padding: 20px;
   max-width: 800px;
   width: 100%;
+  min-width: 600px;
+}
+
+.gameHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
 .game-home,

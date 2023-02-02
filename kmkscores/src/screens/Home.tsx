@@ -6,7 +6,7 @@ import { InfoContextType } from "../Types";
 function Home() {
   const { liveResults } = useInfo() as InfoContextType;
 
-  const scoreElements: any = liveResults.map((x: any) => {
+  const scoreElements = liveResults.map((x: any) => {
     return (
       <LiveScore
         key={x.fixture.id}

@@ -24,6 +24,7 @@ function Game() {
     leagueLogo: "",
     round: "",
     dateTime: "",
+    events: null,
   });
   useEffect(() => {
     const options = {
@@ -57,10 +58,13 @@ function Game() {
           leagueLogo: data.response[0].league.logo,
           round: data.response[0].league.round,
           dateTime: data.response[0].fixture.data,
+          events: data.response[0].events,
         })
       )
       .catch((err) => console.error(err));
   }, []);
+
+  console.log(fixtureDetails);
 
   const {
     home,
@@ -71,31 +75,51 @@ function Game() {
     leagueLogo,
     round,
     dateTime,
+    events,
   } = fixtureDetails;
+
+  const eventElements = events?.map((e) => {
+    const imageUrl: string = "";
+
+    return (
+      <div>
+        <span>{e.player.name}</span>
+        <img />
+        <span>
+          {e.time.elapsed === 90
+            ? `${e.time.elapsed}'`
+            : `${e.time.elapsed} + ${e.time.extra}'`}
+        </span>
+      </div>
+    );
+  });
 
   return (
     <div>
       <Header />
       <div className="gameContainer">
         <div className="game">
-          <div className="game-home">
-            <img src={home.logo} alt="home teams logo" />
-            <h1>{home.name}</h1>
+          <div className="gameHeader">
+            <div className="game-home">
+              <img src={home.logo} alt="home teams logo" />
+              <h1>{home.name}</h1>
+            </div>
+            <div className="game-score">
+              <img
+                src={leagueLogo}
+                alt="logo of the league"
+                className="game-leagueLogo"
+              />
+              <span>{`${league} | Round ${round.split("- ")[1]}`}</span>
+              <h1>{`${home.score} - ${away.score}`}</h1>
+              <span>{`${minutesPlayed}'`}</span>
+            </div>
+            <div className="game-away">
+              <img src={away.logo} alt="home teams logo" />
+              <h1>{away.name}</h1>
+            </div>
           </div>
-          <div className="game-score">
-            <img
-              src={leagueLogo}
-              alt="logo of the league"
-              className="game-leagueLogo"
-            />
-            <span>{`${league} | Round ${round.split("- ")[1]}`}</span>
-            <h1>{`${home.score} - ${away.score}`}</h1>
-            <span>{`${minutesPlayed}'`}</span>
-          </div>
-          <div className="game-away">
-            <img src={away.logo} alt="home teams logo" />
-            <h1>{away.name}</h1>
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
