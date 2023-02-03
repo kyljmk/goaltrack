@@ -111,22 +111,32 @@ function Game() {
         <div className="game">
           <div className="gameHeader">
             <div className="game-home">
-              <img src={home.logo} alt="home teams logo" />
-              <span>{home.name}</span>
+              <img
+                className="game-home-logo"
+                src={home.logo}
+                alt="home teams logo"
+              />
+              <span className="game-home-name">{home.name}</span>
             </div>
-            <div className="game-score">
+            <div className="game-info">
               <img
                 src={leagueLogo}
                 alt="logo of the league"
-                className="game-leagueLogo"
+                className="game-info-leagueLogo"
               />
-              <span>{`${league} | Round ${round.split("- ")[1]}`}</span>
-              <span>{`${home.score} - ${away.score}`}</span>
-              <span>{`${minutesPlayed}'`}</span>
+              <span className="game-info-leagueRound">{`${league} | Round ${
+                round.split("- ")[1]
+              }`}</span>
+              <span className="game-info-score">{`${home.score} - ${away.score}`}</span>
+              <span className="game-info-minutes">{`${minutesPlayed}'`}</span>
             </div>
             <div className="game-away">
-              <img src={away.logo} alt="home teams logo" />
-              <span>{away.name}</span>
+              <img
+                className="game-away-logo"
+                src={away.logo}
+                alt="home teams logo"
+              />
+              <span className="game-away-name">{away.name}</span>
             </div>
           </div>
           <div>{eventElements}</div>

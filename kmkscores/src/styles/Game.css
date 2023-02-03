@@ -2,38 +2,59 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
+  padding: 20px;
 }
 
 .game {
   border: solid 2px goldenrod;
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 15px;
   max-width: 800px;
   width: 100%;
 }
 
 .gameHeader {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  border-bottom: 1px solid goldenrod;
+  padding-bottom: 10px;
 }
 
 .game-home,
-.game-score,
+.game-info,
 .game-away {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
-.game-leagueLogo {
-  width: 40px;
+.game-home-logo,
+.game-away-logo {
+  width: 70px;
+  margin-bottom: 10px;
 }
 
-.game-score {
+.game-info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.game-info-leagueLogo {
+  width: 30px;
+}
+
+.game-info-leagueRound {
+  font-size: 9px;
+}
+
+.game-info-score {
+  font-size: 20px;
+}
+
+.game-info-minutes {
+  font-size: 12px;
 }
 
 .homeEvent {
