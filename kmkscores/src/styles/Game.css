@@ -11,12 +11,11 @@
   padding: 20px;
   max-width: 800px;
   width: 100%;
-  min-width: 600px;
 }
 
 .gameHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .game-home,
@@ -35,4 +34,38 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.homeEvent {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.awayEvent {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.event-imageContainer {
+  background-color: lightgray;
+  display: inline;
+  height: 35px;
+  width: 35px;
+  margin: 0 5px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-image {
+  height: 20px;
+}
+
+.event-timeStamp,
+.event-playerName {
+  font-size: 18px;
 }

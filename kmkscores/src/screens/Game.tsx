@@ -79,17 +79,27 @@ function Game() {
   } = fixtureDetails;
 
   const eventElements = events?.map((e) => {
-    const imageUrl: string = "";
-
+    let imageUrl: string = "";
+    if (e.type === "Goal") imageUrl = "goal.png";
+    if (e.detail === "Yellow Card") imageUrl = "yellow_card.png";
+    if (e.detail === "Second Yellow Card") imageUrl = "second_yellow.png";
+    if (e.type === "subst") imageUrl = "substitution.jpg";
+    if (e.detail === "Red Card") imageUrl = "red_card.png";
     return (
-      <div>
-        <span>{e.player.name}</span>
-        <img />
-        <span>
+      <div className={e.team.name === home.name ? "homeEvent" : "awayEvent"}>
+        <span className="event-timeStamp">
           {e.time.elapsed === 90
-            ? `${e.time.elapsed}'`
-            : `${e.time.elapsed} + ${e.time.extra}'`}
+            ? `${e.time.elapsed}'+${e.time.extra}`
+            : `${e.time.elapsed}'`}
         </span>
+        <div className="event-imageContainer">
+          <img
+            className="event-image"
+            src={imageUrl}
+            alt="A symbol determining what type of event took place"
+          />
+        </div>
+        <span className="event-playerName">{e.player.name}</span>
       </div>
     );
   });
@@ -102,7 +112,7 @@ function Game() {
           <div className="gameHeader">
             <div className="game-home">
               <img src={home.logo} alt="home teams logo" />
-              <h1>{home.name}</h1>
+              <span>{home.name}</span>
             </div>
             <div className="game-score">
               <img
@@ -111,15 +121,15 @@ function Game() {
                 className="game-leagueLogo"
               />
               <span>{`${league} | Round ${round.split("- ")[1]}`}</span>
-              <h1>{`${home.score} - ${away.score}`}</h1>
+              <span>{`${home.score} - ${away.score}`}</span>
               <span>{`${minutesPlayed}'`}</span>
             </div>
             <div className="game-away">
               <img src={away.logo} alt="home teams logo" />
-              <h1>{away.name}</h1>
+              <span>{away.name}</span>
             </div>
           </div>
-          <div></div>
+          <div>{eventElements}</div>
         </div>
       </div>
     </div>
