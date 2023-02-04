@@ -3,66 +3,94 @@ import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import { IFixtureDetails } from "../Types";
 import "../styles/Game.css";
+import { timeStamp } from "console";
 
 function Game() {
   const fixtureId: number = useLocation().state.id;
 
   const [fixtureDetails, setFixtureDetails] = useState<IFixtureDetails>({
     home: {
-      name: "",
-      logo: "",
-      score: 0,
+      name: "QPR",
+      logo: "https://media.api-sports.io/football/teams/72.png",
+      score: 1,
     },
     away: {
-      name: "",
-      logo: "",
-      score: 0,
+      name: "Fulham",
+      logo: "https://media-3.api-sports.io/football/teams/36.png",
+      score: 2,
     },
-    matchStatus: "",
-    minutesPlayed: 0,
-    league: "",
-    leagueLogo: "",
-    round: "",
-    dateTime: "",
-    events: null,
-  });
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    matchStatus: "FT",
+    minutesPlayed: 90,
+    league: "Championship",
+    leagueLogo: "https://media-3.api-sports.io/football/leagues/40.png",
+    round: "Regular Season - 11",
+    dateTime: "2017-09-29T18:45:00+00:00",
+    referee: "Peter Bankes, England",
+    venue: "Loftus Road",
+    events: [
+      {
+        time: {
+          elapsed: 17,
+          extra: null,
+        },
+        team: {
+          id: 72,
+          name: "QPR",
+          logo: "https://media.api-sports.io/football/teams/72.png",
+        },
+        player: {
+          id: 2752,
+          name: "Massimo Luongo",
+        },
+        assist: {
+          id: null,
+          name: null,
+        },
+        type: "Card",
+        detail: "Yellow Card",
+        comment: null,
       },
-    };
+    ],
+  });
+  // useEffect(() => {
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "X-RapidAPI-Key": "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
+  //       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+  //     },
+  //   };
 
-    fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
-      options
-    )
-      .then((response) => response.json())
-      .then((data) =>
-        setFixtureDetails({
-          home: {
-            name: data.response[0].teams.home.name,
-            logo: data.response[0].teams.home.logo,
-            score: data.response[0].goals.home,
-          },
-          away: {
-            name: data.response[0].teams.away.name,
-            logo: data.response[0].teams.away.logo,
-            score: data.response[0].goals.away,
-          },
-          matchStatus: data.response[0].fixture.status.short,
-          minutesPlayed: data.response[0].fixture.status.elapsed,
-          league: data.response[0].league.name,
-          leagueLogo: data.response[0].league.logo,
-          round: data.response[0].league.round,
-          dateTime: data.response[0].fixture.data,
-          events: data.response[0].events,
-        })
-      )
-      .catch((err) => console.error(err));
-  }, []);
+  //   fetch(
+  //     `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
+  //     options
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) =>
+  //       setFixtureDetails({
+  //         home: {
+  //           name: data.response[0].teams.home.name,
+  //           logo: data.response[0].teams.home.logo,
+  //           score: data.response[0].goals.home,
+  //         },
+  //         away: {
+  //           name: data.response[0].teams.away.name,
+  //           logo: data.response[0].teams.away.logo,
+  //           score: data.response[0].goals.away,
+  //         },
+  //         matchStatus: data.response[0].fixture.status.short,
+  //         minutesPlayed: data.response[0].fixture.status.elapsed,
+  //         league: data.response[0].league.name,
+  //         leagueLogo: data.response[0].league.logo,
+  //         round: data.response[0].league.round,
+  //         dateTime: data.response[0].fixture.data,
+  //         referee: data.response[0].fixture.referee,
+  //         venue: data.response[0].fixture.venue.name,
+  //         events: data.response[0].events,
+  //       })
+  //     )
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   console.log(fixtureDetails);
 
@@ -75,8 +103,16 @@ function Game() {
     leagueLogo,
     round,
     dateTime,
+    referee,
+    venue,
     events,
   } = fixtureDetails;
+
+  let timeStamp: string = "";
+  timeStamp =
+    matchStatus === "HT" || matchStatus === "FT"
+      ? (timeStamp = matchStatus)
+      : (timeStamp = `${minutesPlayed.toString()}'`);
 
   const eventElements = events?.map((e) => {
     let imageUrl: string = "";
@@ -85,6 +121,7 @@ function Game() {
     if (e.detail === "Second Yellow Card") imageUrl = "second_yellow.png";
     if (e.type === "subst") imageUrl = "substitution.jpg";
     if (e.detail === "Red Card") imageUrl = "red_card.png";
+
     return (
       <div className={e.team.name === home.name ? "homeEvent" : "awayEvent"}>
         <span className="event-timeStamp">
@@ -117,6 +154,7 @@ function Game() {
                 alt="home teams logo"
               />
               <span className="game-home-name">{home.name}</span>
+              <span className="game-referee">Referee: {referee}</span>
             </div>
             <div className="game-info">
               <img
@@ -128,7 +166,7 @@ function Game() {
                 round.split("- ")[1]
               }`}</span>
               <span className="game-info-score">{`${home.score} - ${away.score}`}</span>
-              <span className="game-info-minutes">{`${minutesPlayed}'`}</span>
+              <span className="game-info-minutes">{timeStamp}</span>
             </div>
             <div className="game-away">
               <img
@@ -137,6 +175,7 @@ function Game() {
                 alt="home teams logo"
               />
               <span className="game-away-name">{away.name}</span>
+              <span className="game-venue">Venue: {venue}</span>
             </div>
           </div>
           <div>{eventElements}</div>

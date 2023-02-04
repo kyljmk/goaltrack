@@ -31,6 +31,8 @@ export interface IFixtureDetails {
   leagueLogo: string;
   round: string;
   dateTime: string;
+  referee: string;
+  venue: string;
   events: IMatchEvent[] | null;
 }
 
@@ -42,7 +44,7 @@ export interface InfoContextType {
 export interface IMatchEvent {
   time: {
     elapsed: number;
-    extra: number;
+    extra: number | null;
   };
   team: {
     id: number;
@@ -54,10 +56,10 @@ export interface IMatchEvent {
     name: string;
   };
   assist: {
-    id: number;
-    name: string;
+    id: number | null;
+    name: string | null;
   };
   type: string;
   detail: string;
-  comment: string;
+  comment: string | null;
 }
