@@ -154,7 +154,6 @@ function Game() {
                 alt="home teams logo"
               />
               <span className="game-home-name">{home.name}</span>
-              <span className="game-referee">Referee: {referee}</span>
             </div>
             <div className="game-info">
               <img
@@ -175,8 +174,11 @@ function Game() {
                 alt="home teams logo"
               />
               <span className="game-away-name">{away.name}</span>
-              <span className="game-venue">Venue: {venue}</span>
             </div>
+          </div>
+          <div className="game-refVenue-container">
+            <span className="game-referee">{referee}</span>
+            <span className="game-venue">{venue}</span>
           </div>
           <div>{eventElements}</div>
         </div>

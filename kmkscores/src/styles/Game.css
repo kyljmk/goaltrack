@@ -58,6 +58,11 @@
   font-size: 12px;
 }
 
+.game-refVenue-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .game-referee {
   font-size: 10px;
 }
