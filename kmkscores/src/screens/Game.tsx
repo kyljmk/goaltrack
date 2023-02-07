@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import { IFixtureDetails } from "../Types";
 import "../styles/Game.css";
 import { timeStamp } from "console";
+import Events from "../components/Events";
 
 function Game() {
   const fixtureId: number = useLocation().state.id;
@@ -51,46 +52,51 @@ function Game() {
         comment: null,
       },
     ],
+    statistics: null,
   });
-  // useEffect(() => {
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       "X-RapidAPI-Key": "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
-  //       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-  //     },
-  //   };
+  useEffect(() => {
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
+        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+      },
+    };
 
-  //   fetch(
-  //     `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
-  //     options
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) =>
-  //       setFixtureDetails({
-  //         home: {
-  //           name: data.response[0].teams.home.name,
-  //           logo: data.response[0].teams.home.logo,
-  //           score: data.response[0].goals.home,
-  //         },
-  //         away: {
-  //           name: data.response[0].teams.away.name,
-  //           logo: data.response[0].teams.away.logo,
-  //           score: data.response[0].goals.away,
-  //         },
-  //         matchStatus: data.response[0].fixture.status.short,
-  //         minutesPlayed: data.response[0].fixture.status.elapsed,
-  //         league: data.response[0].league.name,
-  //         leagueLogo: data.response[0].league.logo,
-  //         round: data.response[0].league.round,
-  //         dateTime: data.response[0].fixture.data,
-  //         referee: data.response[0].fixture.referee,
-  //         venue: data.response[0].fixture.venue.name,
-  //         events: data.response[0].events,
-  //       })
-  //     )
-  //     .catch((err) => console.error(err));
-  // }, []);
+    fetch(
+      `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
+      options
+    )
+      .then((response) => response.json())
+      .then((data) =>
+        setFixtureDetails({
+          home: {
+            name: data.response[0].teams.home.name,
+            logo: data.response[0].teams.home.logo,
+            score: data.response[0].goals.home,
+          },
+          away: {
+            name: data.response[0].teams.away.name,
+            logo: data.response[0].teams.away.logo,
+            score: data.response[0].goals.away,
+          },
+          matchStatus: data.response[0].fixture.status.short,
+          minutesPlayed: data.response[0].fixture.status.elapsed,
+          league: data.response[0].league.name,
+          leagueLogo: data.response[0].league.logo,
+          round: data.response[0].league.round,
+          dateTime: data.response[0].fixture.data,
+          referee: data.response[0].fixture.referee,
+          venue: data.response[0].fixture.venue.name,
+          events: data.response[0].events,
+          statistics: {
+            home: data.response[0].statistics[0].statistics,
+            away: data.response[0].statistics[1].statistics,
+          },
+        })
+      )
+      .catch((err) => console.error(err));
+  }, []);
 
   console.log(fixtureDetails);
 
@@ -115,29 +121,18 @@ function Game() {
       : (timeStamp = `${minutesPlayed.toString()}'`);
 
   const eventElements = events?.map((e) => {
-    let imageUrl: string = "";
-    if (e.type === "Goal") imageUrl = "goal.png";
-    if (e.detail === "Yellow Card") imageUrl = "yellow_card.png";
-    if (e.detail === "Second Yellow Card") imageUrl = "second_yellow.png";
-    if (e.type === "subst") imageUrl = "substitution.jpg";
-    if (e.detail === "Red Card") imageUrl = "red_card.png";
-
     return (
-      <div className={e.team.name === home.name ? "homeEvent" : "awayEvent"}>
-        <span className="event-timeStamp">
-          {e.time.elapsed === 90
-            ? `${e.time.elapsed}'+${e.time.extra}`
-            : `${e.time.elapsed}'`}
-        </span>
-        <div className="event-imageContainer">
-          <img
-            className="event-image"
-            src={imageUrl}
-            alt="A symbol determining what type of event took place"
-          />
-        </div>
-        <span className="event-playerName">{e.player.name}</span>
-      </div>
+      <Events
+        key={e.time.elapsed}
+        homeName={home.name}
+        time={e.time}
+        team={e.team}
+        player={e.player}
+        assist={e.assist}
+        type={e.type}
+        detail={e.detail}
+        comment={e.comment}
+      />
     );
   });
 

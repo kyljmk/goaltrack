@@ -34,6 +34,7 @@ export interface IFixtureDetails {
   referee: string;
   venue: string;
   events: IMatchEvent[] | null;
+  statistics: IMatchStats | null;
 }
 
 export interface InfoContextType {
@@ -63,3 +64,37 @@ export interface IMatchEvent {
   detail: string;
   comment: string | null;
 }
+
+export interface IEventProps {
+  homeName: string;
+  time: {
+    elapsed: number;
+    extra: number | null;
+  };
+  team: {
+    id: number;
+    name: string;
+    logo: string;
+  };
+  player: {
+    id: number;
+    name: string;
+  };
+  assist: {
+    id: number | null;
+    name: string | null;
+  };
+  type: string;
+  detail: string;
+  comment: string | null;
+}
+
+export interface IMatchStats {
+  home: ITeamStats[];
+  away: ITeamStats[];
+}
+
+export type ITeamStats = {
+  type: string;
+  value: number;
+};
