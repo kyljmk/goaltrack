@@ -35,6 +35,36 @@ export interface IFixtureDetails {
   venue: string;
   events: IMatchEvent[] | null;
   statistics: IMatchStats | null;
+  lineups: ILineUps[] | null;
+}
+
+export interface ILineUps {
+  team: {
+    id: number;
+    name: string;
+    logo: string;
+    colors: string;
+  };
+  coach: {
+    id: number;
+    name: string;
+    photo: string;
+  };
+  formation: string;
+  startingXI: IPlayer[];
+  substitutes: IPlayer[];
+}
+
+export interface ILineUpProps {
+  lineups: ILineUps[] | null;
+}
+
+export interface IPlayer {
+  id: number;
+  name: string;
+  number: number;
+  pos: string;
+  grid: string;
 }
 
 export interface IGameHeaderProps {

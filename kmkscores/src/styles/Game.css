@@ -61,14 +61,35 @@
 .game-refVenue-container {
   display: flex;
   justify-content: space-between;
+  margin: 5px 0 13px 0;
 }
 
-.game-referee {
-  font-size: 10px;
-}
-
+.game-referee,
 .game-venue {
   font-size: 10px;
+}
+
+.game-options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.game-options-summary,
+.game-options-lineUps,
+.game-options-stats {
+  border: solid 2px goldenrod;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.game-options-summarySelected,
+.game-options-lineUpsSelected,
+.game-options-statsSelected {
+  border: solid 2px goldenrod;
+  padding: 3px 8px;
+  color: black;
+  background-color: goldenrod;
+  border-radius: 20px;
 }
 
 .homeEvent {
@@ -106,6 +127,11 @@
   font-size: 12px;
 }
 
+.event-timeStamp {
+  color: white;
+}
+
 .event-assistName {
+  color: lightgoldenrodyellow;
   margin: 0 5px;
 }

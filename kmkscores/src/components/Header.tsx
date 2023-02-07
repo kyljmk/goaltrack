@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  fa1,
-  faBars,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 function Header() {

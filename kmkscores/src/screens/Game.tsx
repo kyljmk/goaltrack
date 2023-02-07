@@ -3,12 +3,14 @@ import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import { IFixtureDetails } from "../Types";
 import "../styles/Game.css";
-import { timeStamp } from "console";
 import Events from "../components/Events";
 import GameHeader from "../components/GameHeader";
+import Lineups from "../components/Lineups";
+import Stats from "../components/Stats";
 
 function Game() {
   const fixtureId: number = useLocation().state.id;
+  const [options, setOptions] = useState<number>(0);
 
   const [fixtureDetails, setFixtureDetails] = useState<IFixtureDetails>({
     home: {
@@ -53,6 +55,7 @@ function Game() {
         comment: null,
       },
     ],
+    lineups: null,
     statistics: null,
   });
   useEffect(() => {
@@ -94,6 +97,7 @@ function Game() {
             home: data.response[0].statistics[0].statistics,
             away: data.response[0].statistics[1].statistics,
           },
+          lineups: data.response[0].lineups,
         })
       )
       .catch((err) => console.error(err));
@@ -113,6 +117,7 @@ function Game() {
     referee,
     venue,
     events,
+    lineups,
   } = fixtureDetails;
 
   const eventElements = events?.map((e) => {
@@ -151,7 +156,47 @@ function Game() {
             <span className="game-referee">{referee}</span>
             <span className="game-venue">{venue}</span>
           </div>
-          <div>{eventElements}</div>
+          <div className="game-options">
+            <div
+              onClick={() => {
+                setOptions(0);
+              }}
+              className={
+                options === 0
+                  ? "game-options-summarySelected"
+                  : "game-options-summary"
+              }
+            >
+              Summary
+            </div>
+            <div
+              onClick={() => {
+                setOptions(1);
+              }}
+              className={
+                options === 1
+                  ? "game-options-lineUpsSelected"
+                  : "game-options-lineUps"
+              }
+            >
+              Line-Ups
+            </div>
+            <div
+              onClick={() => {
+                setOptions(2);
+              }}
+              className={
+                options === 2
+                  ? "game-options-statsSelected"
+                  : "game-options-stats"
+              }
+            >
+              Stats
+            </div>
+          </div>
+          {options === 0 && eventElements}
+          {options === 1 && <Lineups lineups={lineups} />}
+          {options === 2 && <Stats />}
         </div>
       </div>
     </div>
