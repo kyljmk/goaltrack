@@ -89,7 +89,7 @@
   display: inline;
   height: 25px;
   width: 25px;
-  margin: 0 5px;
+  margin: 0 10px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -101,6 +101,11 @@
 }
 
 .event-timeStamp,
-.event-playerName {
-  font-size: 14px;
+.event-playerName,
+.event-assistName {
+  font-size: 12px;
+}
+
+.event-assistName {
+  margin: 0 5px;
 }

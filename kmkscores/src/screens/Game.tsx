@@ -5,6 +5,7 @@ import { IFixtureDetails } from "../Types";
 import "../styles/Game.css";
 import { timeStamp } from "console";
 import Events from "../components/Events";
+import GameHeader from "../components/GameHeader";
 
 function Game() {
   const fixtureId: number = useLocation().state.id;
@@ -114,12 +115,6 @@ function Game() {
     events,
   } = fixtureDetails;
 
-  let timeStamp: string = "";
-  timeStamp =
-    matchStatus === "HT" || matchStatus === "FT"
-      ? (timeStamp = matchStatus)
-      : (timeStamp = `${minutesPlayed.toString()}'`);
-
   const eventElements = events?.map((e) => {
     return (
       <Events
@@ -141,36 +136,17 @@ function Game() {
       <Header />
       <div className="gameContainer">
         <div className="game">
-          <div className="gameHeader">
-            <div className="game-home">
-              <img
-                className="game-home-logo"
-                src={home.logo}
-                alt="home teams logo"
-              />
-              <span className="game-home-name">{home.name}</span>
-            </div>
-            <div className="game-info">
-              <img
-                src={leagueLogo}
-                alt="logo of the league"
-                className="game-info-leagueLogo"
-              />
-              <span className="game-info-leagueRound">{`${league} | Round ${
-                round.split("- ")[1]
-              }`}</span>
-              <span className="game-info-score">{`${home.score} - ${away.score}`}</span>
-              <span className="game-info-minutes">{timeStamp}</span>
-            </div>
-            <div className="game-away">
-              <img
-                className="game-away-logo"
-                src={away.logo}
-                alt="home teams logo"
-              />
-              <span className="game-away-name">{away.name}</span>
-            </div>
-          </div>
+          <GameHeader
+            key={fixtureId}
+            home={home}
+            away={away}
+            matchStatus={matchStatus}
+            minutesPlayed={minutesPlayed}
+            league={league}
+            leagueLogo={leagueLogo}
+            round={round}
+            dateTime={dateTime}
+          />
           <div className="game-refVenue-container">
             <span className="game-referee">{referee}</span>
             <span className="game-venue">{venue}</span>

@@ -1,5 +1,5 @@
 import React from "react";
-import { IEventProps, IMatchEvent } from "../Types";
+import { IEventProps } from "../Types";
 
 function Events({
   time,
@@ -32,6 +32,7 @@ function Events({
         />
       </div>
       <span className="event-playerName">{player.name}</span>
+      {assist.name && <span className="event-assistName">({assist.name})</span>}
     </div>
   );
 }

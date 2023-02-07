@@ -37,6 +37,17 @@ export interface IFixtureDetails {
   statistics: IMatchStats | null;
 }
 
+export interface IGameHeaderProps {
+  home: Team;
+  away: Team;
+  matchStatus: string;
+  minutesPlayed: number;
+  league: string;
+  leagueLogo: string;
+  round: string;
+  dateTime: string;
+}
+
 export interface InfoContextType {
   liveResults: any;
   setLiveResults: Dispatch<SetStateAction<any>>;
