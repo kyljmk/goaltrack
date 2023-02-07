@@ -55,7 +55,10 @@ function Game() {
         comment: null,
       },
     ],
-    lineups: null,
+    lineups: {
+      home: null,
+      away: null,
+    },
     statistics: null,
   });
   useEffect(() => {
@@ -97,13 +100,14 @@ function Game() {
             home: data.response[0].statistics[0].statistics,
             away: data.response[0].statistics[1].statistics,
           },
-          lineups: data.response[0].lineups,
+          lineups: {
+            home: data.response[0].lineups[0],
+            away: data.response[0].lineups[1],
+          },
         })
       )
       .catch((err) => console.error(err));
   }, []);
-
-  console.log(fixtureDetails);
 
   const {
     home,
@@ -195,7 +199,7 @@ function Game() {
             </div>
           </div>
           {options === 0 && eventElements}
-          {options === 1 && <Lineups lineups={lineups} />}
+          {options === 1 && <Lineups home={lineups.home} away={lineups.away} />}
           {options === 2 && <Stats />}
         </div>
       </div>

@@ -35,10 +35,18 @@ export interface IFixtureDetails {
   venue: string;
   events: IMatchEvent[] | null;
   statistics: IMatchStats | null;
-  lineups: ILineUps[] | null;
+  lineups: {
+    home: ILineUp | null;
+    away: ILineUp | null;
+  };
 }
 
 export interface ILineUps {
+  home: ILineUp;
+  away: ILineUp;
+}
+
+export interface ILineUp {
   team: {
     id: number;
     name: string;
@@ -56,7 +64,8 @@ export interface ILineUps {
 }
 
 export interface ILineUpProps {
-  lineups: ILineUps[] | null;
+  home: ILineUp | null;
+  away: ILineUp | null;
 }
 
 export interface IPlayer {
