@@ -36,14 +36,9 @@ export interface IFixtureDetails {
   events: IMatchEvent[] | null;
   statistics: IMatchStats | null;
   lineups: {
-    home: ILineUp | null;
-    away: ILineUp | null;
+    home: ILineUp;
+    away: ILineUp;
   };
-}
-
-export interface ILineUps {
-  home: ILineUp;
-  away: ILineUp;
 }
 
 export interface ILineUp {
@@ -59,21 +54,23 @@ export interface ILineUp {
     photo: string;
   };
   formation: string;
-  startingXI: IPlayer[];
+  startXI: IPlayer[];
   substitutes: IPlayer[];
 }
 
 export interface ILineUpProps {
-  home: ILineUp | null;
-  away: ILineUp | null;
+  home: ILineUp;
+  away: ILineUp;
 }
 
 export interface IPlayer {
-  id: number;
-  name: string;
-  number: number;
-  pos: string;
-  grid: string;
+  player: {
+    id: number;
+    name: string;
+    number: number;
+    pos: string;
+    grid: string;
+  };
 }
 
 export interface IGameHeaderProps {

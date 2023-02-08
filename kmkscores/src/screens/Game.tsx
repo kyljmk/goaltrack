@@ -56,8 +56,78 @@ function Game() {
       },
     ],
     lineups: {
-      home: null,
-      away: null,
+      home: {
+        team: {
+          id: 72,
+          name: "QPR",
+          logo: "https://media.api-sports.io/football/teams/72.png",
+          colors: "string",
+        },
+        coach: {
+          id: 1,
+          name: "string",
+          photo: "string",
+        },
+        formation: "string",
+        startXI: [
+          {
+            player: {
+              id: 1,
+              name: "string",
+              number: 1,
+              pos: "string",
+              grid: "string",
+            },
+          },
+        ],
+        substitutes: [
+          {
+            player: {
+              id: 1,
+              name: "string",
+              number: 1,
+              pos: "string",
+              grid: "string",
+            },
+          },
+        ],
+      },
+      away: {
+        team: {
+          id: 72,
+          name: "QPR",
+          logo: "https://media.api-sports.io/football/teams/72.png",
+          colors: "string",
+        },
+        coach: {
+          id: 1,
+          name: "string",
+          photo: "string",
+        },
+        formation: "string",
+        startXI: [
+          {
+            player: {
+              id: 1,
+              name: "string",
+              number: 1,
+              pos: "string",
+              grid: "string",
+            },
+          },
+        ],
+        substitutes: [
+          {
+            player: {
+              id: 1,
+              name: "string",
+              number: 1,
+              pos: "string",
+              grid: "string",
+            },
+          },
+        ],
+      },
     },
     statistics: null,
   });
