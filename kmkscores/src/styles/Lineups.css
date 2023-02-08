@@ -1,3 +1,65 @@
-.startLineups-container {
+.lineups-container {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.startLineups-title,
+.substitutes-title,
+.coaches-title {
+  color: black;
+  background-color: goldenrod;
+  text-align: center;
+  margin: 15px 0 5px 0;
+  border-radius: 10px;
+}
+
+.startLineups-container,
+.substitutes-container,
+.coaches-container {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.startLineups-away-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.startLineups-home-player,
+.startLineups-away-player {
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.startLineups-home-player-number-container,
+.startLineups-away-player-number-container {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.startLineups-home-player-number-container {
+  margin-right: 5px;
+}
+
+.startLineups-away-player-number-container {
+  margin-left: 5px;
+}
+
+.startLineups-home-player-number-shirt,
+.startLineups-away-player-number-shirt {
+  position: absolute;
+  z-index: -1;
+  font-size: 22px;
+}
+
+.startLineups-home-player-number,
+.startLineups-away-player-number {
+  color: black;
 }
