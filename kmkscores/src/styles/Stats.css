@@ -17,11 +17,26 @@
 .stat-text-away {
 }
 
-.stat-bars-container {
+.stat-bar-container {
+  display: flex;
+  justify-content: center;
+}
+
+.stat-bar-home-container {
+  justify-content: flex-end;
+}
+.stat-bar-home-container,
+.stat-bar-away-container {
+  width: 50%;
+  display: flex;
+  border-radius: 5px;
+  background-color: #28231d;
 }
 
 .stat-bar-home {
+  height: 10px;
 }
 
 .stat-bar-away {
+  height: 10px;
 }

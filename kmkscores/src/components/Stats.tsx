@@ -17,6 +17,14 @@ function Stats(stats: IStatsProps) {
   }
 
   const statsElements = combinedStats.map((x, i) => {
+    let homePercentage: number =
+      (x.homeValue / (x.homeValue + x.awayValue)) * 100;
+    let awayPercentage: number =
+      (x.awayValue / (x.homeValue + x.awayValue)) * 100;
+    if (x.type === "Ball Possession" || x.type === "Passes %") {
+      homePercentage = x.homeValue;
+      awayPercentage = x.awayValue;
+    }
     return (
       <div key={i} className="stat">
         <div className="stat-text">
@@ -25,8 +33,26 @@ function Stats(stats: IStatsProps) {
           <span className="stat-text-away">{x.awayValue}</span>
         </div>
         <div className="stat-bar-container">
-          <div className="stat-bar-home" />
-          <div className="stat-bar-away" />
+          <div className="stat-bar-home-container">
+            <div
+              className="stat-bar-home"
+              style={{
+                width: `${homePercentage}%`,
+                backgroundColor:
+                  homePercentage > awayPercentage ? "goldenrod" : "gray",
+              }}
+            />
+          </div>
+          <div className="stat-bar-away-container">
+            <div
+              className="stat-bar-away"
+              style={{
+                width: `${awayPercentage}%`,
+                backgroundColor:
+                  awayPercentage > homePercentage ? "goldenrod" : "gray",
+              }}
+            />
+          </div>
         </div>
       </div>
     );
