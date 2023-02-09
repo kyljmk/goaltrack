@@ -34,10 +34,27 @@ export interface IFixtureDetails {
   referee: string;
   venue: string;
   events: IMatchEvent[] | null;
-  statistics: IMatchStats | null;
   lineups: {
     home: ILineUp;
     away: ILineUp;
+  };
+  statistics: {
+    home: {
+      team: {
+        id: number;
+        name: string;
+        logo: string;
+      };
+      statistics: ITeamStat[];
+    };
+    away: {
+      team: {
+        id: number;
+        name: string;
+        logo: string;
+      };
+      statistics: ITeamStat[];
+    };
   };
 }
 
@@ -136,12 +153,32 @@ export interface IEventProps {
   comment: string | null;
 }
 
-export interface IMatchStats {
-  home: ITeamStats[];
-  away: ITeamStats[];
+export interface IStatsProps {
+  home: {
+    team: {
+      id: number;
+      name: string;
+      logo: string;
+    };
+    statistics: ITeamStat[];
+  };
+  away: {
+    team: {
+      id: number;
+      name: string;
+      logo: string;
+    };
+    statistics: ITeamStat[];
+  };
 }
 
-export type ITeamStats = {
+export type ITeamStat = {
   type: string;
   value: number;
+};
+
+export type ICombinedStat = {
+  type: string;
+  homeValue: number;
+  awayValue: number;
 };

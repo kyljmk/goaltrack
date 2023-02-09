@@ -25,6 +25,7 @@
 .coaches-container {
   font-size: 13px;
   padding: 5px 20px;
+  color: lightgoldenrodyellow;
 }
 
 .startLineups-away-container,
@@ -68,4 +69,9 @@
 .startLineups-home-player-number,
 .startLineups-away-player-number {
   color: black;
+}
+
+.startLineups-home-player-name,
+.startLineups-away-player-name {
+  color: lightgoldenrodyellow;
 }

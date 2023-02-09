@@ -120,16 +120,43 @@ function Game() {
           {
             player: {
               id: 1,
-              name: "string",
+              name: "",
               number: 1,
-              pos: "string",
-              grid: "string",
+              pos: "",
+              grid: "",
             },
           },
         ],
       },
     },
-    statistics: null,
+    statistics: {
+      home: {
+        team: {
+          id: 0,
+          name: "",
+          logo: "",
+        },
+        statistics: [
+          {
+            type: "",
+            value: 0,
+          },
+        ],
+      },
+      away: {
+        team: {
+          id: 0,
+          name: "",
+          logo: "",
+        },
+        statistics: [
+          {
+            type: "",
+            value: 0,
+          },
+        ],
+      },
+    },
   });
   useEffect(() => {
     const options = {
@@ -166,13 +193,13 @@ function Game() {
           referee: data.response[0].fixture.referee,
           venue: data.response[0].fixture.venue.name,
           events: data.response[0].events,
-          statistics: {
-            home: data.response[0].statistics[0].statistics,
-            away: data.response[0].statistics[1].statistics,
-          },
           lineups: {
             home: data.response[0].lineups[0],
             away: data.response[0].lineups[1],
+          },
+          statistics: {
+            home: data.response[0].statistics[0].statistics,
+            away: data.response[0].statistics[1].statistics,
           },
         })
       )
@@ -192,6 +219,7 @@ function Game() {
     venue,
     events,
     lineups,
+    statistics,
   } = fixtureDetails;
 
   const eventElements = events?.map((e) => {
@@ -249,11 +277,11 @@ function Game() {
               }}
               className={
                 options === 1
-                  ? "game-options-lineUpsSelected"
-                  : "game-options-lineUps"
+                  ? "game-options-statsSelected"
+                  : "game-options-stats"
               }
             >
-              Line-Ups
+              Stats
             </div>
             <div
               onClick={() => {
@@ -261,18 +289,20 @@ function Game() {
               }}
               className={
                 options === 2
-                  ? "game-options-statsSelected"
-                  : "game-options-stats"
+                  ? "game-options-lineUpsSelected"
+                  : "game-options-lineUps"
               }
             >
-              Stats
+              Line-Ups
             </div>
           </div>
           {options === 0 && (
             <div className="events-container">{eventElements}</div>
           )}
-          {options === 1 && <Lineups home={lineups.home} away={lineups.away} />}
-          {options === 2 && <Stats />}
+          {options === 1 && (
+            <Stats home={statistics.home} away={statistics.away} />
+          )}
+          {options === 2 && <Lineups home={lineups.home} away={lineups.away} />}
         </div>
       </div>
     </div>

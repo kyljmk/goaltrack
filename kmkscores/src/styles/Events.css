@@ -34,10 +34,13 @@
 }
 
 .event-timeStamp {
-  color: white;
+  color: lightgoldenrodyellow;
+}
+
+.event-playerName {
+  color: lightgoldenrodyellow;
 }
 
 .event-assistName {
-  color: lightgoldenrodyellow;
   margin: 0 5px;
 }

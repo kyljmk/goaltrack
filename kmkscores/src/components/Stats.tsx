@@ -1,6 +1,7 @@
 import React from "react";
+import { IStatsProps } from "../Types";
 
-function Stats() {
+function Stats(stats: IStatsProps) {
   return <div>Stats</div>;
 }
 
