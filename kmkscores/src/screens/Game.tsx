@@ -198,8 +198,8 @@ function Game() {
             away: data.response[0].lineups[1],
           },
           statistics: {
-            home: data.response[0].statistics[0].statistics,
-            away: data.response[0].statistics[1].statistics,
+            home: data.response[0].statistics[0],
+            away: data.response[0].statistics[1],
           },
         })
       )
@@ -222,10 +222,10 @@ function Game() {
     statistics,
   } = fixtureDetails;
 
-  const eventElements = events?.map((e) => {
+  const eventElements = events?.map((e, i) => {
     return (
       <Events
-        key={e.time.elapsed}
+        key={i}
         homeName={home.name}
         time={e.time}
         team={e.team}

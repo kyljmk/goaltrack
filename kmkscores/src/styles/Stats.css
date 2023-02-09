@@ -1,0 +1,27 @@
+.stats-container {
+  padding: 10px 20px;
+}
+
+.stat {
+  margin-bottom: 5px;
+}
+
+.stat-text {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-text-home {
+}
+
+.stat-text-away {
+}
+
+.stat-bars-container {
+}
+
+.stat-bar-home {
+}
+
+.stat-bar-away {
+}

@@ -8,7 +8,7 @@ function Lineups(lineUps: ILineUpProps) {
   const { home, away } = lineUps;
   const startHomeElements = home.startXI.map((x) => {
     return (
-      <div className="startLineups-home-player">
+      <div key={x.player.number} className="startLineups-home-player">
         <div className="startLineups-home-player-number-container">
           <FontAwesomeIcon
             className="startLineups-home-player-number-shirt"
@@ -26,7 +26,7 @@ function Lineups(lineUps: ILineUpProps) {
 
   const startAwayElements = away.startXI.map((x) => {
     return (
-      <div className="startLineups-away-player">
+      <div key={x.player.number} className="startLineups-away-player">
         <span className="startLineups-away-player-name">{x.player.name}</span>
         <div className="startLineups-away-player-number-container">
           <FontAwesomeIcon
