@@ -1,5 +1,6 @@
 import React from "react";
 import { IEventProps } from "../Types";
+import "../styles/Events.css";
 
 function Events({
   time,

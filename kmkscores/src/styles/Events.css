@@ -1,0 +1,43 @@
+.homeEvent {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.awayEvent {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.event-imageContainer {
+  background-color: lightgray;
+  display: inline;
+  height: 25px;
+  width: 25px;
+  margin: 0 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-image {
+  height: 15px;
+}
+
+.event-timeStamp,
+.event-playerName,
+.event-assistName {
+  font-size: 12px;
+}
+
+.event-timeStamp {
+  color: white;
+}
+
+.event-assistName {
+  color: lightgoldenrodyellow;
+  margin: 0 5px;
+}

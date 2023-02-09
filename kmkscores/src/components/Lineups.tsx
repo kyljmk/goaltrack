@@ -52,7 +52,7 @@ function Lineups(lineUps: ILineUpProps) {
       <span className="substitutes-title">Substitutes</span>
       <div className="substitutes-container">
         <div>{startHomeElements}</div>
-        <div>{startAwayElements}</div>
+        <div className="substitutes-away-container">{startAwayElements}</div>
       </div>
       <span className="coaches-title">Coaches</span>
       <div className="coaches-container">

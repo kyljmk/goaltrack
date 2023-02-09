@@ -268,7 +268,9 @@ function Game() {
               Stats
             </div>
           </div>
-          {options === 0 && eventElements}
+          {options === 0 && (
+            <div className="events-container">{eventElements}</div>
+          )}
           {options === 1 && <Lineups home={lineups.home} away={lineups.away} />}
           {options === 2 && <Stats />}
         </div>
