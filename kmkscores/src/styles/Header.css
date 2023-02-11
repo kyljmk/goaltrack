@@ -65,6 +65,5 @@
 .header-title {
   width: 160px;
   margin: 25px 0;
-  /* object-fit: cover; */
   cursor: pointer;
 }

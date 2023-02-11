@@ -182,3 +182,69 @@ export type ICombinedStat = {
   homeValue: number;
   awayValue: number;
 };
+
+export type League = {
+  country: string;
+  flag: string;
+  id: number;
+  logo: string;
+  name: string;
+  round: string;
+  season: number;
+};
+
+export interface DailyFixture {
+  fixture: {
+    id: number;
+    referee: string;
+    timezone: string;
+    date: string;
+    timestamp: number;
+    periods: {
+      first: number | null;
+      second: number | null;
+    };
+    venue: {
+      id: number;
+      name: string;
+      city: string;
+    };
+    status: {
+      long: string;
+      short: string;
+      elapsed: number;
+    };
+  };
+  league: {
+    id: number;
+    name: string;
+    country: string;
+    logo: string;
+    flag: string;
+    season: number;
+    round: string;
+  };
+  teams: {
+    home: ITeam;
+    away: ITeam;
+  };
+  goals: Score;
+  score: {
+    halftime: Score;
+    fulltime: Score;
+    extratime: Score;
+    penalty: Score;
+  };
+}
+
+export interface ITeam {
+  id: number;
+  name: string;
+  logo: string;
+  winner: boolean | null;
+}
+
+export type Score = {
+  home: number | null;
+  away: number | null;
+};

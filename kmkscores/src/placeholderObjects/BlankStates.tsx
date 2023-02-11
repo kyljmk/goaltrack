@@ -146,3 +146,74 @@ export const blankFixtureObject: IFixtureDetails = {
     },
   },
 };
+
+export const blankDailyFixtures = {
+  fixture: {
+    id: 0,
+    referee: "",
+    timezone: "",
+    date: "",
+    timestamp: 0,
+    periods: {
+      first: 0,
+      second: 0,
+    },
+    venue: {
+      id: 0,
+      name: "",
+      city: "",
+    },
+    status: {
+      long: "",
+      short: "",
+      elapsed: 0,
+    },
+  },
+  league: {
+    id: 0,
+    name: "",
+    country: "",
+    logo: "",
+    flag: "",
+    season: 0,
+    round: "",
+  },
+  teams: {
+    home: {
+      id: 0,
+      name: "",
+      logo: "",
+      winner: false,
+    },
+    away: {
+      id: 0,
+      name: "",
+      logo: "",
+      winner: false,
+    },
+  },
+  goals: {
+    home: 0,
+    away: 0,
+  },
+
+  score: {
+    halftime: {
+      home: 0,
+      away: 0,
+    },
+
+    fulltime: {
+      home: 0,
+      away: 0,
+    },
+    extratime: {
+      home: 0,
+      away: 0,
+    },
+    penalty: {
+      home: 0,
+      away: 0,
+    },
+  },
+};

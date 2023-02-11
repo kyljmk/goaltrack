@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { blankFixtureObject } from "../blankObjects/BlankStates";
+import { blankFixtureObject } from "../placeholderObjects/BlankStates";
 import { IFixtureDetails } from "../Types";
 
 export const useApiGetGame = (fixtureId: number) => {
