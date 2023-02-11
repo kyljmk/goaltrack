@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
-import { blankFixtureObject } from "../placeholderObjects/BlankStates";
-import { IFixtureDetails } from "../Types";
+import {
+  blankDailyFixtures,
+  blankDailyLeagues,
+  blankFixtureObject,
+} from "../placeholderObjects/BlankStates";
+import { tempDailyFixtures } from "../placeholderObjects/TempDailys";
+import { DailyFixture, IFixtureDetails } from "../Types";
 
 export const useApiGetGame = (fixtureId: number) => {
   const [fixtureDetails, setFixtureDetails] =
@@ -55,4 +60,49 @@ export const useApiGetGame = (fixtureId: number) => {
   }, []);
 
   return fixtureDetails;
+};
+
+export const useApiGetDaily = (todaysDate: string) => {
+  const [daysFixtures, setDaysFixtures] =
+    useState<DailyFixture[]>(tempDailyFixtures);
+  const [leagues, setLeagues] = useState<DailyFixture[][]>(blankDailyLeagues);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      // const options = {
+      //   method: "GET",
+      //   headers: {
+      //     "X-RapidAPI-Key":
+      //       "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
+      //     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+      //   },
+      // };
+
+      // const response = await fetch(
+      //   "https://api-football-v1.p.rapidapi.com/v3/fixtures?date=2023-02-11",
+      //   options
+      // );
+      // const data = await response.json();
+      // setDaysFixtures(data.response);
+      // setLeagues(
+      //   daysFixtures.reduce((x: any, y: any) => {
+      //     (x[y.league.id] = x[y.league.id] || []).push(y);
+
+      //     return x;
+      //   }, {})
+      // );
+      setDaysFixtures(tempDailyFixtures);
+      setLeagues(
+        Object.values(
+          daysFixtures.reduce((x: any, y: any) => {
+            (x[y.league.id] = x[y.league.id] || []).push(y);
+
+            return x;
+          }, {})
+        )
+      );
+    };
+    fetchApi();
+  }, []);
+  return leagues;
 };

@@ -212,7 +212,7 @@ export interface DailyFixture {
     status: {
       long: string;
       short: string;
-      elapsed: number;
+      elapsed: number | null;
     };
   };
   league: {
@@ -248,3 +248,7 @@ export type Score = {
   home: number | null;
   away: number | null;
 };
+
+export interface IDailyLeagueProps {
+  league: DailyFixture[];
+}
