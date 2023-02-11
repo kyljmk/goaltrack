@@ -24,7 +24,7 @@
 
 .header-dropdown-container {
   padding: 20px;
-  border-bottom: 2px solid goldenrod;
+  border-bottom: 2px solid #f4a340;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,12 +45,12 @@
 
 .header-dropdown-item {
   padding: 20px;
-  border-bottom: 2px solid goldenrod;
+  border-bottom: 2px solid #f4a340;
   cursor: pointer;
 }
 
 .header-dropdown-item:hover {
-  border-bottom: 2px solid goldenrod;
+  border-bottom: 2px solid #f4a340;
   background-color: black;
 }
 
@@ -63,7 +63,8 @@
 }
 
 .header-title {
-  font-family: "Roboto Mono", monospace;
-  font-weight: 700;
+  width: 160px;
+  margin: 25px 0;
+  /* object-fit: cover; */
   cursor: pointer;
 }

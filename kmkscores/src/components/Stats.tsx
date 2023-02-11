@@ -39,7 +39,7 @@ function Stats(stats: IStatsProps) {
               style={{
                 width: `${homePercentage}%`,
                 backgroundColor:
-                  homePercentage > awayPercentage ? "goldenrod" : "gray",
+                  homePercentage > awayPercentage ? "#F4A340" : "gray",
               }}
             />
           </div>
@@ -49,7 +49,7 @@ function Stats(stats: IStatsProps) {
               style={{
                 width: `${awayPercentage}%`,
                 backgroundColor:
-                  awayPercentage > homePercentage ? "goldenrod" : "gray",
+                  awayPercentage > homePercentage ? "#F4A340" : "gray",
               }}
             />
           </div>

@@ -6,7 +6,7 @@
 }
 
 .game {
-  border: solid 2px goldenrod;
+  border: solid 2px #f4a340;
   border-radius: 15px;
   max-width: 800px;
   width: 100%;
@@ -15,7 +15,7 @@
 .gameHeader {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid goldenrod;
+  border-bottom: 1px solid #f4a340;
   padding: 20px 20px;
 }
 
@@ -78,7 +78,7 @@
 .game-options-summary,
 .game-options-lineUps,
 .game-options-stats {
-  border: solid 2px goldenrod;
+  border: solid 2px #f4a340;
   padding: 3px 8px;
   border-radius: 20px;
   cursor: pointer;
@@ -87,10 +87,10 @@
 .game-options-summarySelected,
 .game-options-lineUpsSelected,
 .game-options-statsSelected {
-  border: solid 2px goldenrod;
+  border: solid 2px #f4a340;
   padding: 3px 8px;
   color: black;
-  background-color: goldenrod;
+  background-color: #f4a340;
   border-radius: 20px;
   cursor: pointer;
 }

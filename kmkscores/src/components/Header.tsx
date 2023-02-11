@@ -62,14 +62,14 @@ function Header() {
         icon={faBars}
         size="2xl"
       />
-      <h1
+      <img
+        src="new_logo.png"
+        alt="goaltrack logo"
         onClick={() => {
           navigate("/");
         }}
         className="header-title"
-      >
-        kmkScores
-      </h1>
+      />
       <FontAwesomeIcon
         className="header-searchIcon"
         icon={faMagnifyingGlass}
