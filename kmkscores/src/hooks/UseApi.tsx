@@ -1,3 +1,4 @@
+import { faV } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import {
   blankDailyFixtures,
@@ -62,47 +63,38 @@ export const useApiGetGame = (fixtureId: number) => {
   return fixtureDetails;
 };
 
-export const useApiGetDaily = (todaysDate: string) => {
+export const useApiGetDaily = (todaysDate: string, favourites: number[]) => {
   const [daysFixtures, setDaysFixtures] =
-    useState<DailyFixture[]>(tempDailyFixtures);
+    useState<DailyFixture[]>(blankDailyFixtures);
   const [leagues, setLeagues] = useState<DailyFixture[][]>(blankDailyLeagues);
 
   useEffect(() => {
-    const fetchApi = async () => {
-      // const options = {
-      //   method: "GET",
-      //   headers: {
-      //     "X-RapidAPI-Key":
-      //       "ed335cb230mshe5db575b6e1b922p105ee4jsn4ff974b1ea03",
-      //     "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-      //   },
-      // };
+    const leagueFixtures: DailyFixture[][] = favourites.map((id: number) => {
+      const fetchApi = async () => {
+        const apiKey: string = process.env.REACT_APP_API_KEY as string;
+        const options = {
+          method: "GET",
+          headers: {
+            "X-RapidAPI-Key": apiKey,
+            "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+          },
+        };
 
-      // const response = await fetch(
-      //   "https://api-football-v1.p.rapidapi.com/v3/fixtures?date=2023-02-11",
-      //   options
-      // );
-      // const data = await response.json();
-      // setDaysFixtures(data.response);
-      // setLeagues(
-      //   daysFixtures.reduce((x: any, y: any) => {
-      //     (x[y.league.id] = x[y.league.id] || []).push(y);
-
-      //     return x;
-      //   }, {})
-      // );
-      setDaysFixtures(tempDailyFixtures);
-      setLeagues(
-        Object.values(
-          daysFixtures.reduce((x: any, y: any) => {
-            (x[y.league.id] = x[y.league.id] || []).push(y);
-
-            return x;
-          }, {})
+        fetch(
+          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&league=${id}&season=2022`,
+          options
         )
-      );
-    };
-    fetchApi();
+          .then((response) => response.json())
+          .then((data) => setDaysFixtures(data.response))
+          .catch((err) => console.error(err));
+        //setDaysFixtures(tempDailyFixtures);
+      };
+      fetchApi();
+      console.log(daysFixtures);
+      return daysFixtures;
+    });
+    setLeagues(leagueFixtures);
   }, []);
+
   return leagues;
 };

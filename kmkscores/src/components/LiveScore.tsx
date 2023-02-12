@@ -1,17 +1,11 @@
 import React from "react";
-import { ILiveResultsProps } from "../Types";
+import { IFixtureProps } from "../Types";
 import "../styles/LiveScore.css";
 import { useNavigate } from "react-router-dom";
 
-function LiveScore({
-  id,
-  homeName,
-  awayName,
-  homeScore,
-  awayScore,
-  flagUrl,
-}: ILiveResultsProps) {
+function LiveScore({ details }: IFixtureProps) {
   const navigate = useNavigate();
+  const { id, homeName, awayName, homeScore, awayScore, flagUrl } = details;
 
   return (
     <div

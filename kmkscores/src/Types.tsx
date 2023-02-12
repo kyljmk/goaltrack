@@ -7,13 +7,15 @@ export interface ITeamInfo {
   logoUrl: string;
 }
 
-export interface ILiveResultsProps {
-  id: number;
-  homeName: string;
-  awayName: string;
-  homeScore: number;
-  awayScore: number;
-  flagUrl: string;
+export interface IFixtureProps {
+  details: {
+    id: number;
+    homeName: string;
+    awayName: string;
+    homeScore: number | null;
+    awayScore: number | null;
+    flagUrl: string;
+  };
 }
 
 export type Team = {
@@ -102,8 +104,8 @@ export interface IGameHeaderProps {
 }
 
 export interface InfoContextType {
-  liveResults: any;
-  setLiveResults: Dispatch<SetStateAction<any>>;
+  favourites: any;
+  setFavourites: Dispatch<SetStateAction<any>>;
 }
 
 export interface IMatchEvent {
@@ -250,5 +252,5 @@ export type Score = {
 };
 
 export interface IDailyLeagueProps {
-  league: DailyFixture[];
+  fixtures: DailyFixture[];
 }
