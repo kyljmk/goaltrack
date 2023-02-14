@@ -12,10 +12,14 @@ function GameHeader({
   minutesPlayed,
 }: IGameHeaderProps) {
   let timeStamp: string = "";
-  timeStamp =
-    matchStatus === "HT" || matchStatus === "FT"
-      ? (timeStamp = matchStatus)
-      : (timeStamp = `${minutesPlayed.toString()}'`);
+
+  if (matchStatus === "HT" || matchStatus === "FT") {
+    timeStamp = matchStatus;
+  } else if (matchStatus === "NS") {
+    timeStamp = `${dateTime.slice(11, 16)} K.O.`;
+  } else {
+    timeStamp = `${minutesPlayed.toString()}'`;
+  }
 
   return (
     <div className="gameHeader">

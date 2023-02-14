@@ -12,22 +12,11 @@ function Home() {
 
   const leagues: DailyFixture[][] = useApiGetDailyLeague(dateString);
   const leagueElements = leagues.map((league: DailyFixture[]) => {
-    return <DailyLeague key={league[0]?.league.id} fixtures={league} />;
+    if (league.length !== 0) {
+      return <DailyLeague key={league[0]?.league.id} fixtures={league} />;
+    }
   });
-
-  // const scoreElements = liveResults.map((x: any) => {
-  //   return (
-  //     <LiveScore
-  //       key={x.fixture.id}
-  //       id={x.fixture.id}
-  //       homeName={x.teams.home.name}
-  //       awayName={x.teams.away.name}
-  //       homeScore={x.goals.home}
-  //       awayScore={x.goals.away}
-  //       flagUrl={x.league.flag}
-  //     />
-  //   );
-  // });
+  console.log(leagues);
   return (
     <div className="App">
       <Header />

@@ -12,7 +12,7 @@ import { useApiGetGame } from "../hooks/UseApi";
 function Game() {
   const fixtureId: number = useLocation().state.id;
   const [options, setOptions] = useState<number>(0);
-  const fixtureDetails: IFixtureDetails = useApiGetGame(fixtureId);
+  const { fixtureDetails, loading } = useApiGetGame(fixtureId);
 
   const {
     home,
@@ -50,68 +50,76 @@ function Game() {
     <div>
       <Header />
       <div className="gameContainer">
-        <div className="game">
-          <GameHeader
-            key={fixtureId}
-            home={home}
-            away={away}
-            matchStatus={matchStatus}
-            minutesPlayed={minutesPlayed}
-            league={league}
-            leagueLogo={leagueLogo}
-            round={round}
-            dateTime={dateTime}
-          />
-          <div className="game-refVenue-container">
-            <span className="game-referee">{referee}</span>
-            <span className="game-venue">{venue}</span>
+        {loading === true ? (
+          <div>
+            <span>LOADING...</span>
           </div>
-          <div className="game-options">
-            <div
-              onClick={() => {
-                setOptions(0);
-              }}
-              className={
-                options === 0
-                  ? "game-options-summarySelected"
-                  : "game-options-summary"
-              }
-            >
-              Summary
+        ) : (
+          <div className="game">
+            <GameHeader
+              key={fixtureId}
+              home={home}
+              away={away}
+              matchStatus={matchStatus}
+              minutesPlayed={minutesPlayed}
+              league={league}
+              leagueLogo={leagueLogo}
+              round={round}
+              dateTime={dateTime}
+            />
+            <div className="game-refVenue-container">
+              <span className="game-referee">{referee}</span>
+              <span className="game-venue">{venue}</span>
             </div>
-            <div
-              onClick={() => {
-                setOptions(1);
-              }}
-              className={
-                options === 1
-                  ? "game-options-statsSelected"
-                  : "game-options-stats"
-              }
-            >
-              Stats
+            <div className="game-options">
+              <div
+                onClick={() => {
+                  setOptions(0);
+                }}
+                className={
+                  options === 0
+                    ? "game-options-summarySelected"
+                    : "game-options-summary"
+                }
+              >
+                Summary
+              </div>
+              <div
+                onClick={() => {
+                  setOptions(1);
+                }}
+                className={
+                  options === 1
+                    ? "game-options-statsSelected"
+                    : "game-options-stats"
+                }
+              >
+                Stats
+              </div>
+              <div
+                onClick={() => {
+                  setOptions(2);
+                }}
+                className={
+                  options === 2
+                    ? "game-options-lineUpsSelected"
+                    : "game-options-lineUps"
+                }
+              >
+                Line-Ups
+              </div>
             </div>
-            <div
-              onClick={() => {
-                setOptions(2);
-              }}
-              className={
-                options === 2
-                  ? "game-options-lineUpsSelected"
-                  : "game-options-lineUps"
-              }
-            >
-              Line-Ups
-            </div>
+            {options === 0 && (
+              <div className="events-container">{eventElements}</div>
+            )}
+            {options === 1 && (
+              <Stats home={statistics.home} away={statistics.away} />
+            )}
+            {options === 2 && (
+              <Lineups home={lineups.home} away={lineups.away} />
+            )}
           </div>
-          {options === 0 && (
-            <div className="events-container">{eventElements}</div>
-          )}
-          {options === 1 && (
-            <Stats home={statistics.home} away={statistics.away} />
-          )}
-          {options === 2 && <Lineups home={lineups.home} away={lineups.away} />}
-        </div>
+        )}
       </div>
     </div>
   );
