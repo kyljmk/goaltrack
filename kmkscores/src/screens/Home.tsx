@@ -1,17 +1,18 @@
+import { useEffect, useState } from "react";
 import DailyLeague from "../components/DailyLeague";
 import Header from "../components/Header";
 import LiveScore from "../components/LiveScore";
-import { useApiGetDaily } from "../hooks/UseApi";
+import { useApiGetDailyLeague } from "../hooks/UseApi";
 import useInfo from "../hooks/UseInfo";
 import { DailyFixture, InfoContextType } from "../Types";
 
 function Home() {
-  const { favourites } = useInfo() as InfoContextType;
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
-  const leagues: DailyFixture[][] = useApiGetDaily(dateString, favourites);
+
+  const leagues: DailyFixture[][] = useApiGetDailyLeague(dateString);
   const leagueElements = leagues.map((league: DailyFixture[]) => {
-    return <DailyLeague key={league[0].league.id} fixtures={league} />;
+    return <DailyLeague key={league[0]?.league.id} fixtures={league} />;
   });
 
   // const scoreElements = liveResults.map((x: any) => {
@@ -36,3 +37,10 @@ function Home() {
 }
 
 export default Home;
+
+export type test = {
+  league: {
+    name: string;
+    id: number;
+  };
+};

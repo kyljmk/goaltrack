@@ -104,8 +104,8 @@ export interface IGameHeaderProps {
 }
 
 export interface InfoContextType {
-  favourites: any;
-  setFavourites: Dispatch<SetStateAction<any>>;
+  favourites: number[];
+  setFavourites: Dispatch<SetStateAction<number[]>>;
 }
 
 export interface IMatchEvent {
