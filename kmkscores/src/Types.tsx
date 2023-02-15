@@ -256,3 +256,8 @@ export type Score = {
 export interface IDailyLeagueProps {
   fixtures: DailyFixture[];
 }
+
+export interface IMenuProps {
+  closeMenu: Dispatch<SetStateAction<boolean>>;
+  dropdown: boolean;
+}

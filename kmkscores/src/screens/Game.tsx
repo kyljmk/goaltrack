@@ -12,7 +12,7 @@ import { useApiGetGame } from "../hooks/UseApi";
 function Game() {
   const fixtureId: number = useLocation().state.id;
   const [options, setOptions] = useState<number>(0);
-  const { fixtureDetails, loading } = useApiGetGame(fixtureId);
+  const { fixtureDetails, loading } = useApiGetGame(868141);
 
   const {
     home,

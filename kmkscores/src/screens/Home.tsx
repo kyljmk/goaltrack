@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import DailyLeague from "../components/DailyLeague";
 import Header from "../components/Header";
-import LiveScore from "../components/LiveScore";
+import Menu from "../components/Menu";
 import { useApiGetDailyLeague } from "../hooks/UseApi";
 import useInfo from "../hooks/UseInfo";
+import "../styles/Home.css";
 import { DailyFixture, InfoContextType } from "../Types";
 
 function Home() {
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
+  const [menu, setMenu] = useState<boolean>(true);
 
   const { daysFixtures, loading } = useApiGetDailyLeague(dateString);
   const leagueElements = daysFixtures.map((league: DailyFixture[]) => {
@@ -20,7 +22,10 @@ function Home() {
   return (
     <div className="App">
       <Header />
-      <div className="livescoreContainer">{leagueElements}</div>
+      <div className="menu-container">
+        <Menu closeMenu={setMenu} dropdown={false} />
+        <div className="livescoreContainer">{leagueElements}</div>
+      </div>
     </div>
   );
 }

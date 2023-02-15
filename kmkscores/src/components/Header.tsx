@@ -3,59 +3,19 @@ import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import Menu from "./Menu";
 
 function Header() {
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [menu, setMenu] = useState<boolean>(false);
   const handleOpen = () => {
-    setOpenMenu(true);
+    setMenu(true);
   };
-  const handleClose = () => {
-    setOpenMenu(false);
-  };
+
   const navigate = useNavigate();
 
   return (
     <div className="header">
-      {openMenu && (
-        <ul className="header-dropdown">
-          <li onClick={handleClose} className="header-dropdown-container">
-            <span className="header-dropdown-title">kmkScores</span>
-            <span className="header-dropdown-escape">X</span>
-          </li>
-          <li
-            onClick={() => {
-              navigate("/settings");
-            }}
-            className="header-dropdown-item"
-          >
-            Settings
-          </li>
-          <li
-            onClick={() => {
-              navigate("/favourites");
-            }}
-            className="header-dropdown-item"
-          >
-            Favourites
-          </li>
-          <li
-            onClick={() => {
-              navigate("/leagues");
-            }}
-            className="header-dropdown-item"
-          >
-            Leagues
-          </li>
-          <li
-            onClick={() => {
-              navigate("/contact");
-            }}
-            className="header-dropdown-item"
-          >
-            Contact
-          </li>
-        </ul>
-      )}
+      {menu && <Menu closeMenu={setMenu} dropdown={true} />}
       <FontAwesomeIcon
         className="header-menuIcon"
         onClick={handleOpen}
