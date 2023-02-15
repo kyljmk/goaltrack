@@ -11,41 +11,37 @@ function Menu({ closeMenu, dropdown }: IMenuProps) {
 
   return (
     <ul className={dropdown ? "header-dropdown" : "menu"}>
-      <li onClick={handleClose} className="header-dropdown-container">
-        <span className="header-dropdown-title">kmkScores</span>
-        <span className="header-dropdown-escape">X</span>
-      </li>
       <li
+        className="header-dropdown-item-container"
         onClick={() => {
           navigate("/settings");
         }}
-        className="header-dropdown-item"
       >
-        Settings
+        <div className="header-dropdown-item">Settings</div>
       </li>
       <li
+        className="header-dropdown-item-container"
         onClick={() => {
           navigate("/favourites");
         }}
-        className="header-dropdown-item"
       >
-        Favourites
+        <div className="header-dropdown-item">Favourites</div>
       </li>
       <li
+        className="header-dropdown-item-container"
         onClick={() => {
           navigate("/leagues");
         }}
-        className="header-dropdown-item"
       >
-        Leagues
+        <div className="header-dropdown-item">Leagues</div>
       </li>
       <li
+        className="header-dropdown-item-container"
         onClick={() => {
           navigate("/contact");
         }}
-        className="header-dropdown-item"
       >
-        Contact
+        <div className="header-dropdown-item">Contact</div>
       </li>
     </ul>
   );

@@ -24,3 +24,10 @@
   margin: 25px 0;
   cursor: pointer;
 }
+
+@media (min-width: 600px) {
+  .header-menuIcon {
+    color: lightgray;
+    cursor: auto;
+  }
+}

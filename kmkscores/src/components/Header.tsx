@@ -7,9 +7,6 @@ import Menu from "./Menu";
 
 function Header() {
   const [menu, setMenu] = useState<boolean>(false);
-  const handleOpen = () => {
-    setMenu(true);
-  };
 
   const navigate = useNavigate();
 
@@ -18,7 +15,9 @@ function Header() {
       {menu && <Menu closeMenu={setMenu} dropdown={true} />}
       <FontAwesomeIcon
         className="header-menuIcon"
-        onClick={handleOpen}
+        onClick={() => {
+          setMenu((prev) => !prev);
+        }}
         icon={faBars}
         size="2xl"
       />
