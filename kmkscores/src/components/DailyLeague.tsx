@@ -9,7 +9,10 @@ function DailyLeague({ fixtures }: IDailyLeagueProps) {
       details: {
         id: fixture.fixture.id,
         homeName: fixture.teams.home.name,
+        homeLogo: fixture.teams.home.logo,
         awayName: fixture.teams.away.name,
+        awayLogo: fixture.teams.away.logo,
+
         homeScore: fixture.goals.home,
         awayScore: fixture.goals.away,
         flagUrl: fixture.league.flag,
@@ -21,9 +24,9 @@ function DailyLeague({ fixtures }: IDailyLeagueProps) {
   });
 
   return (
-    <div>
+    <div style={{ border: "1px solid white", width: "100%" }}>
       <h2
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", width: "100%" }}
         onClick={() => {
           setShowFixtures((prev) => !prev);
         }}

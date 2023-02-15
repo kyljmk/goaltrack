@@ -3,26 +3,30 @@
   justify-content: flex-start;
   border-radius: 10px;
   margin-bottom: 15px;
-  max-width: 600px;
   width: 100%;
   cursor: pointer;
   border: 2px solid #f4a340;
+  padding: 10px;
 }
 
-.liveScore-img {
-  width: 100px;
-  border-radius: 10px;
-}
-
-.liveScore-text {
+.liveScore-teams {
   width: 100%;
 }
 
-.liveScore-text-home,
-.liveScore-text-away {
+.liveScore-teams-home,
+.liveScore-teams-away {
   display: flex;
   justify-content: space-between;
   height: 50%;
   align-items: center;
-  padding: 0 15px;
+}
+.liveScore-teams-home-logo,
+.liveScore-teams-away-logo {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.liveScore-teams-home-score,
+.liveScore-teams-away-score {
+  margin-left: 10px;
 }

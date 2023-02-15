@@ -10,13 +10,13 @@ function Home() {
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
 
-  const leagues: DailyFixture[][] = useApiGetDailyLeague(dateString);
-  const leagueElements = leagues.map((league: DailyFixture[]) => {
+  const { daysFixtures, loading } = useApiGetDailyLeague(dateString);
+  const leagueElements = daysFixtures.map((league: DailyFixture[]) => {
     if (league.length !== 0) {
       return <DailyLeague key={league[0]?.league.id} fixtures={league} />;
     }
   });
-  console.log(leagues);
+  console.log(daysFixtures);
   return (
     <div className="App">
       <Header />

@@ -11,7 +11,9 @@ export interface IFixtureProps {
   details: {
     id: number;
     homeName: string;
+    homeLogo: string;
     awayName: string;
+    awayLogo: string;
     homeScore: number | null;
     awayScore: number | null;
     flagUrl: string;
