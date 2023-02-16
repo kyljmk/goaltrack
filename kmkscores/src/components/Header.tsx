@@ -12,7 +12,7 @@ function Header() {
 
   return (
     <div className="header">
-      {menu && <Menu closeMenu={setMenu} dropdown={true} />}
+      {<Menu menu={menu} dropdown={true} />}
       <FontAwesomeIcon
         className="header-menuIcon"
         onClick={() => {

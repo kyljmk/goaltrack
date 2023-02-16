@@ -23,7 +23,7 @@ function Home() {
     <div className="App">
       <Header />
       <div className="menu-container">
-        <Menu closeMenu={setMenu} dropdown={false} />
+        <Menu menu={true} dropdown={false} />
         <div className="livescoreContainer">{leagueElements}</div>
       </div>
     </div>

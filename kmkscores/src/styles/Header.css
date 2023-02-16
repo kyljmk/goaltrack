@@ -12,7 +12,7 @@
 }
 
 .header-menuIcon {
-  cursor: pointer;
+  pointer-events: none;
 }
 
 .header-searchIcon {
@@ -28,6 +28,7 @@
 @media (min-width: 600px) {
   .header-menuIcon {
     color: lightgray;
-    cursor: auto;
+    cursor: default;
+    cursor: pointer;
   }
 }

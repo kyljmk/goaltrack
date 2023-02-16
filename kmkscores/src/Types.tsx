@@ -258,6 +258,6 @@ export interface IDailyLeagueProps {
 }
 
 export interface IMenuProps {
-  closeMenu: Dispatch<SetStateAction<boolean>>;
+  menu: boolean;
   dropdown: boolean;
 }
