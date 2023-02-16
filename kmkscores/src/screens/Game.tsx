@@ -12,6 +12,7 @@ import { useApiGetGame } from "../hooks/UseApi";
 function Game() {
   const fixtureId: number = useLocation().state.id;
   const [options, setOptions] = useState<number>(0);
+  const [menu, setMenu] = useState<boolean>(false);
   const { fixtureDetails, loading } = useApiGetGame(868141);
 
   const {
@@ -48,7 +49,7 @@ function Game() {
 
   return (
     <div>
-      <Header />
+      <Header menu={menu} setMenu={setMenu} />
       <div className="gameContainer">
         {loading === true ? (
           <div>

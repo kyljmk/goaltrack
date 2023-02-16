@@ -6,15 +6,13 @@ import { useNavigate } from "react-router-dom";
 import Menu from "./Menu";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useScrollLock } from "../hooks/UseScrollLock";
+import { IHeaderProps } from "../Types";
 
-function Header() {
-  const [menu, setMenu] = useState<boolean>(false);
+function Header({ menu, setMenu }: IHeaderProps) {
   const navigate = useNavigate();
-  const toggle = useScrollLock();
-  // menu ? disableBodyScroll(document.body) : enableBodyScroll(document.body);
+  menu ? disableBodyScroll(document.body) : enableBodyScroll(document.body);
   const handleClick = () => {
     setMenu((prev) => !prev);
-    toggle();
   };
   return (
     <div className="header-container">
@@ -31,6 +29,7 @@ function Header() {
           alt="goaltrack logo"
           onClick={() => {
             navigate("/");
+            setMenu(false);
           }}
           className="header-title"
         />

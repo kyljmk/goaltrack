@@ -18,6 +18,7 @@ export interface IFixtureProps {
     awayScore: number | null;
     flagUrl: string;
   };
+  menu: boolean;
 }
 
 export type Team = {
@@ -255,9 +256,15 @@ export type Score = {
 
 export interface IDailyLeagueProps {
   fixtures: DailyFixture[];
+  menu: boolean;
 }
 
 export interface IMenuProps {
   menu: boolean;
   dropdown: boolean;
+}
+
+export interface IHeaderProps {
+  menu: boolean;
+  setMenu: Dispatch<SetStateAction<boolean>>;
 }

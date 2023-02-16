@@ -50,8 +50,19 @@
 }
 
 .header-dropdown-item-container:last-child {
-  margin-top: auto;
+  margin: auto 0 20px 0;
   padding-bottom: 30px;
+}
+
+@media (max-width: 499px) {
+  .header-dropdown-item-container:last-child {
+    margin: auto 0 100px 0;
+  }
+}
+
+.header-dropdown-item-iphone {
+  margin: auto 0 40px 0;
+  padding-bottom: 100px;
 }
 
 .header-dropdown-item-container:first-child {
@@ -84,6 +95,6 @@
   opacity: 0.7;
 }
 .header-dropdown-item:active {
-  transform: scale(0.7);
+  transform: scale(0.9);
   opacity: 0.7;
 }

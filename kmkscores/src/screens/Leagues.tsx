@@ -4,9 +4,10 @@ import Header from "../components/Header";
 import { League } from "../Types";
 
 function Leagues() {
+  const [menu, setMenu] = useState<boolean>(false);
   return (
     <div>
-      <Header />
+      <Header menu={menu} setMenu={setMenu} />
       <p>Leagues</p>
     </div>
   );

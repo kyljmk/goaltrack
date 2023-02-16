@@ -3,7 +3,7 @@ import { IFixtureProps } from "../Types";
 import "../styles/LiveScore.css";
 import { useNavigate } from "react-router-dom";
 
-function LiveScore({ details }: IFixtureProps) {
+function LiveScore({ details, menu }: IFixtureProps) {
   const navigate = useNavigate();
   const {
     id,
@@ -19,9 +19,10 @@ function LiveScore({ details }: IFixtureProps) {
   return (
     <div
       onClick={() => {
-        navigate("/game", { state: { id: id } });
+        if (!menu) navigate("/game", { state: { id: id } });
       }}
       className="liveScore"
+      style={{ cursor: menu ? "default" : "pointer" }}
     >
       <div className="liveScore-teams">
         <div className="liveScore-teams-home">

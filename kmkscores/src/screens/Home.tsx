@@ -10,18 +10,20 @@ import { DailyFixture, InfoContextType } from "../Types";
 function Home() {
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
-  const [menu, setMenu] = useState<boolean>(true);
+  const [menu, setMenu] = useState<boolean>(false);
 
   const { daysFixtures, loading } = useApiGetDailyLeague(dateString);
   const leagueElements = daysFixtures.map((league: DailyFixture[]) => {
     if (league.length !== 0) {
-      return <DailyLeague key={league[0]?.league.id} fixtures={league} />;
+      return (
+        <DailyLeague key={league[0]?.league.id} fixtures={league} menu={menu} />
+      );
     }
   });
-  console.log(daysFixtures);
+
   return (
     <div className="App">
-      <Header />
+      <Header menu={menu} setMenu={setMenu} />
       <div className="menu-container">
         <Menu menu={true} dropdown={false} />
         <div className="leagues-container">
