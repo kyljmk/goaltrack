@@ -18,6 +18,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
       style={{ left: menu ? "30px" : "-180px", transition: "0.5s" }}
       className={dropdown ? "header-dropdown" : "menu"}
     >
+      <li style={{ height: "90px" }}></li>
       <li
         className="header-dropdown-item-container"
         onClick={() => {

@@ -9,11 +9,12 @@
 @media (max-width: 599px) {
   .header-dropdown {
     position: absolute;
-    margin: 90px 0 0 -30px;
+    margin: 0 0 0 -30px;
     list-style-type: none;
     padding: 0;
     width: 200px;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     background-color: black;
     display: block;
     top: 10px;
@@ -34,12 +35,13 @@
 
 @media (min-width: 600px) {
   .menu {
-    margin: 0;
+    margin: -90px 0 0 0;
     display: block;
     list-style-type: none;
     padding: 0;
     width: 200px;
-    height: 100%;
+    min-height: 100vh;
+    height: auto;
     background-color: black;
     box-shadow: 0px 5px 5px #28231d;
     display: flex;

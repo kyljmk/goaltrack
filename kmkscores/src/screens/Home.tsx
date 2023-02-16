@@ -24,7 +24,9 @@ function Home() {
       <Header />
       <div className="menu-container">
         <Menu menu={true} dropdown={false} />
-        <div className="livescoreContainer">{leagueElements}</div>
+        <div className="leagues-container">
+          <div className="leagues">{leagueElements}</div>
+        </div>
       </div>
     </div>
   );
