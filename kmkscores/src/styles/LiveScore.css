@@ -9,8 +9,20 @@
   padding: 10px;
 }
 
+.matchStatus-container {
+  margin: auto;
+  padding-right: 5px;
+  width: 50px;
+}
+
+.matchStatus-text {
+  font-size: 12px;
+}
+
 .liveScore-teams {
   width: 100%;
+  border-left: 2px solid #f4a340;
+  padding-left: 5px;
 }
 
 .liveScore-teams-home,

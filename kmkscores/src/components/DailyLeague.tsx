@@ -4,7 +4,8 @@ import LiveScore from "./LiveScore";
 
 function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
   const [showFixtures, setShowFixtures] = useState<boolean>(true);
-  const fixtureElements = fixtures.map((fixture: DailyFixture) => {
+
+  const fixtureElements = fixtures.response.map((fixture) => {
     const fixtureDetails: IFixtureProps = {
       details: {
         id: fixture.fixture.id,
@@ -15,6 +16,9 @@ function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
         homeScore: fixture.goals.home,
         awayScore: fixture.goals.away,
         flagUrl: fixture.league.flag,
+        status: fixture.fixture.status.short,
+        kickoff: fixture.fixture.date,
+        minutesPlayed: fixture.fixture.status.elapsed,
       },
       menu: menu,
     };
@@ -36,7 +40,7 @@ function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
       <div className="league-header">
         <img
           className="league-header-image"
-          src={fixtures[0].league.logo}
+          src={fixtures.response[0].league.logo}
           alt="logo of selected league"
         />
         <h2
@@ -44,7 +48,7 @@ function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
           style={{ cursor: menu ? "default" : "pointer" }}
           onClick={handleClick}
         >
-          {fixtures[0].league.name}
+          {fixtures.response[0].league.name}
         </h2>
       </div>
       {showFixtures && fixtureElements}

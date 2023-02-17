@@ -13,14 +13,17 @@ function Home() {
   const [menu, setMenu] = useState<boolean>(false);
 
   const { daysFixtures, loading } = useApiGetDailyLeague(dateString);
-  const leagueElements = daysFixtures.map((league: DailyFixture[]) => {
-    if (league.length !== 0) {
+  const leagueElements = daysFixtures.map((league: DailyFixture) => {
+    if (league.response.length !== 0) {
       return (
-        <DailyLeague key={league[0]?.league.id} fixtures={league} menu={menu} />
+        <DailyLeague
+          key={league.response[0].league.id}
+          fixtures={league}
+          menu={menu}
+        />
       );
     }
   });
-
   return (
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />

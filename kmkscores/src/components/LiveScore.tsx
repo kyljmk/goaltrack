@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function LiveScore({ details, menu }: IFixtureProps) {
   const navigate = useNavigate();
-  const {
+  let {
     id,
     homeName,
     awayName,
@@ -14,7 +14,13 @@ function LiveScore({ details, menu }: IFixtureProps) {
     flagUrl,
     homeLogo,
     awayLogo,
+    status,
+    kickoff,
+    minutesPlayed,
   } = details;
+
+  if (status === "NS") status = kickoff.slice(11, 16);
+  if (status === "1H" || status === "2H") status = `${minutesPlayed}'`;
 
   return (
     <div
@@ -24,6 +30,9 @@ function LiveScore({ details, menu }: IFixtureProps) {
       className="liveScore"
       style={{ cursor: menu ? "default" : "pointer" }}
     >
+      <div className="matchStatus-container">
+        <span className="matchStatus-text">{status}</span>
+      </div>
       <div className="liveScore-teams">
         <div className="liveScore-teams-home">
           <div style={{ display: "flex", alignItems: "center" }}>

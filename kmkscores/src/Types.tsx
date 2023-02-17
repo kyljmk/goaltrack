@@ -17,6 +17,9 @@ export interface IFixtureProps {
     homeScore: number | null;
     awayScore: number | null;
     flagUrl: string;
+    status: string;
+    kickoff: string;
+    minutesPlayed: number | null;
   };
   menu: boolean;
 }
@@ -199,47 +202,49 @@ export type League = {
 };
 
 export interface DailyFixture {
-  fixture: {
-    id: number;
-    referee: string;
-    timezone: string;
-    date: string;
-    timestamp: number;
-    periods: {
-      first: number | null;
-      second: number | null;
+  response: {
+    fixture: {
+      id: number;
+      referee: string;
+      timezone: string;
+      date: string;
+      timestamp: number;
+      periods: {
+        first: number | null;
+        second: number | null;
+      };
+      venue: {
+        id: number;
+        name: string;
+        city: string;
+      };
+      status: {
+        long: string;
+        short: string;
+        elapsed: number | null;
+      };
     };
-    venue: {
+    league: {
       id: number;
       name: string;
-      city: string;
+      country: string;
+      logo: string;
+      flag: string;
+      season: number;
+      round: string;
     };
-    status: {
-      long: string;
-      short: string;
-      elapsed: number | null;
+    teams: {
+      home: ITeam;
+      away: ITeam;
     };
-  };
-  league: {
-    id: number;
-    name: string;
-    country: string;
-    logo: string;
-    flag: string;
-    season: number;
-    round: string;
-  };
-  teams: {
-    home: ITeam;
-    away: ITeam;
-  };
-  goals: Score;
-  score: {
-    halftime: Score;
-    fulltime: Score;
-    extratime: Score;
-    penalty: Score;
-  };
+    goals: Score;
+    score: {
+      halftime: Score;
+      fulltime: Score;
+      extratime: Score;
+      penalty: Score;
+    };
+  }[];
 }
 
 export interface ITeam {
@@ -255,7 +260,7 @@ export type Score = {
 };
 
 export interface IDailyLeagueProps {
-  fixtures: DailyFixture[];
+  fixtures: DailyFixture;
   menu: boolean;
 }
 
