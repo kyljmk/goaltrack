@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { DailyFixture, IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
-function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
+function Leagues({ fixtures, menu }: IDailyLeagueProps) {
   const [showFixtures, setShowFixtures] = useState<boolean>(true);
 
-  const fixtureElements = fixtures.response.map((fixture) => {
+  const fixtureElements = fixtures.map((fixture) => {
     const fixtureDetails: IFixtureProps = {
       details: {
         id: fixture.fixture.id,
@@ -40,7 +40,7 @@ function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
       <div className="league-header">
         <img
           className="league-header-image"
-          src={fixtures.response[0].league.logo}
+          src={fixtures[0].league.logo}
           alt="logo of selected league"
         />
         <h2
@@ -48,7 +48,7 @@ function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
           style={{ cursor: menu ? "default" : "pointer" }}
           onClick={handleClick}
         >
-          {fixtures.response[0].league.name}
+          {fixtures[0].league.name}
         </h2>
       </div>
       {showFixtures && fixtureElements}
@@ -56,4 +56,4 @@ function DailyLeague({ fixtures, menu }: IDailyLeagueProps) {
   );
 }
 
-export default DailyLeague;
+export default Leagues;

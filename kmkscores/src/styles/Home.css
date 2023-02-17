@@ -18,6 +18,7 @@
   align-items: center;
   margin-bottom: 10px;
   width: 100%;
+  max-width: 800px;
 }
 
 .homeOptions-item {
@@ -25,6 +26,8 @@
   border-radius: 20px;
   padding: 8px 13px;
   border: 2px solid #f4a340;
+  width: 150px;
+  font-size: 18px;
 }
 
 .homeOptions-item-selected {
@@ -34,6 +37,30 @@
   border-radius: 20px;
   padding: 8px 13px;
   border: 2px solid #f4a340;
+  width: 150px;
+  font-size: 18px;
+}
+
+@media (max-width: 750px) {
+  .homeOptions-item-selected {
+    width: 120px;
+    font-size: 15px;
+  }
+  .homeOptions-item {
+    width: 120px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 499px) {
+  .homeOptions-item {
+    font-size: 12px;
+    width: 100px;
+  }
+  .homeOptions-item-selected {
+    font-size: 12px;
+    width: 100px;
+  }
 }
 
 .homeOptions-item-icon {

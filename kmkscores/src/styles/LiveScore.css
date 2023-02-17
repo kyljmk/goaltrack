@@ -9,6 +9,19 @@
   padding: 10px;
 }
 
+.liveScore-live {
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  cursor: pointer;
+  border: 2px solid #f4a340;
+  border-left: double orangered;
+  border-bottom: double orangered;
+  padding: 10px;
+}
+
 .matchStatus-container {
   margin: auto;
   padding-right: 5px;

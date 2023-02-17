@@ -19,6 +19,12 @@ function LiveScore({ details, menu }: IFixtureProps) {
     minutesPlayed,
   } = details;
 
+  const localTime = new Date(kickoff).toISOString();
+  console.log(localTime);
+  let isLive: boolean = false;
+  const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
+  if (liveStatuses.includes(status)) isLive = true;
+
   if (status === "NS") status = kickoff.slice(11, 16);
   if (status === "1H" || status === "2H") status = `${minutesPlayed}'`;
 
@@ -27,7 +33,7 @@ function LiveScore({ details, menu }: IFixtureProps) {
       onClick={() => {
         if (!menu) navigate("/game", { state: { id: id } });
       }}
-      className="liveScore"
+      className={isLive ? "liveScore-live" : "liveScore"}
       style={{ cursor: menu ? "default" : "pointer" }}
     >
       <div className="matchStatus-container">

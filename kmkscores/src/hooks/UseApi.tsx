@@ -5,7 +5,12 @@ import {
   tempDailyFixtures,
   tempLiveFixtures,
 } from "../placeholderObjects/TempDailys";
-import { DailyFixture, IFixtureDetails, InfoContextType } from "../Types";
+import {
+  DailyFixture,
+  DailyFixtureResponse,
+  IFixtureDetails,
+  InfoContextType,
+} from "../Types";
 import useInfo from "./UseInfo";
 
 export const useApiGetGame = (fixtureId: number) => {
@@ -106,7 +111,7 @@ export const useApiGetDailyLeague = (todaysDate: string) => {
 
 export const useApiGetLiveGames = () => {
   const [liveResults, setLiveResults] =
-    useState<DailyFixture>(tempLiveFixtures);
+    useState<DailyFixtureResponse[]>(tempLiveFixtures);
   const [loadingLive, setLoadingLive] = useState<boolean>(false);
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
