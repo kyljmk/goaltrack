@@ -13,7 +13,7 @@ function Game() {
   const fixtureId: number = useLocation().state.id;
   const [options, setOptions] = useState<number>(0);
   const [menu, setMenu] = useState<boolean>(false);
-  const { fixtureDetails, loading } = useApiGetGame(868141);
+  const { fixtureDetails, loadingGame } = useApiGetGame(868141);
 
   const {
     home,
@@ -51,7 +51,7 @@ function Game() {
     <div>
       <Header menu={menu} setMenu={setMenu} />
       <div className="gameContainer">
-        {loading === true ? (
+        {loadingGame === true ? (
           <div>
             <span>LOADING...</span>
           </div>

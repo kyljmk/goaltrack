@@ -6,7 +6,7 @@
   display: none;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 649px) {
   .header-dropdown {
     position: absolute;
     margin: 0 0 0 -30px;
@@ -33,7 +33,7 @@
   margin-right: 10px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 650px) {
   .menu {
     margin: -90px 0 0 0;
     display: block;

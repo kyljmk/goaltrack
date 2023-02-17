@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-.leagues-container {
+.homefixtures-container {
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -11,13 +11,43 @@
   width: 100%;
 }
 
-.leagues {
+.homeOptions-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.homeOptions-item {
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 8px 13px;
+  border: 2px solid #f4a340;
+}
+
+.homeOptions-item-selected {
+  cursor: pointer;
+  background-color: #f4a340;
+  color: black;
+  border-radius: 20px;
+  padding: 8px 13px;
+  border: 2px solid #f4a340;
+}
+
+.homeOptions-item-icon {
+  margin-right: 5px;
+}
+
+.homefixtures {
   width: 100%;
   padding: 20px;
   border: 3px solid #f4a340;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
+  max-width: 800px;
 }
 
 .league {

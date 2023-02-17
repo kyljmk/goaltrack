@@ -22,7 +22,7 @@
 .liveScore-teams {
   width: 100%;
   border-left: 2px solid #f4a340;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .liveScore-teams-home,
@@ -36,6 +36,22 @@
 .liveScore-teams-away-logo {
   width: 20px;
   margin-right: 10px;
+}
+
+.liveScore-teams-away-logo {
+  margin-top: 5px;
+}
+
+@media (max-width: 450px) {
+  .liveScore-teams-home-name,
+  .liveScore-teams-away-name {
+    font-size: 13px;
+  }
+  .matchStatus-container {
+    margin: auto;
+    padding-right: 5px;
+    width: 50px;
+  }
 }
 
 .liveScore-teams-home-score,

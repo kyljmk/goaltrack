@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
+import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import DailyLeague from "../components/DailyLeague";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import { useApiGetDailyLeague } from "../hooks/UseApi";
-import useInfo from "../hooks/UseInfo";
 import "../styles/Home.css";
-import { DailyFixture, InfoContextType } from "../Types";
+import { DailyFixture } from "../Types";
+import Favourites from "./Favourites";
 
 function Home() {
+  const [menu, setMenu] = useState<boolean>(false);
+  const [homeOptions, setHomeOptions] = useState<number>(0);
+
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
-  const [menu, setMenu] = useState<boolean>(false);
 
-  const { daysFixtures, loading } = useApiGetDailyLeague(dateString);
+  const { daysFixtures, loadingLeagues } = useApiGetDailyLeague(dateString);
+
   const leagueElements = daysFixtures.map((league: DailyFixture) => {
     if (league.response.length !== 0) {
       return (
@@ -29,8 +34,60 @@ function Home() {
       <Header menu={menu} setMenu={setMenu} />
       <div className="menu-container">
         <Menu menu={true} dropdown={false} />
-        <div className="leagues-container">
-          <div className="leagues">{leagueElements}</div>
+        <div className="homefixtures-container">
+          <div className="homeOptions-container">
+            <div
+              onClick={() => {
+                setHomeOptions(0);
+              }}
+              className={
+                homeOptions === 0
+                  ? "homeOptions-item-selected"
+                  : "homeOptions-item"
+              }
+            >
+              <FontAwesomeIcon
+                className="homeOptions-item-icon"
+                icon={faStar}
+              />
+              Leagues
+            </div>
+            <div
+              onClick={() => {
+                setHomeOptions(1);
+              }}
+              className={
+                homeOptions === 1
+                  ? "homeOptions-item-selected"
+                  : "homeOptions-item"
+              }
+            >
+              <FontAwesomeIcon
+                className="homeOptions-item-icon"
+                icon={faClock}
+              />
+              Live
+            </div>
+            <div
+              onClick={() => {
+                setHomeOptions(2);
+              }}
+              className={
+                homeOptions === 2
+                  ? "homeOptions-item-selected"
+                  : "homeOptions-item"
+              }
+            >
+              <FontAwesomeIcon
+                className="homeOptions-item-icon"
+                icon={faStar}
+              />
+              Teams
+            </div>
+          </div>
+          <div className="homefixtures">
+            {homeOptions === 0 && leagueElements}
+          </div>
         </div>
       </div>
     </div>
