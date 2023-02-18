@@ -13,7 +13,7 @@ function Game() {
   const fixtureId: number = useLocation().state.id;
   const [options, setOptions] = useState<number>(0);
   const [menu, setMenu] = useState<boolean>(false);
-  const { fixtureDetails, loadingGame } = useApiGetGame(868141);
+  const { fixtureDetails, loadingGame } = useApiGetGame(fixtureId);
 
   const {
     home,

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { DailyFixture, IDailyLeagueProps, IFixtureProps } from "../Types";
+import { useState } from "react";
+import { IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
 function Leagues({ fixtures, menu }: IDailyLeagueProps) {
@@ -49,6 +49,7 @@ function Leagues({ fixtures, menu }: IDailyLeagueProps) {
           onClick={handleClick}
         >
           {fixtures[0].league.name}
+          {fixtures.length}
         </h2>
       </div>
       {showFixtures && fixtureElements}

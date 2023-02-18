@@ -19,8 +19,6 @@ function LiveScore({ details, menu }: IFixtureProps) {
     minutesPlayed,
   } = details;
 
-  const localTime = new Date(kickoff).toISOString();
-  console.log(localTime);
   let isLive: boolean = false;
   const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
   if (liveStatuses.includes(status)) isLive = true;
@@ -31,7 +29,7 @@ function LiveScore({ details, menu }: IFixtureProps) {
   return (
     <div
       onClick={() => {
-        if (!menu) navigate("/game", { state: { id: id } });
+        if (!menu) navigate(`/game?id=${id}`, { state: { id: id } });
       }}
       className={isLive ? "liveScore-live" : "liveScore"}
       style={{ cursor: menu ? "default" : "pointer" }}

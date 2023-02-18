@@ -1,14 +1,13 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import Leagues from "../components/Leagues";
+import Leagues from "../components/LeaguesComponent";
 import Header from "../components/Header";
-import LiveScore from "../components/LiveScore";
 import Menu from "../components/Menu";
 import { useApiGetDailyLeague, useApiGetLiveGames } from "../hooks/UseApi";
 import "../styles/Home.css";
-import { DailyFixture, IFixtureProps } from "../Types";
-import Favourites from "./Favourites";
+import { DailyFixture, DailyFixtureResponse } from "../Types";
+import EmptyFixtures from "../components/EmptyFixtures";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -20,43 +19,44 @@ function Home() {
   const { daysFixtures, loadingLeagues } = useApiGetDailyLeague(dateString);
   const { liveResults, loadingLive } = useApiGetLiveGames();
 
-  const leagueElements = daysFixtures.map((league: DailyFixture) => {
-    if (league.response.length !== 0) {
-      return (
-        <Leagues
-          key={league.response[0].league.id}
-          fixtures={league.response}
-          menu={menu}
-        />
-      );
-    }
-  });
-
-  const liveElements = liveResults.map((fixture) => {
-    const fixtureDetails: IFixtureProps = {
-      details: {
-        id: fixture.fixture.id,
-        homeName: fixture.teams.home.name,
-        homeLogo: fixture.teams.home.logo,
-        awayName: fixture.teams.away.name,
-        awayLogo: fixture.teams.away.logo,
-        homeScore: fixture.goals.home,
-        awayScore: fixture.goals.away,
-        flagUrl: fixture.league.flag,
-        status: fixture.fixture.status.short,
-        kickoff: fixture.fixture.date,
-        minutesPlayed: fixture.fixture.status.elapsed,
-      },
-      menu: menu,
-    };
+  let leagueElements = daysFixtures.map((league: DailyFixture) => {
+    // if (league.response.length !== 0) {
     return (
-      <LiveScore
-        key={fixture.fixture.id}
-        details={fixtureDetails.details}
+      <Leagues
+        key={league.response[0].league.id}
+        fixtures={league.response}
         menu={menu}
       />
     );
+    // }
   });
+
+  if (daysFixtures.length === 0) {
+    leagueElements = [
+      <EmptyFixtures message="There are no fixtures from you favourites leages today." />,
+    ];
+  }
+
+  const orderedLiveElements: DailyFixtureResponse[][] = Object.values(
+    liveResults.reduce((x: any, y: any) => {
+      (x[y.league.id] = x[y.league.id] || []).push(y);
+
+      return x;
+    }, {})
+  );
+
+  let liveElements: JSX.Element[] = orderedLiveElements.map((leagues) => {
+    return (
+      <Leagues key={leagues[0].league.id} fixtures={leagues} menu={menu} />
+    );
+  });
+
+  if (orderedLiveElements.length === 0) {
+    liveElements = [
+      <EmptyFixtures message="There are no live fixtures right now, go to bed." />,
+    ];
+  }
+
   return (
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />
@@ -115,8 +115,9 @@ function Home() {
           </div>
           <div className="homefixtures">
             {homeOptions === 0 &&
-              (loadingLeagues ? <div>Loading..</div> : leagueElements)}
-            {homeOptions === 1 && liveElements}
+              (loadingLeagues ? <div>Loading...</div> : leagueElements)}
+            {homeOptions === 1 &&
+              (loadingLive ? <div>Loading...</div> : liveElements)}
           </div>
         </div>
       </div>
@@ -125,10 +126,3 @@ function Home() {
 }
 
 export default Home;
-
-export type test = {
-  league: {
-    name: string;
-    id: number;
-  };
-};

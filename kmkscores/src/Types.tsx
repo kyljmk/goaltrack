@@ -275,3 +275,7 @@ export interface IHeaderProps {
   menu: boolean;
   setMenu: Dispatch<SetStateAction<boolean>>;
 }
+
+export interface IEmptyMessage {
+  message: string;
+}
