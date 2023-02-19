@@ -29,10 +29,9 @@ function LiveScore({ details, menu }: IFixtureProps) {
   return (
     <div
       onClick={() => {
-        if (!menu) navigate(`/game?id=${id}`, { state: { id: id } });
+        navigate(`/game?id=${id}`);
       }}
       className={isLive ? "liveScore-live" : "liveScore"}
-      style={{ cursor: menu ? "default" : "pointer" }}
     >
       <div className="matchStatus-container">
         <span className="matchStatus-text">{status}</span>

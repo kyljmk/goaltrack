@@ -279,3 +279,15 @@ export interface IHeaderProps {
 export interface IEmptyMessage {
   message: string;
 }
+
+export interface ILeagueDetails {
+  country: {
+    name: string;
+    code: string | null;
+    flag: string | null;
+  };
+  league: {
+    id: number;
+    name: string;
+  };
+}

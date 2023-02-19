@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
-import { IFixtureDetails } from "../Types";
 import "../styles/Game.css";
 import Events from "../components/Events";
 import GameHeader from "../components/GameHeader";
@@ -10,10 +9,12 @@ import Stats from "../components/Stats";
 import { useApiGetGame } from "../hooks/UseApi";
 
 function Game() {
-  const fixtureId: number = useLocation().state.id;
   const [options, setOptions] = useState<number>(0);
   const [menu, setMenu] = useState<boolean>(false);
-  const { fixtureDetails, loadingGame } = useApiGetGame(fixtureId);
+
+  const [searchParams] = useSearchParams();
+  const id = Number(searchParams.get("id"));
+  const { fixtureDetails, loadingGame } = useApiGetGame(id);
 
   const {
     home,
@@ -58,7 +59,7 @@ function Game() {
         ) : (
           <div className="game">
             <GameHeader
-              key={fixtureId}
+              key={id}
               home={home}
               away={away}
               matchStatus={matchStatus}

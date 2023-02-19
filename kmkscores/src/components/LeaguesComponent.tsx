@@ -43,13 +43,8 @@ function Leagues({ fixtures, menu }: IDailyLeagueProps) {
           src={fixtures[0].league.logo}
           alt="logo of selected league"
         />
-        <h2
-          className="league-header-title"
-          style={{ cursor: menu ? "default" : "pointer" }}
-          onClick={handleClick}
-        >
+        <h2 className="league-header-title" onClick={handleClick}>
           {fixtures[0].league.name}
-          {fixtures.length}
         </h2>
       </div>
       {showFixtures && fixtureElements}

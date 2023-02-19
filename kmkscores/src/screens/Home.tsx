@@ -18,17 +18,18 @@ function Home() {
 
   const { daysFixtures, loadingLeagues } = useApiGetDailyLeague(dateString);
   const { liveResults, loadingLive } = useApiGetLiveGames();
+  console.log(daysFixtures);
 
   let leagueElements = daysFixtures.map((league: DailyFixture) => {
-    // if (league.response.length !== 0) {
-    return (
-      <Leagues
-        key={league.response[0].league.id}
-        fixtures={league.response}
-        menu={menu}
-      />
-    );
-    // }
+    if (league.response.length !== 0) {
+      return (
+        <Leagues
+          key={league.response[0].league.id}
+          fixtures={league.response}
+          menu={menu}
+        />
+      );
+    }
   });
 
   if (daysFixtures.length === 0) {
@@ -60,7 +61,10 @@ function Home() {
   return (
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />
-      <div className="menu-container">
+      <div
+        className="menu-container"
+        style={{ pointerEvents: menu ? "none" : "auto" }}
+      >
         <Menu menu={true} dropdown={false} />
         <div className="homefixtures-container">
           <div className="homeOptions-container">
