@@ -1,4 +1,4 @@
-import { DailyFixture, DailyFixtureResponse } from "../Types";
+import { DailyFixture, DailyFixtureResponse, ILeagueDetails } from "../Types";
 
 export const tempLiveFixtures: DailyFixtureResponse[] = [
   {
@@ -423,6 +423,97 @@ export const tempDailyFixtures: DailyFixture[] = [
             away: null,
           },
         },
+      },
+    ],
+  },
+];
+
+export const tempLeagues: ILeagueDetails[] = [
+  {
+    league: {
+      id: 424,
+      name: "Ligue 1",
+      type: "League",
+      logo: "https://media.api-sports.io/football/leagues/424.png",
+    },
+    country: {
+      name: "Congo-DR",
+      code: "CG",
+      flag: "https://media.api-sports.io/flags/cg.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-10-08",
+        end: "2023-01-04",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 39,
+      name: "Premier League",
+      type: "League",
+      logo: "https://media.api-sports.io/football/leagues/39.png",
+    },
+    country: {
+      name: "England",
+      code: "GB",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-05",
+        end: "2023-05-28",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 140,
+      name: "La Liga",
+      type: "League",
+      logo: "https://media-3.api-sports.io/football/leagues/140.png",
+    },
+    country: {
+      name: "Spain",
+      code: "ES",
+      flag: "https://media-3.api-sports.io/flags/es.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-12",
+        end: "2023-06-04",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 78,
+      name: "Bundesliga",
+      type: "League",
+      logo: "https://media.api-sports.io/football/leagues/78.png",
+    },
+    country: {
+      name: "Germany",
+      code: "DE",
+      flag: "https://media.api-sports.io/flags/de.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-05",
+        end: "2023-05-27",
+        current: true,
       },
     ],
   },

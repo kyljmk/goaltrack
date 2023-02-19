@@ -281,13 +281,26 @@ export interface IEmptyMessage {
 }
 
 export interface ILeagueDetails {
+  league: {
+    id: number;
+    logo: string;
+    name: string;
+    type: string;
+  };
   country: {
     name: string;
     code: string | null;
     flag: string | null;
   };
-  league: {
-    id: number;
-    name: string;
-  };
+  seasons: {
+    coverage: null;
+    current: boolean;
+    end: string;
+    start: string;
+    year: number;
+  }[];
+}
+
+export interface ILeagueResultProps {
+  country: ILeagueDetails[];
 }
