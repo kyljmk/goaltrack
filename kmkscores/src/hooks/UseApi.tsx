@@ -170,5 +170,5 @@ export const useApiGetLeagues = (option: string) => {
   //   fetchApi();
   // }, []);
 
-  return { leagues, leaguesLoading };
+  return leagues;
 };

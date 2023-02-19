@@ -1,20 +1,21 @@
 import React, { ChangeEvent, useState } from "react";
 import { useApiGetLeagues } from "../hooks/UseApi";
 import { ILeagueDetails } from "../Types";
-import LeagueResults from "./LeagueResults";
 
 function LeagueSearch() {
   const [options, setOptions] = useState<string>("league");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filteredLeagues, setFilteredLeagues] = useState<ILeagueDetails[][]>(
-    []
+  const [leagues, setLeagues] = useState<ILeagueDetails[]>(
+    useApiGetLeagues(options)
   );
-
-  const { leagues, leaguesLoading } = useApiGetLeagues(options);
+  const [filteredLeagues, setFilteredLeagues] = useState<ILeagueDetails[]>([]);
+  const [groupedFilteredLeagues, setGroupedFilteredLeagues] = useState<
+    ILeagueDetails[][]
+  >([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.currentTarget.value);
-    setFilteredLeagues(
+    setGroupedFilteredLeagues(
       Object.values(
         leagues
           .filter(
@@ -27,7 +28,7 @@ function LeagueSearch() {
                 .includes(e.currentTarget.value.toLowerCase())
           )
           .reduce((x: any, y: any) => {
-            (x[y.league.id] = x[y.league.id] || []).push(y);
+            (x[y.country.code] = x[y.country.code] || []).push(y);
 
             return x;
           }, {})
@@ -35,13 +36,26 @@ function LeagueSearch() {
     );
   };
 
-  console.log(filteredLeagues);
+  console.log(leagues);
 
-  const leaguesByCountryElements = filteredLeagues.map((country) => {
-    return <LeagueResults country={country} />;
+  const leaguesByCountryElements = groupedFilteredLeagues.map((country) => {
+    const leagueElements = country.map((league) => {
+      return (
+        <div key={league.league.id}>
+          <span>{league.league.name}</span>
+          <span>{league.league.id}</span>
+        </div>
+      );
+    });
+    return (
+      <div key={country[0].country.code}>
+        <span style={{ fontSize: "30px" }}>{country[0].country.name}</span>
+        {leagueElements}
+      </div>
+    );
   });
 
-  console.log(filteredLeagues);
+  console.log(groupedFilteredLeagues);
 
   return (
     <div className="search-container">
@@ -76,7 +90,7 @@ function LeagueSearch() {
       <form>
         <input type="search" value={searchQuery} onChange={handleChange} />
       </form>
-      {filteredLeagues}
+      {leaguesByCountryElements}
     </div>
   );
 }

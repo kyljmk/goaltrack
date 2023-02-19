@@ -517,4 +517,26 @@ export const tempLeagues: ILeagueDetails[] = [
       },
     ],
   },
+  {
+    league: {
+      id: 40,
+      name: "Championship",
+      type: "League",
+      logo: "https://media.api-sports.io/football/leagues/78.png",
+    },
+    country: {
+      name: "England",
+      code: "GB",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-05",
+        end: "2023-05-27",
+        current: true,
+      },
+    ],
+  },
 ];
