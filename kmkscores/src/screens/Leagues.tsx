@@ -12,7 +12,6 @@ function Leagues() {
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
-  useApiGetLeagues("cup");
 
   return (
     <div className="App">

@@ -304,3 +304,43 @@ export interface ILeagueDetails {
 export interface ILeagueResultProps {
   country: ILeagueDetails[];
 }
+
+export interface ILeagueTable {
+  league: {
+    id: number;
+    name: string;
+    country: string;
+    logo: string;
+    flag: string;
+    season: number;
+    standings: {
+      rank: number;
+      team: {
+        id: number;
+        name: string;
+        logo: string;
+      };
+      points: number;
+      goalsDiff: number;
+      group: string;
+      form: string;
+      status: string;
+      description: string;
+      all: IRecord;
+      home: IRecord;
+      away: IRecord;
+      update: string;
+    }[][];
+  };
+}
+
+export interface IRecord {
+  played: number;
+  win: number;
+  draw: number;
+  lose: number;
+  goals: {
+    for: number;
+    against: number;
+  };
+}

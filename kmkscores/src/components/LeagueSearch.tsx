@@ -1,47 +1,74 @@
 import React, { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useApiGetLeagues } from "../hooks/UseApi";
+import { tempCups } from "../placeholderObjects/TempDailys";
 import { ILeagueDetails } from "../Types";
 
 function LeagueSearch() {
   const [options, setOptions] = useState<string>("league");
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [leagues, setLeagues] = useState<ILeagueDetails[]>(
-    useApiGetLeagues(options)
-  );
-  const [filteredLeagues, setFilteredLeagues] = useState<ILeagueDetails[]>([]);
+  const { leagues, cups } = useApiGetLeagues();
+  const [results, setResuts] = useState<ILeagueDetails[]>(leagues);
   const [groupedFilteredLeagues, setGroupedFilteredLeagues] = useState<
     ILeagueDetails[][]
   >([]);
+  const navigate = useNavigate();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.currentTarget.value);
     setGroupedFilteredLeagues(
-      Object.values(
-        leagues
-          .filter(
-            (league) =>
-              league.country.name
-                .toLocaleLowerCase()
-                .includes(e.currentTarget.value.toLowerCase()) ||
-              league.league.name
-                .toLocaleLowerCase()
-                .includes(e.currentTarget.value.toLowerCase())
-          )
-          .reduce((x: any, y: any) => {
-            (x[y.country.code] = x[y.country.code] || []).push(y);
+      options === "league"
+        ? Object.values(
+            leagues
+              .filter(
+                (league) =>
+                  league.country.name
+                    .toLocaleLowerCase()
+                    .includes(e.currentTarget.value.toLowerCase()) ||
+                  league.league.name
+                    .toLocaleLowerCase()
+                    .includes(e.currentTarget.value.toLowerCase())
+              )
+              .reduce((x: any, y: any) => {
+                (x[y.country.code] = x[y.country.code] || []).push(y);
 
-            return x;
-          }, {})
-      )
+                return x;
+              }, {})
+          )
+        : Object.values(
+            cups
+              .filter(
+                (league) =>
+                  league.country.name
+                    .toLocaleLowerCase()
+                    .includes(e.currentTarget.value.toLowerCase()) ||
+                  league.league.name
+                    .toLocaleLowerCase()
+                    .includes(e.currentTarget.value.toLowerCase())
+              )
+              .reduce((x: any, y: any) => {
+                (x[y.country.code] = x[y.country.code] || []).push(y);
+
+                return x;
+              }, {})
+          )
     );
   };
 
-  console.log(leagues);
+  const handleClick = async (option: string) => {
+    setOptions(option);
+    setSearchQuery("");
+    setGroupedFilteredLeagues([]);
+  };
 
   const leaguesByCountryElements = groupedFilteredLeagues.map((country) => {
+    country.sort((a, b) => a.league.id - b.league.id);
     const leagueElements = country.map((league) => {
       return (
-        <div key={league.league.id}>
+        <div
+          key={league.league.id}
+          onClick={() => navigate(`/leagues?id=${league.league.id}`)}
+        >
           <span>{league.league.name}</span>
           <span>{league.league.id}</span>
         </div>
@@ -55,8 +82,6 @@ function LeagueSearch() {
     );
   });
 
-  console.log(groupedFilteredLeagues);
-
   return (
     <div className="search-container">
       <div className="options">
@@ -68,9 +93,7 @@ function LeagueSearch() {
           <span
             style={{ color: options === "league" ? "black" : "#f4a340" }}
             className="options-item"
-            onClick={() => {
-              setOptions("league");
-            }}
+            onClick={() => handleClick("league")}
           >
             League
           </span>
@@ -79,9 +102,7 @@ function LeagueSearch() {
           <span
             style={{ color: options === "league" ? "#f4a340" : "black" }}
             className="options-item"
-            onClick={() => {
-              setOptions("cup");
-            }}
+            onClick={() => handleClick("cup")}
           >
             Cup
           </span>

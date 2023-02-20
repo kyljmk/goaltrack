@@ -53,3 +53,18 @@
   width: 50%;
   align-items: center;
 }
+
+.team-row {
+  font-size: 10px;
+}
+
+.team-logo {
+  width: 20px;
+}
+
+.team-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

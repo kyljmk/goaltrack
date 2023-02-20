@@ -2,8 +2,10 @@ import { faL, faV } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { blankFixtureObject } from "../placeholderObjects/BlankStates";
 import {
+  tempCups,
   tempDailyFixtures,
   tempLeagues,
+  tempLeagueTable,
   tempLiveFixtures,
 } from "../placeholderObjects/TempDailys";
 import {
@@ -11,6 +13,7 @@ import {
   DailyFixtureResponse,
   IFixtureDetails,
   ILeagueDetails,
+  ILeagueTable,
   InfoContextType,
 } from "../Types";
 import useInfo from "./UseInfo";
@@ -142,9 +145,44 @@ export const useApiGetLiveGames = () => {
   return { liveResults, loadingLive };
 };
 
-export const useApiGetLeagues = (option: string) => {
+export const useApiGetLeagues = () => {
   const [leaguesLoading, setLeaguesLoading] = useState<boolean>(false);
   const [leagues, setLeagues] = useState<ILeagueDetails[]>(tempLeagues);
+  const [cups, setCups] = useState<ILeagueDetails[]>(tempCups);
+
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  // const fetchApi = async (option: string) => {
+  //   setLeaguesLoading(true);
+  //   const response = await fetch(
+  //     `https://api-football-v1.p.rapidapi.com/v3/leagues?season=2022&type=${option}`,
+  //     options
+  //   );
+  //   const data = await response.json();
+  //   option === "league" ? setLeagues(data.response) : setCups(data.response);
+  //   setLeaguesLoading(false);
+  // };
+
+  // useEffect(() => {
+  //   fetchApi("league");
+  //   fetchApi("cup");
+  // }, []);
+
+  return { leagues, cups };
+};
+
+export const useApiGetLeagueTable = (id: number) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [leagueTable, setLeagueTable] = useState<ILeagueTable[]>([
+    tempLeagueTable,
+  ]);
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -156,19 +194,19 @@ export const useApiGetLeagues = (option: string) => {
   };
 
   // const fetchApi = async () => {
-  //   setLeaguesLoading(true);
+  //   setLoading(true);
   //   const response = await fetch(
-  //     `https://api-football-v1.p.rapidapi.com/v3/leagues?season=2022&type=${option}`,
+  //     `https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=${id}`,
   //     options
   //   );
   //   const data = await response.json();
-  //   setLeagues(data.response);
-  //   setLeaguesLoading(false);
+  //   setLeagueTable(data.response);
+  //   setLoading(false);
   // };
 
   // useEffect(() => {
   //   fetchApi();
   // }, []);
 
-  return leagues;
+  return { leagueTable, loading };
 };

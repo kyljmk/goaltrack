@@ -1,4 +1,9 @@
-import { DailyFixture, DailyFixtureResponse, ILeagueDetails } from "../Types";
+import {
+  DailyFixture,
+  DailyFixtureResponse,
+  ILeagueDetails,
+  ILeagueTable,
+} from "../Types";
 
 export const tempLiveFixtures: DailyFixtureResponse[] = [
   {
@@ -540,3 +545,205 @@ export const tempLeagues: ILeagueDetails[] = [
     ],
   },
 ];
+export const tempCups: ILeagueDetails[] = [
+  {
+    league: {
+      id: 424,
+      name: "Coupe de France",
+      type: "Cup",
+      logo: "https://media.api-sports.io/football/leagues/424.png",
+    },
+    country: {
+      name: "Congo-DR",
+      code: "CG",
+      flag: "https://media.api-sports.io/flags/cg.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-10-08",
+        end: "2023-01-04",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 39,
+      name: "FA Cup",
+      type: "Cup",
+      logo: "https://media.api-sports.io/football/leagues/39.png",
+    },
+    country: {
+      name: "England",
+      code: "GB",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-05",
+        end: "2023-05-28",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 140,
+      name: "Copa del Rey",
+      type: "League",
+      logo: "https://media-3.api-sports.io/football/leagues/140.png",
+    },
+    country: {
+      name: "Spain",
+      code: "ES",
+      flag: "https://media-3.api-sports.io/flags/es.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-12",
+        end: "2023-06-04",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 78,
+      name: "DFB-Polka",
+      type: "Cup",
+      logo: "https://media.api-sports.io/football/leagues/78.png",
+    },
+    country: {
+      name: "Germany",
+      code: "DE",
+      flag: "https://media.api-sports.io/flags/de.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-05",
+        end: "2023-05-27",
+        current: true,
+      },
+    ],
+  },
+  {
+    league: {
+      id: 40,
+      name: "League Cup",
+      type: "Cup",
+      logo: "https://media.api-sports.io/football/leagues/78.png",
+    },
+    country: {
+      name: "England",
+      code: "GB",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+    },
+    seasons: [
+      {
+        coverage: null,
+        year: 2022,
+        start: "2022-08-05",
+        end: "2023-05-27",
+        current: true,
+      },
+    ],
+  },
+];
+
+export const tempLeagueTable: ILeagueTable = {
+  league: {
+    id: 39,
+    name: "Premier League",
+    country: "England",
+    logo: "https://media-3.api-sports.io/football/leagues/39.png",
+    flag: "https://media-3.api-sports.io/flags/gb.svg",
+    season: 2022,
+    standings: [
+      [
+        {
+          rank: 1,
+          team: {
+            id: 42,
+            name: "Arsenal",
+            logo: "https://media.api-sports.io/football/teams/42.png",
+          },
+          points: 54,
+          goalsDiff: 28,
+          group: "Premier League",
+          form: "WLDLW",
+          status: "same",
+          description: "Promotion - Champions League (Group Stage)",
+          all: {
+            played: 23,
+            win: 17,
+            draw: 3,
+            lose: 3,
+            goals: {
+              for: 51,
+              against: 23,
+            },
+          },
+          home: {
+            played: 11,
+            win: 8,
+            draw: 2,
+            lose: 1,
+            goals: { for: 27, against: 14 },
+          },
+          away: {
+            played: 12,
+            win: 9,
+            draw: 1,
+            lose: 2,
+            goals: { for: 24, against: 9 },
+          },
+          update: "2023-02-19T00:00:00+00:00",
+        },
+        {
+          rank: 2,
+          team: {
+            id: 50,
+            name: "Manchester City",
+            logo: "https://media-3.api-sports.io/football/teams/50.png",
+          },
+          points: 52,
+          goalsDiff: 36,
+          group: "Premier League",
+          form: "DWWLW",
+          status: "same",
+          description: "Promotion - Champions League (Group Stage)",
+          all: {
+            played: 23,
+            win: 17,
+            draw: 3,
+            lose: 3,
+            goals: { for: 60, against: 24 },
+          },
+          home: {
+            played: 11,
+            win: 8,
+            draw: 2,
+            lose: 1,
+            goals: { for: 41, against: 13 },
+          },
+          away: {
+            played: 12,
+            win: 9,
+            draw: 1,
+            lose: 2,
+            goals: { for: 19, against: 11 },
+          },
+          update: "2023-02-19T00:00:00+00:00",
+        },
+      ],
+    ],
+  },
+};

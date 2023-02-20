@@ -18,7 +18,6 @@ function Home() {
 
   const { daysFixtures, loadingLeagues } = useApiGetDailyLeague(dateString);
   const { liveResults, loadingLive } = useApiGetLiveGames();
-  console.log(daysFixtures);
 
   let leagueElements = daysFixtures.map((league: DailyFixture) => {
     if (league.response.length !== 0) {
