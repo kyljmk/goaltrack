@@ -10,7 +10,7 @@ import { IHeaderProps } from "../Types";
 
 function Header({ menu, setMenu }: IHeaderProps) {
   const navigate = useNavigate();
-  menu ? disableBodyScroll(document.body) : enableBodyScroll(document.body);
+  // menu ? disableBodyScroll(document.body) : enableBodyScroll(document.body);
   const handleClick = () => {
     setMenu((prev) => !prev);
   };

@@ -8,40 +8,53 @@ function LeagueTable() {
   const { leagueTable, loading } = useApiGetLeagueTable(Number(id));
 
   const tableElements = leagueTable[0].league.standings[0].map((team) => {
+    const regExArray = team.form.match(/.{1,1}/g);
+    const formattedForm = regExArray?.join(" ");
+
     return (
       <tr className="team-row">
         <td>{team.rank}</td>
-        <td className="team-cell">
-          <img src={team.team.logo} alt="Team's Logo" className="team-logo" />
-          {team.team.name}
+        <td>
+          <div className="team-name">
+            <div className="logo-container">
+              <img
+                src={team.team.logo}
+                alt="Team's Logo"
+                className="team-logo"
+              />
+            </div>
+            <div className="team-name-text">{team.team.name}</div>
+          </div>
         </td>
         <td>{team.all.played}</td>
-        <td className="web">{team.all.win}</td>
-        <td className="web">{team.all.draw}</td>
-        <td className="web">{team.all.lose}</td>
+        <td className="web-display">{team.all.win}</td>
+        <td className="web-display">{team.all.draw}</td>
+        <td className="web-display">{team.all.lose}</td>
         <td>
           {team.all.goals.for}:{team.all.goals.against}
         </td>
-        <td>{team.points}</td>
-        <td>{team.form}</td>
+        <td className="team-points">{team.points}</td>
+        <td className="web-display-form">
+          <span>{formattedForm}</span>
+        </td>
       </tr>
     );
   });
 
   return (
     <div>
-      <table>
+      <table style={{ width: "100%" }}>
         <thead>
           <tr>
-            <th>Pos.</th>
+            <th>#</th>
             <th>Team</th>
             <th>MP</th>
-            <th>W</th>
-            <th>D</th>
-            <th>L</th>
+            <th className="web-display">W</th>
+            <th className="web-display">D</th>
+            <th className="web-display">L</th>
             <th>G</th>
-            <th>Pts</th>
-            <th>Form</th>
+            <th>P</th>
+            <th className="web-display-form">Form</th>
           </tr>
         </thead>
         <tbody>{tableElements}</tbody>

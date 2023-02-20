@@ -1,3 +1,8 @@
+.menu-container {
+  display: flex;
+  width: 100%;
+}
+
 .leagues-container {
   padding: 40px;
   display: flex;
@@ -54,17 +59,67 @@
   align-items: center;
 }
 
-.team-row {
-  font-size: 10px;
+table {
+  border-collapse: collapse;
+}
+
+td {
+  font-size: 12px;
+  border-bottom: solid 1px #f4a340;
+  height: 40px;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #28231d;
+  padding: 2px;
+  border-radius: 7px;
+  margin-right: 5px;
 }
 
 .team-logo {
   width: 20px;
 }
 
-.team-cell {
+.team-name {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
+}
+
+.team-name-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.web-display,
+.web-display-form {
+  display: none;
+}
+
+@media (min-width: 750px) {
+  .web-display,
+  .web-display-form {
+    display: table-cell;
+  }
+
+  .web-display {
+    min-width: 20px;
+  }
+
+  .team-name-text {
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+
+  .team-name {
+    padding-left: 5px;
+  }
+
+  td {
+    font-size: 15px;
+  }
 }

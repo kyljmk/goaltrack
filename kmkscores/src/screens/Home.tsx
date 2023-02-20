@@ -1,7 +1,7 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import Leagues from "../components/LeaguesComponent";
+import LeaguesComponent from "../components/LeaguesComponent";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import { useApiGetDailyLeague, useApiGetLiveGames } from "../hooks/UseApi";
@@ -22,7 +22,7 @@ function Home() {
   let leagueElements = daysFixtures.map((league: DailyFixture) => {
     if (league.response.length !== 0) {
       return (
-        <Leagues
+        <LeaguesComponent
           key={league.response[0].league.id}
           fixtures={league.response}
           menu={menu}
@@ -47,7 +47,11 @@ function Home() {
 
   let liveElements: JSX.Element[] = orderedLiveElements.map((leagues) => {
     return (
-      <Leagues key={leagues[0].league.id} fixtures={leagues} menu={menu} />
+      <LeaguesComponent
+        key={leagues[0].league.id}
+        fixtures={leagues}
+        menu={menu}
+      />
     );
   });
 

@@ -1,3 +1,4 @@
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
