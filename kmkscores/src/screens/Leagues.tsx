@@ -1,11 +1,9 @@
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import LeagueSearch from "../components/LeagueSearch";
 import LeagueTable from "../components/LeagueTable";
 import Menu from "../components/Menu";
-import { useApiGetLeagues } from "../hooks/UseApi";
 import "../styles/Leagues.css";
 
 function Leagues() {
@@ -22,7 +20,7 @@ function Leagues() {
         style={{ pointerEvents: menu ? "none" : "auto" }}
       >
         <Menu menu={true} dropdown={false} />
-        <div className="leagues-container">
+        <div className="leagues-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="leagues">
             {id ? <LeagueTable /> : <LeagueSearch />}
           </div>

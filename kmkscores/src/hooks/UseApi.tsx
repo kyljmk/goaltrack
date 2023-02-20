@@ -76,11 +76,11 @@ export const useApiGetGame = (fixtureId: number) => {
   return { fixtureDetails, loadingGame };
 };
 
-export const useApiGetDailyLeague = (todaysDate: string) => {
-  const [daysFixtures, setDaysFixtures] =
+export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
+  const [teamsDaysFixtures, setTeamsDaysFixtures] =
     useState<DailyFixture[]>(tempDailyFixtures);
-  const [loadingLeagues, setLoadingLeagues] = useState<boolean>(false);
-  const { favourites } = useInfo() as InfoContextType;
+  const [loadingTeams, setLoadingTeams] = useState<boolean>(false);
+  const { favouriteTeams } = useInfo() as InfoContextType;
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -94,12 +94,50 @@ export const useApiGetDailyLeague = (todaysDate: string) => {
   // useEffect(() => {
   //   const promises = fetchApi();
   //   Promise.all(promises).then((values) => {
-  //     setDaysFixtures(values);
+  //     setTeamsDaysFixtures(values);
   //   });
   // }, []);
 
   // const fetchApi = () => {
   //   const data = favourites.map(async (i) => {
+  //     setLoadingTeams(true);
+  //     const response = await fetch(
+  //       `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=2022`,
+  //       options
+  //     );
+  //     setLoadingTeams(false);
+  //     return response.json();
+  //   });
+  //   return data;
+  // };
+
+  return { teamsDaysFixtures, loadingTeams };
+};
+
+export const useApiGetDailyLeague = (todaysDate: string) => {
+  const [leaguesDaysFixtures, setLeaguesDaysFixtures] =
+    useState<DailyFixture[]>(tempDailyFixtures);
+  const [loadingLeagues, setLoadingLeagues] = useState<boolean>(false);
+  const { favouriteLeagues } = useInfo() as InfoContextType;
+
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  // useEffect(() => {
+  //   const promises = fetchApi();
+  //   Promise.all(promises).then((values) => {
+  //     setLeaguesDaysFixtures(values);
+  //   });
+  // }, []);
+
+  // const fetchApi = () => {
+  //   const data = favouriteLeagues.map(async (i) => {
   //     setLoadingLeagues(true);
   //     const response = await fetch(
   //       `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&league=${i}&season=2022`,
@@ -111,7 +149,7 @@ export const useApiGetDailyLeague = (todaysDate: string) => {
   //   return data;
   // };
 
-  return { daysFixtures, loadingLeagues };
+  return { leaguesDaysFixtures, loadingLeagues };
 };
 
 export const useApiGetLiveGames = () => {
