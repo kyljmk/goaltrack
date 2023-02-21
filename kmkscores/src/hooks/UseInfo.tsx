@@ -8,7 +8,7 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
     39, 40, 41, 42, 140, 78, 135, 61, 2, 3, 848,
   ]);
   const [favouriteTeams, setFavouriteTeams] = useState<number[]>([
-    39, 40, 41, 42, 140, 78, 135, 61, 2, 3, 848,
+    33, 50, 529, 541, 157, 492,
   ]);
 
   return (

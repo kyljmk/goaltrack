@@ -78,7 +78,7 @@ export const useApiGetGame = (fixtureId: number) => {
 
 export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   const [teamsDaysFixtures, setTeamsDaysFixtures] =
-    useState<DailyFixture[]>(tempDailyFixtures);
+    useState<DailyFixtureResponse[]>(tempLiveFixtures);
   const [loadingTeams, setLoadingTeams] = useState<boolean>(false);
   const { favouriteTeams } = useInfo() as InfoContextType;
 
@@ -94,27 +94,34 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   // useEffect(() => {
   //   const promises = fetchApi();
   //   Promise.all(promises).then((values) => {
-  //     setTeamsDaysFixtures(values);
+  //     const filteredValues = values.filter((element) => {
+  //       return element !== undefined;
+  //     });
+  //     setTeamsDaysFixtures(filteredValues);
   //   });
   // }, []);
 
   // const fetchApi = () => {
-  //   const data = favourites.map(async (i) => {
+  //   const data = favouriteTeams.map(async (i) => {
   //     setLoadingTeams(true);
   //     const response = await fetch(
   //       `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=2022`,
   //       options
   //     );
+  //     const data = await response.json();
   //     setLoadingTeams(false);
-  //     return response.json();
+  //     if (data.response.length !== 0) {
+  //       return data.response[0];
+  //     }
   //   });
   //   return data;
   // };
 
+  console.log(teamsDaysFixtures);
   return { teamsDaysFixtures, loadingTeams };
 };
 
-export const useApiGetDailyLeague = (todaysDate: string) => {
+export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
   const [leaguesDaysFixtures, setLeaguesDaysFixtures] =
     useState<DailyFixture[]>(tempDailyFixtures);
   const [loadingLeagues, setLoadingLeagues] = useState<boolean>(false);

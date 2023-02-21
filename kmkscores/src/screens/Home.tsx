@@ -5,7 +5,7 @@ import LeaguesComponent from "../components/LeaguesComponent";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import {
-  useApiGetDailyLeague,
+  useApiGetFavouriteLeaguesFixtures,
   useApiGetFavouriteTeamsFixtures,
   useApiGetLiveGames,
 } from "../hooks/UseApi";
@@ -21,7 +21,7 @@ function Home() {
   const dateString: string = today.toISOString().split("T")[0];
 
   const { leaguesDaysFixtures, loadingLeagues } =
-    useApiGetDailyLeague(dateString);
+    useApiGetFavouriteLeaguesFixtures(dateString);
   const { teamsDaysFixtures, loadingTeams } =
     useApiGetFavouriteTeamsFixtures(dateString);
   const { liveResults, loadingLive } = useApiGetLiveGames();
@@ -46,11 +46,13 @@ function Home() {
 
   const orderedLiveElements: DailyFixtureResponse[][] = Object.values(
     liveResults.reduce((x: any, y: any) => {
-      (x[y.league.id] = x[y.league.id] || []).push(y);
+      (x[y.league.name] = x[y.league.name] || []).push(y);
 
       return x;
     }, {})
   );
+
+  console.log(orderedLiveElements);
 
   let liveElements: JSX.Element[] = orderedLiveElements.map((leagues) => {
     return (
@@ -65,6 +67,32 @@ function Home() {
   if (orderedLiveElements.length === 0) {
     liveElements = [
       <EmptyFixtures message="There are no live fixtures right now, go to bed." />,
+    ];
+  }
+
+  const orderedTeamElements: DailyFixtureResponse[][] = Object.values(
+    teamsDaysFixtures.reduce((x: any, y: any) => {
+      (x[y.league.name] = x[y.league.name] || []).push(y);
+
+      return x;
+    }, {})
+  );
+
+  let teamsElements = orderedTeamElements.map((league) => {
+    if (league.length !== 0) {
+      return (
+        <LeaguesComponent
+          key={league[0].league.id}
+          fixtures={league}
+          menu={menu}
+        />
+      );
+    }
+  });
+
+  if (orderedTeamElements.length === 0) {
+    liveElements = [
+      <EmptyFixtures message="There are no fixtures from your favourtie teams right now." />,
     ];
   }
 
@@ -136,7 +164,7 @@ function Home() {
             {homeOptions === 1 &&
               (loadingLive ? <div>Loading...</div> : liveElements)}
             {homeOptions === 2 &&
-              (loadingTeams ? <div>Loading...</div> : teamElements)}
+              (loadingTeams ? <div>Loading...</div> : teamsElements)}
           </div>
         </div>
       </div>
