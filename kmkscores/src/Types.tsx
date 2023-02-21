@@ -346,3 +346,141 @@ export interface IRecord {
     against: number;
   };
 }
+
+export interface ITeamStats {
+  league: {
+    id: number;
+    name: string;
+    country: string;
+    logo: string;
+    flag: string;
+    season: number;
+  };
+  team: {
+    id: number;
+    name: string;
+    logo: string;
+  };
+  form: string;
+  fixtures: {
+    played: RecordSplit;
+    wins: RecordSplit;
+    draws: RecordSplit;
+    losses: RecordSplit;
+  };
+  goals: {
+    for: {
+      total: RecordSplit;
+      average: {
+        home: string;
+        away: string;
+        total: string;
+      };
+      minutes: MinutesStats;
+    };
+    against: {
+      total: RecordSplit;
+      average: {
+        home: string;
+        away: string;
+        total: string;
+      };
+      minutes: MinutesStats;
+    };
+  };
+  biggest: {
+    streak: {
+      wins: number;
+      draws: number;
+      loses: number;
+    };
+    wins: {
+      home: string;
+      away: string;
+    };
+    loses: {
+      home: string;
+      away: string;
+    };
+    goals: {
+      for: {
+        home: number;
+        away: number;
+      };
+      against: {
+        home: number;
+        away: number;
+      };
+    };
+  };
+  clean_sheet: {
+    home: number;
+    away: number;
+    total: number;
+  };
+  failed_to_score: {
+    home: number;
+    away: number;
+    total: number;
+  };
+  penalty: {
+    scored: {
+      total: number;
+      percentage: string;
+    };
+    missed: {
+      total: number;
+      percentage: string;
+    };
+    total: number;
+  };
+  lineups: {
+    formation: string;
+    played: number;
+  }[];
+  cards: {
+    yellow: MinutesStats;
+    red: MinutesStats;
+  };
+}
+
+export type RecordSplit = {
+  home: number;
+  away: number;
+  total: number;
+};
+
+export type MinutesStats = {
+  "0-15": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "16-30": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "31-45": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "46-60": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "61-75": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "76-90": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "91-105": {
+    total: number | null;
+    percentage: string | null;
+  };
+  "106-120": {
+    total: number | null;
+    percentage: string | null;
+  };
+};

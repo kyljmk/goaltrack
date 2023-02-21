@@ -4,10 +4,11 @@ import { IMenuProps } from "../Types";
 import "../styles/Menu.css";
 import {
   faTable,
-  faGear,
   faStar,
   faMessage,
+  faShirt,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Menu({ menu, dropdown }: IMenuProps) {
@@ -19,17 +20,6 @@ function Menu({ menu, dropdown }: IMenuProps) {
       className={dropdown ? "header-dropdown" : "menu"}
     >
       <li style={{ height: "90px" }}></li>
-      <li
-        className="header-dropdown-item-container"
-        onClick={() => {
-          navigate("/settings");
-        }}
-      >
-        <div className="header-dropdown-item">
-          <FontAwesomeIcon className="menu-icon" icon={faGear} />
-          <span>Settings</span>
-        </div>
-      </li>
       <li
         className="header-dropdown-item-container"
         onClick={() => {
@@ -50,6 +40,17 @@ function Menu({ menu, dropdown }: IMenuProps) {
         <div className="header-dropdown-item">
           <FontAwesomeIcon className="menu-icon" icon={faTable} />
           <span>Leagues</span>
+        </div>
+      </li>
+      <li
+        className="header-dropdown-item-container"
+        onClick={() => {
+          navigate("/settings");
+        }}
+      >
+        <div className="header-dropdown-item">
+          <FontAwesomeIcon className="menu-icon" icon={faShirt} />
+          <span>Teams</span>
         </div>
       </li>
       <li

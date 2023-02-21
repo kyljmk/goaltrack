@@ -1,0 +1,23 @@
+.menu-container {
+  display: flex;
+  width: 100%;
+}
+
+.favourites-container {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.favourites {
+  width: 100%;
+  padding: 20px;
+  border: 3px solid #f4a340;
+  border-radius: 35px;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  height: 100%;
+}
