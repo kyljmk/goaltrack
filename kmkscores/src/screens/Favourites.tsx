@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
+import { useApiGetFavouriteTeams } from "../hooks/UseApi";
 import "../styles/Favourites.css";
 
 function Favourites() {
   const [menu, setMenu] = useState<boolean>(false);
+  const favouriteTeamsInfo = useApiGetFavouriteTeams();
+  console.log(favouriteTeamsInfo);
   return (
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />

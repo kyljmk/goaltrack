@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface ITeamInfo {
-  id: number;
-  name: string;
-  score: number;
-  logoUrl: string;
-}
+// export interface ITeamInfo {
+//   id: number;
+//   name: string;
+//   score: number;
+//   logoUrl: string;
+// }
 
 export interface IFixtureProps {
   details: {
@@ -484,3 +484,24 @@ export type MinutesStats = {
     percentage: string | null;
   };
 };
+
+export interface ITeamInfo {
+  team: {
+    id: number;
+    name: string;
+    code: string;
+    country: string;
+    founded: number;
+    national: boolean;
+    logo: string;
+  };
+  venue: {
+    id: number;
+    name: string;
+    address: string;
+    city: string;
+    capacity: number;
+    surface: string;
+    image: string;
+  };
+}

@@ -15,6 +15,7 @@ import {
   ILeagueDetails,
   ILeagueTable,
   InfoContextType,
+  ITeamInfo,
 } from "../Types";
 import useInfo from "./UseInfo";
 
@@ -254,4 +255,37 @@ export const useApiGetLeagueTable = (id: number) => {
   // }, []);
 
   return { leagueTable, loading };
+};
+
+export const useApiGetFavouriteTeams = () => {
+  const { favouriteTeams } = useInfo() as InfoContextType;
+  const [favouriteTeamsInfo, setFavouriteTeamsInfo] = useState<ITeamInfo[]>([]);
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  useEffect(() => {
+    const promises = fetchApi();
+    Promise.all(promises).then((values) => {
+      setFavouriteTeamsInfo(values);
+    });
+  }, []);
+  const fetchApi = () => {
+    const data = favouriteTeams.map(async (i) => {
+      const response = await fetch(
+        `https://api-football-v1.p.rapidapi.com/v3/teams?id=${i}`,
+        options
+      );
+      const data = await response.json();
+      return data.response[0];
+    });
+    return data;
+  };
+
+  return favouriteTeamsInfo;
 };
