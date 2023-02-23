@@ -21,3 +21,79 @@
   max-width: 800px;
   height: 100%;
 }
+
+.teams-container,
+.league-container {
+  width: 100%;
+}
+
+.team,
+.league {
+  display: flex;
+  width: 100%;
+  border: 1px dashed #f4a340;
+  border-radius: 15px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.teamInfo-container,
+.leagueInfo-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.team-logoContainer,
+.league-logoContainer {
+  margin-right: 10px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+.team-logo,
+.league-logo {
+  width: 30px;
+}
+
+.team-name,
+.league-name {
+  margin-right: 5px;
+}
+
+.team-country,
+.league-country {
+  color: lightgray;
+}
+
+.team-star-container,
+.league-star-container {
+  font-size: 25px;
+}
+
+.team-star,
+.league-star {
+  cursor: pointer;
+}
+
+.addFavourite {
+  border: 1px solid #f4a340;
+  padding: 0 15px;
+  font-size: 25px;
+  border-radius: 15px;
+  color: black;
+  background-color: #f4a340;
+  cursor: pointer;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

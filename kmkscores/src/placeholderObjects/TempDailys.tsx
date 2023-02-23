@@ -747,3 +747,75 @@ export const tempLeagueTable: ILeagueTable = {
     ],
   },
 };
+
+export const tempFavTeams = [
+  {
+    team: {
+      id: 33,
+      name: "Manchester United",
+      code: "MUN",
+      country: "England",
+      founded: 1878,
+      national: false,
+      logo: "https://media-3.api-sports.io/football/teams/33.png",
+    },
+    venue: {
+      id: 556,
+      name: "Old Trafford",
+      address: "Sir Matt Busby Way",
+      city: "Manchester",
+      capacity: 76212,
+      surface: "grass",
+      image: "https://media.api-sports.io/football/venues/556.png",
+    },
+  },
+  {
+    team: {
+      id: 50,
+      name: "Manchester City",
+      code: "MAC",
+      country: "England",
+      founded: 1880,
+      national: false,
+      logo: "https://media-3.api-sports.io/football/teams/50.png",
+    },
+    venue: {
+      id: 555,
+      name: "Etihad Stadium",
+      address: "Rowsley Street",
+      city: "Manchester",
+      capacity: 55097,
+      surface: "grass",
+      image: "https://media.api-sports.io/football/venues/555.png",
+    },
+  },
+];
+
+export const tempFavLeagues = [
+  {
+    league: {
+      id: 39,
+      name: "Premier League",
+      type: "League",
+      logo: "https://media.api-sports.io/football/leagues/39.png",
+    },
+    country: {
+      name: "England",
+      code: "GB",
+      flag: "https://media.api-sports.io/flags/gb.svg",
+    },
+  },
+  {
+    league: {
+      id: 78,
+      name: "Bundesliga",
+      type: "League",
+      logo: "https://media.api-sports.io/football/leagues/78.png",
+    },
+    country: {
+      name: "Germany",
+      code: "DE",
+      flag: "https://media-3.api-sports.io/flags/de.svg",
+    },
+  },
+];

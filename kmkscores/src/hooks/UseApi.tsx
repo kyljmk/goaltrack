@@ -4,6 +4,8 @@ import { blankFixtureObject } from "../placeholderObjects/BlankStates";
 import {
   tempCups,
   tempDailyFixtures,
+  tempFavLeagues,
+  tempFavTeams,
   tempLeagues,
   tempLeagueTable,
   tempLiveFixtures,
@@ -13,6 +15,7 @@ import {
   DailyFixtureResponse,
   IFixtureDetails,
   ILeagueDetails,
+  ILeagueInfo,
   ILeagueTable,
   InfoContextType,
   ITeamInfo,
@@ -270,22 +273,59 @@ export const useApiGetFavouriteTeams = () => {
   };
 
   useEffect(() => {
-    const promises = fetchApi();
-    Promise.all(promises).then((values) => {
-      setFavouriteTeamsInfo(values);
-    });
+    // const promises = fetchApi();
+    // Promise.all(promises).then((values) => {
+    //   setFavouriteTeamsInfo(values);
+    // });
+    // setFavouriteTeamsInfo(tempFavTeams);
   }, []);
-  const fetchApi = () => {
-    const data = favouriteTeams.map(async (i) => {
-      const response = await fetch(
-        `https://api-football-v1.p.rapidapi.com/v3/teams?id=${i}`,
-        options
-      );
-      const data = await response.json();
-      return data.response[0];
-    });
-    return data;
-  };
+  // const fetchApi = () => {
+  //   const data = favouriteTeams.map(async (i) => {
+  //     const response = await fetch(
+  //       `https://api-football-v1.p.rapidapi.com/v3/teams?id=${i}`,
+  //       options
+  //     );
+  //     const data = await response.json();
+  //     return data.response[0];
+  //   });
+  //   return data;
+  // };
 
   return favouriteTeamsInfo;
+};
+
+export const useApiGetFavouriteLeagues = () => {
+  const { favouriteLeagues } = useInfo() as InfoContextType;
+  const [favouriteLeaguesInfo, setFavouriteLeaguesInfo] = useState<
+    ILeagueInfo[]
+  >([]);
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  useEffect(() => {
+    // const promises = fetchApi();
+    // Promise.all(promises).then((values) => {
+    //   setFavouriteLeaguesInfo(values);
+    // });
+    setFavouriteLeaguesInfo(tempFavLeagues);
+  }, []);
+  // const fetchApi = () => {
+  //   const data = favouriteLeagues.map(async (i) => {
+  //     const response = await fetch(
+  //       `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${i}&&season=2022`,
+  //       options
+  //     );
+  //     const data = await response.json();
+  //     return data.response[0];
+  //   });
+  //   return data;
+  // };
+
+  return favouriteLeaguesInfo;
 };
