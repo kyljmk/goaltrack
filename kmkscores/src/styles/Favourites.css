@@ -22,13 +22,21 @@
   height: 100%;
 }
 
+.favourites-title {
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f4a340;
+}
+
 .teams-container,
 .league-container {
   width: 100%;
 }
 
 .team,
-.favLeague {
+.favLeague,
+.team-empty,
+.favLeague-empty {
   display: flex;
   width: 100%;
   border: 1px dashed #f4a340;
@@ -37,6 +45,18 @@
   align-items: center;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+@media (max-width: 450px) {
+  .team,
+  .favLeague {
+    font-size: 11px;
+  }
+
+  .team-empty,
+  .favLeague-empty {
+    font-size: 14px;
+  }
 }
 
 .teamInfo-container,
@@ -83,13 +103,20 @@
 }
 
 .addFavourite {
-  border: 1px solid #f4a340;
+  border: 2px solid #f4a340;
   padding: 0 15px;
   font-size: 25px;
   border-radius: 15px;
-  color: black;
-  background-color: #f4a340;
   cursor: pointer;
+}
+
+.addFavourite:hover {
+  transform: scale(1.04);
+  opacity: 0.7;
+}
+.addFavourite:active {
+  transform: scale(0.9);
+  opacity: 0.7;
 }
 
 .title-container {

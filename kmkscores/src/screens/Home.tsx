@@ -1,7 +1,7 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import LeaguesComponent from "../components/LeaguesComponent";
+import LiveLeaguesComponent from "../components/LiveLeaguesComponent";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import {
@@ -29,7 +29,7 @@ function Home() {
   let leagueElements = leaguesDaysFixtures.map((league: DailyFixture) => {
     if (league.response.length !== 0) {
       return (
-        <LeaguesComponent
+        <LiveLeaguesComponent
           key={league.response[0].league.id}
           fixtures={league.response}
           menu={menu}
@@ -54,7 +54,7 @@ function Home() {
 
   let liveElements: JSX.Element[] = orderedLiveElements.map((leagues) => {
     return (
-      <LeaguesComponent
+      <LiveLeaguesComponent
         key={leagues[0].league.id}
         fixtures={leagues}
         menu={menu}
@@ -79,7 +79,7 @@ function Home() {
   let teamsElements = orderedTeamElements.map((league) => {
     if (league.length !== 0) {
       return (
-        <LeaguesComponent
+        <LiveLeaguesComponent
           key={league[0].league.id}
           fixtures={league}
           menu={menu}
@@ -106,6 +106,10 @@ function Home() {
           className="homefixtures-container"
           style={{ opacity: menu ? 0.1 : 1 }}
         >
+          <span style={{ marginBottom: "30px", fontSize: "22px" }}>
+            This site is currently under construction and is populated with
+            dummy data. It should be going live on Saturday 25th Feb!
+          </span>
           <div className="homeOptions-container">
             <div
               onClick={() => {

@@ -22,6 +22,7 @@ function Leagues() {
         <Menu menu={true} dropdown={false} />
         <div className="leagues-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="leagues">
+            <h1 className="leagues-title">Leagues</h1>
             {id ? <LeagueTable /> : <LeagueSearch />}
           </div>
         </div>

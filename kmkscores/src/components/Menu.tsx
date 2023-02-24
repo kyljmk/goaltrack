@@ -45,7 +45,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
       <li
         className="header-dropdown-item-container"
         onClick={() => {
-          navigate("/settings");
+          navigate("/teams");
         }}
       >
         <div className="header-dropdown-item">

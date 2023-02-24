@@ -5,13 +5,18 @@ const InfoContext = createContext<InfoContextType | null>(null);
 
 export const InfoProvider = ({ children }: { children: ReactNode }) => {
   const [favouriteLeagues, setFavouriteLeagues] = useState<number[]>(
-    localStorage.getItem("favouriteTeams")?.length === 0
-      ? JSON.parse(localStorage.getItem("favouriteTeams") || "")
-      : [39, 40, 41, 42, 140, 78, 135, 61, 2, 3, 848]
+    //@ts-ignore
+    JSON.parse(localStorage.getItem("favouriteLeagues")) || [
+      39, 40, 41, 42, 140, 78, 135, 61, 2, 3, 848,
+    ]
   );
   const [favouriteTeams, setFavouriteTeams] = useState<number[]>(
-    JSON.parse(localStorage.getItem("favouriteTeams") || "")
+    //@ts-ignore
+    JSON.parse(localStorage.getItem("favouriteTeams")) || []
   );
+
+  console.log(favouriteLeagues);
+  console.log(favouriteTeams);
 
   return (
     <InfoContext.Provider

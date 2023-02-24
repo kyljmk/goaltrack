@@ -106,7 +106,7 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   // }, []);
 
   // const fetchApi = () => {
-  //   const data = favouriteTeams.map(async (i) => {
+  //   const data = favouriteTeams.sort(function(a, b){return a-b}).map(async (i) => {
   //     setLoadingTeams(true);
   //     const response = await fetch(
   //       `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=2022`,
@@ -147,7 +147,7 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
   // }, []);
 
   // const fetchApi = () => {
-  //   const data = favouriteLeagues.map(async (i) => {
+  //   const data = favouriteLeagues.sort(function(a, b){return a-b}).map(async (i) => {
   //     setLoadingLeagues(true);
   //     const response = await fetch(
   //       `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&league=${i}&season=2022`,

@@ -2,7 +2,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EmptyFixtures from "../components/EmptyFixtures";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import {
@@ -32,8 +31,6 @@ function Favourites() {
   useEffect(() => {
     localStorage.setItem("favouriteLeagues", JSON.stringify(favouriteLeagues));
   }, [favouriteLeagues]);
-
-  console.log(favouriteLeagues);
 
   let favTeamsElements: JSX.Element[] | ReactElement = favouriteTeamsInfo.map(
     (team) => {
@@ -65,7 +62,7 @@ function Favourites() {
 
   if (favouriteTeams.length === 0) {
     favTeamsElements = (
-      <div className="favLeague" style={{ fontSize: "16px" }}>
+      <div className="team-empty">
         <span>You have to add your favourite leagues.</span>
         <div onClick={() => navigate("/teams")} className="addFavourite">
           <span>+</span>
@@ -82,7 +79,7 @@ function Favourites() {
         );
       };
       return (
-        <div key={league.league.id} className="league">
+        <div key={league.league.id} className="favLeague">
           <div className="leagueInfo-container">
             <div className="league-logoContainer">
               <img
@@ -103,7 +100,7 @@ function Favourites() {
 
   if (favouriteLeagues.length === 0) {
     favLeaguesElements = (
-      <div className="league" style={{ fontSize: "16px" }}>
+      <div className="favLeague-empty" style={{ fontSize: "16px" }}>
         <span>You have to add your favourite leagues.</span>
         <div onClick={() => navigate("/leagues")} className="addFavourite">
           <span>+</span>
@@ -125,7 +122,7 @@ function Favourites() {
           style={{ opacity: menu ? 0.1 : 1 }}
         >
           <div className="favourites">
-            <h1>Favourites</h1>
+            <h1 className="favourites-title">Favourites</h1>
             <div className="title-container">
               <h2 style={{ marginRight: "10px" }}>Teams</h2>
               {favouriteTeams.length !== 0 && (
@@ -137,12 +134,17 @@ function Favourites() {
                 </div>
               )}
             </div>
-            <div className="teams-container">{favTeamsElements}</div>
+            <div className="team-container">{favTeamsElements}</div>
             <div className="title-container">
               <h2 style={{ marginRight: "10px" }}>Leagues</h2>
-              <div onClick={() => navigate("/teams")} className="addFavourite">
-                <span>+</span>
-              </div>
+              {favouriteLeagues.length !== 0 && (
+                <div
+                  onClick={() => navigate("/leagues")}
+                  className="addFavourite"
+                >
+                  <span>+</span>
+                </div>
+              )}
             </div>
             <div className="league-container">{favLeaguesElements}</div>
           </div>

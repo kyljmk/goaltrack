@@ -519,3 +519,7 @@ export interface ILeagueInfo {
     flag: string;
   };
 }
+
+export interface ISearchProps {
+  isLeague: boolean;
+}

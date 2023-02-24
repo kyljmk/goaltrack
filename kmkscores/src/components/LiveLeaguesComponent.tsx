@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
-function Leagues({ fixtures, menu }: IDailyLeagueProps) {
+function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
   const [showFixtures, setShowFixtures] = useState<boolean>(true);
 
   const fixtureElements = fixtures.map((fixture) => {
@@ -52,4 +52,4 @@ function Leagues({ fixtures, menu }: IDailyLeagueProps) {
   );
 }
 
-export default Leagues;
+export default LiveLeagues;
