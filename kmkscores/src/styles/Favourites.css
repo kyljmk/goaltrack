@@ -28,7 +28,7 @@
 }
 
 .team,
-.league {
+.favLeague {
   display: flex;
   width: 100%;
   border: 1px dashed #f4a340;

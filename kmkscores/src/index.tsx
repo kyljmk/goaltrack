@@ -5,10 +5,11 @@ import Home from "./screens/Home";
 import Game from "./screens/Game";
 import "./Index.css";
 import { InfoProvider } from "./hooks/UseInfo";
-import Settings from "./screens/Settings";
+import Settings from "./screens/Teams";
 import Favourites from "./screens/Favourites";
 import Leagues from "./screens/Leagues";
 import Contact from "./screens/Contact";
+import Teams from "./screens/Teams";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,7 +21,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/game" element={<Game />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/teams" element={<Teams />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/leagues" element={<Leagues />} />
           <Route path="/contact" element={<Contact />} />

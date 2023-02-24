@@ -52,8 +52,6 @@ function Home() {
     }, {})
   );
 
-  console.log(orderedLiveElements);
-
   let liveElements: JSX.Element[] = orderedLiveElements.map((leagues) => {
     return (
       <LeaguesComponent

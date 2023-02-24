@@ -121,7 +121,6 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   //   return data;
   // };
 
-  console.log(teamsDaysFixtures);
   return { teamsDaysFixtures, loadingTeams };
 };
 

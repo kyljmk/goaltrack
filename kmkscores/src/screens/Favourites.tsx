@@ -65,7 +65,7 @@ function Favourites() {
 
   if (favouriteTeams.length === 0) {
     favTeamsElements = (
-      <div className="league" style={{ fontSize: "16px" }}>
+      <div className="favLeague" style={{ fontSize: "16px" }}>
         <span>You have to add your favourite leagues.</span>
         <div onClick={() => navigate("/teams")} className="addFavourite">
           <span>+</span>
@@ -105,7 +105,7 @@ function Favourites() {
     favLeaguesElements = (
       <div className="league" style={{ fontSize: "16px" }}>
         <span>You have to add your favourite leagues.</span>
-        <div onClick={() => navigate("/teams")} className="addFavourite">
+        <div onClick={() => navigate("/leagues")} className="addFavourite">
           <span>+</span>
         </div>
       </div>
