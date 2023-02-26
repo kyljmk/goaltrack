@@ -89,8 +89,8 @@ function Home() {
   });
 
   if (orderedTeamElements.length === 0) {
-    liveElements = [
-      <EmptyFixtures message="There are no fixtures from your favourtie teams right now." />,
+    teamsElements = [
+      <EmptyFixtures message="There are no fixtures from your favourite teams right now." />,
     ];
   }
 
@@ -106,9 +106,10 @@ function Home() {
           className="homefixtures-container"
           style={{ opacity: menu ? 0.1 : 1 }}
         >
-          <span style={{ marginBottom: "30px", fontSize: "22px" }}>
-            This site is currently under construction and is populated with
-            dummy data. It should be going live on Saturday 25th Feb!
+          <span style={{ marginBottom: "30px", fontSize: "24px" }}>
+            This website is currently under construction! It has limited
+            functionality, however all data should be accurate and up to data.
+            Construction should completed by the end of February.
           </span>
           <div className="homeOptions-container">
             <div
