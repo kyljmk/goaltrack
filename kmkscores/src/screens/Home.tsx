@@ -1,9 +1,11 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import LiveLeaguesComponent from "../components/LiveLeaguesComponent";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
+import EmptyFixtures from "../components/EmptyFixtures";
 import {
   useApiGetFavouriteLeaguesFixtures,
   useApiGetFavouriteTeamsFixtures,
@@ -11,7 +13,6 @@ import {
 } from "../hooks/UseApi";
 import "../styles/Home.css";
 import { DailyFixture, DailyFixtureResponse } from "../Types";
-import EmptyFixtures from "../components/EmptyFixtures";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -96,6 +97,13 @@ function Home() {
 
   return (
     <div className="App">
+      <Helmet>
+        <title>This is GoalTrack</title>
+        <meta
+          name="description"
+          content="Up-to-the-minutes and live football results."
+        />
+      </Helmet>
       <Header menu={menu} setMenu={setMenu} />
       <div
         className="menu-container"
@@ -106,7 +114,13 @@ function Home() {
           className="homefixtures-container"
           style={{ opacity: menu ? 0.1 : 1 }}
         >
-          <span style={{ marginBottom: "30px", fontSize: "24px" }}>
+          <span
+            style={{
+              marginBottom: "30px",
+              fontSize: "24px",
+              maxWidth: "800px",
+            }}
+          >
             This website is currently under construction! It has limited
             functionality, however all data should be accurate and up to data.
             Construction should completed by the end of February.

@@ -7,16 +7,13 @@ export const InfoProvider = ({ children }: { children: ReactNode }) => {
   const [favouriteLeagues, setFavouriteLeagues] = useState<number[]>(
     //@ts-ignore
     JSON.parse(localStorage.getItem("favouriteLeagues")) || [
-      39, 40, 41, 42, 140, 78, 135, 61, 2, 3, 848,
+      39, 140, 78, 135, 61, 2, 3, 848,
     ]
   );
   const [favouriteTeams, setFavouriteTeams] = useState<number[]>(
     //@ts-ignore
     JSON.parse(localStorage.getItem("favouriteTeams")) || []
   );
-
-  console.log(favouriteLeagues);
-  console.log(favouriteTeams);
 
   return (
     <InfoContext.Provider
