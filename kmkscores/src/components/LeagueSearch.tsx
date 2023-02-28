@@ -68,7 +68,7 @@ function LeagueSearch() {
     if (favouriteLeagues.includes(id)) {
       setFavouriteLeagues(favouriteLeagues.filter((item) => item !== id));
     } else {
-      setFavouriteLeagues((prev) => [...prev, id]);
+      setFavouriteLeagues((prev) => [...prev, id].sort((a, b) => a - b));
     }
   };
 

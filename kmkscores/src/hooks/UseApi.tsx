@@ -30,14 +30,14 @@ export const useApiGetGame = (fixtureId: number) => {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": apiKey,
+      "x-api-Key": "EgOLcnJIxz9csuBoPuPhSa8HojW3gscV3MDvtizq",
       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
     },
   };
   const fetchApi = async () => {
     setLoadingGame(true);
     const response = await fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
+      `https://kmansonkullinj.korconnect.io/GoalTrack/fixtures?id=${fixtureId}`,
       options
     );
     const data = await response.json();

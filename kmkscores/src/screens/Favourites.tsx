@@ -10,12 +10,13 @@ import {
 } from "../hooks/UseApi";
 import useInfo from "../hooks/UseInfo";
 import "../styles/Favourites.css";
-import { InfoContextType } from "../Types";
+import { ILeagueInfo, InfoContextType } from "../Types";
 
 function Favourites() {
   const [menu, setMenu] = useState<boolean>(false);
   const favouriteTeamsInfo = useApiGetFavouriteTeams();
   const favouriteLeaguesInfo = useApiGetFavouriteLeagues();
+
   const {
     favouriteTeams,
     setFavouriteTeams,
@@ -74,12 +75,25 @@ function Favourites() {
   let favLeaguesElements: JSX.Element[] | ReactElement =
     favouriteLeaguesInfo.map((league) => {
       const handleClick = () => {
-        setFavouriteLeagues(
-          favouriteLeagues.filter((item) => item !== league.league.id)
-        );
+        if (favouriteLeagues.includes(league.league.id)) {
+          setFavouriteLeagues(
+            favouriteLeagues.filter((item) => item !== league.league.id)
+          );
+        } else {
+          setFavouriteLeagues((prev) =>
+            [...prev, league.league.id].sort((a, b) => a - b)
+          );
+        }
       };
       return (
-        <div key={league.league.id} className="favLeague">
+        <div
+          key={league.league.id}
+          className={
+            favouriteLeagues.includes(league.league.id)
+              ? "favLeague"
+              : "favLeague-unselected"
+          }
+        >
           <div className="leagueInfo-container">
             <div className="league-logoContainer">
               <img

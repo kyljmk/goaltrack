@@ -47,6 +47,18 @@
   margin-bottom: 10px;
 }
 
+.favLeague-unselected {
+  display: flex;
+  width: 100%;
+  border: 1px dashed grey;
+  opacity: 0.4;
+  border-radius: 15px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 @media (max-width: 450px) {
   .team,
   .favLeague {

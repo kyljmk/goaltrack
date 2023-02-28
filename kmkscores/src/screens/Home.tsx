@@ -119,11 +119,12 @@ function Home() {
               marginBottom: "30px",
               fontSize: "24px",
               maxWidth: "800px",
+              textAlign: "justify",
             }}
           >
             This website is currently under construction! It has limited
             functionality, however all data should be accurate and up to data.
-            Construction should completed by the end of February.
+            Construction should completed by the first weekend of March.
           </span>
           <div className="homeOptions-container">
             <div
