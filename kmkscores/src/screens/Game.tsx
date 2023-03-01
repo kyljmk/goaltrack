@@ -16,27 +16,14 @@ function Game() {
   const id = Number(searchParams.get("id"));
   const { fixtureDetails, loadingGame } = useApiGetGame(id);
 
-  const {
-    home,
-    away,
-    matchStatus,
-    minutesPlayed,
-    league,
-    leagueLogo,
-    round,
-    dateTime,
-    referee,
-    venue,
-    events,
-    lineups,
-    statistics,
-  } = fixtureDetails;
+  const { fixture, league, teams, goals, score, events, lineups, statistics } =
+    fixtureDetails;
 
   const eventElements = events?.map((e, i) => {
     return (
       <Events
         key={i}
-        homeName={home.name}
+        homeName={teams.home.name}
         time={e.time}
         team={e.team}
         player={e.player}
@@ -60,18 +47,20 @@ function Game() {
           <div className="game">
             <GameHeader
               key={id}
-              home={home}
-              away={away}
-              matchStatus={matchStatus}
-              minutesPlayed={minutesPlayed}
-              league={league}
-              leagueLogo={leagueLogo}
-              round={round}
-              dateTime={dateTime}
+              home={teams.home}
+              homeScore={goals.home}
+              away={teams.away}
+              awayScore={goals.away}
+              matchStatus={fixture.status.short}
+              minutesPlayed={fixture.status.elapsed}
+              league={league.name}
+              leagueLogo={league.logo}
+              round={league.round}
+              dateTime={fixture.date}
             />
             <div className="game-refVenue-container">
-              <span className="game-referee">{referee}</span>
-              <span className="game-venue">{venue}</span>
+              <span className="game-referee">{fixture.referee}</span>
+              <span className="game-venue">{fixture.venue.name}</span>
             </div>
             <div className="game-options">
               <div
@@ -114,12 +103,8 @@ function Game() {
             {options === 0 && (
               <div className="events-container">{eventElements}</div>
             )}
-            {options === 1 && (
-              <Stats home={statistics.home} away={statistics.away} />
-            )}
-            {options === 2 && (
-              <Lineups home={lineups.home} away={lineups.away} />
-            )}
+            {options === 1 && <Stats statistics={statistics} />}
+            {options === 2 && <Lineups lineups={lineups} />}
           </div>
         )}
       </div>

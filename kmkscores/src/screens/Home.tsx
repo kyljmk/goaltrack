@@ -12,7 +12,7 @@ import {
   useApiGetLiveGames,
 } from "../hooks/UseApi";
 import "../styles/Home.css";
-import { DailyFixture, DailyFixtureResponse } from "../Types";
+import { DailyFixture, FixtureResponse } from "../Types";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -45,7 +45,7 @@ function Home() {
     ];
   }
 
-  const orderedLiveElements: DailyFixtureResponse[][] = Object.values(
+  const orderedLiveElements: FixtureResponse[][] = Object.values(
     liveResults.reduce((x: any, y: any) => {
       (x[y.league.name] = x[y.league.name] || []).push(y);
 
@@ -69,7 +69,7 @@ function Home() {
     ];
   }
 
-  const orderedTeamElements: DailyFixtureResponse[][] = Object.values(
+  const orderedTeamElements: FixtureResponse[][] = Object.values(
     teamsDaysFixtures.reduce((x: any, y: any) => {
       (x[y.league.name] = x[y.league.name] || []).push(y);
 

@@ -31,39 +31,59 @@ export type Team = {
 };
 
 export interface IFixtureDetails {
-  home: Team;
-  away: Team;
-  matchStatus: string;
-  minutesPlayed: number;
-  league: string;
-  leagueLogo: string;
-  round: string;
-  dateTime: string;
-  referee: string;
-  venue: string;
+  fixture: {
+    id: number;
+    referee: string;
+    timezone: string;
+    date: string;
+    timestamp: number;
+    periods: {
+      first: number | null;
+      second: number | null;
+    };
+    venue: {
+      id: number;
+      name: string;
+      city: string;
+    };
+    status: {
+      long: string;
+      short: string;
+      elapsed: number | null;
+    };
+  };
+  league: {
+    id: number;
+    name: string;
+    country: string;
+    logo: string;
+    flag: string;
+    season: number;
+    round: string;
+  };
+  teams: {
+    home: ITeam;
+    away: ITeam;
+  };
+  goals: Score;
+  score: {
+    halftime: Score;
+    fulltime: Score;
+    extratime: Score;
+    penalty: Score;
+  };
   events: IMatchEvent[] | null;
-  lineups: {
-    home: ILineUp;
-    away: ILineUp;
-  };
-  statistics: {
-    home: {
-      team: {
-        id: number;
-        name: string;
-        logo: string;
-      };
-      statistics: ITeamStat[];
-    };
-    away: {
-      team: {
-        id: number;
-        name: string;
-        logo: string;
-      };
-      statistics: ITeamStat[];
-    };
-  };
+  lineups: ILineUp[] | null;
+  statistics:
+    | {
+        team: {
+          id: number;
+          name: string;
+          logo: string;
+        };
+        statistics: ITeamStat[];
+      }[]
+    | null;
 }
 
 export interface ILineUp {
@@ -84,8 +104,7 @@ export interface ILineUp {
 }
 
 export interface ILineUpProps {
-  home: ILineUp;
-  away: ILineUp;
+  lineups: ILineUp[] | null;
 }
 
 export interface IPlayer {
@@ -99,10 +118,18 @@ export interface IPlayer {
 }
 
 export interface IGameHeaderProps {
-  home: Team;
-  away: Team;
+  home: {
+    name: string;
+    logo: string;
+  };
+  homeScore: number | null;
+  away: {
+    name: string;
+    logo: string;
+  };
+  awayScore: number | null;
   matchStatus: string;
-  minutesPlayed: number;
+  minutesPlayed: number | null;
   league: string;
   leagueLogo: string;
   round: string;
@@ -164,22 +191,16 @@ export interface IEventProps {
 }
 
 export interface IStatsProps {
-  home: {
-    team: {
-      id: number;
-      name: string;
-      logo: string;
-    };
-    statistics: ITeamStat[];
-  };
-  away: {
-    team: {
-      id: number;
-      name: string;
-      logo: string;
-    };
-    statistics: ITeamStat[];
-  };
+  statistics:
+    | {
+        team: {
+          id: number;
+          name: string;
+          logo: string;
+        };
+        statistics: ITeamStat[];
+      }[]
+    | null;
 }
 
 export type ITeamStat = {
@@ -204,10 +225,10 @@ export type League = {
 };
 
 export interface DailyFixture {
-  response: DailyFixtureResponse[];
+  response: FixtureResponse[];
 }
 
-export interface DailyFixtureResponse {
+export interface FixtureResponse {
   fixture: {
     id: number;
     referee: string;
@@ -264,7 +285,7 @@ export type Score = {
 };
 
 export interface IDailyLeagueProps {
-  fixtures: DailyFixtureResponse[];
+  fixtures: FixtureResponse[];
   menu: boolean;
 }
 

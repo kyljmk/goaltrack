@@ -3,7 +3,9 @@ import { IGameHeaderProps } from "../Types";
 
 function GameHeader({
   home,
+  homeScore,
   away,
+  awayScore,
   league,
   leagueLogo,
   round,
@@ -16,9 +18,9 @@ function GameHeader({
   if (matchStatus === "HT" || matchStatus === "FT") {
     timeStamp = matchStatus;
   } else if (matchStatus === "NS") {
-    timeStamp = `${dateTime.slice(11, 16)} K.O.`;
+    timeStamp = dateTime.slice(11, 16);
   } else {
-    timeStamp = `${minutesPlayed.toString()}'`;
+    timeStamp = `${minutesPlayed?.toString()}'`;
   }
 
   return (
@@ -36,8 +38,18 @@ function GameHeader({
         <span className="game-info-leagueRound">{`${league} | Round ${
           round.split("- ")[1]
         }`}</span>
-        <span className="game-info-score">{`${home.score} - ${away.score}`}</span>
-        <span className="game-info-minutes">{timeStamp}</span>
+        <span
+          className="game-info-score"
+          style={{
+            display: matchStatus === "NS" ? "none" : "inline",
+          }}
+        >{`${homeScore} - ${awayScore}`}</span>
+        <span
+          className="game-info-minutes"
+          style={{ fontSize: matchStatus === "NS" ? "18px" : "12px" }}
+        >
+          {timeStamp}
+        </span>
       </div>
       <div className="game-away">
         <img className="game-away-logo" src={away.logo} alt="home teams logo" />

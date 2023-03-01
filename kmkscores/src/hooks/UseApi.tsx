@@ -12,7 +12,7 @@ import {
 } from "../placeholderObjects/TempDailys";
 import {
   DailyFixture,
-  DailyFixtureResponse,
+  FixtureResponse,
   IFixtureDetails,
   ILeagueDetails,
   ILeagueInfo,
@@ -30,47 +30,19 @@ export const useApiGetGame = (fixtureId: number) => {
   const options = {
     method: "GET",
     headers: {
-      "x-api-Key": "EgOLcnJIxz9csuBoPuPhSa8HojW3gscV3MDvtizq",
+      "X-RapidAPI-Key": apiKey,
       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
     },
   };
   const fetchApi = async () => {
     setLoadingGame(true);
     const response = await fetch(
-      `https://kmansonkullinj.korconnect.io/GoalTrack/fixtures?id=${fixtureId}`,
+      `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${fixtureId}`,
       options
     );
     const data = await response.json();
 
-    setFixtureDetails({
-      home: {
-        name: data.response[0].teams.home.name,
-        logo: data.response[0].teams.home.logo,
-        score: data.response[0].goals.home,
-      },
-      away: {
-        name: data.response[0].teams.away.name,
-        logo: data.response[0].teams.away.logo,
-        score: data.response[0].goals.away,
-      },
-      matchStatus: data.response[0].fixture.status.short,
-      minutesPlayed: data.response[0].fixture.status.elapsed,
-      league: data.response[0].league.name,
-      leagueLogo: data.response[0].league.logo,
-      round: data.response[0].league.round,
-      dateTime: data.response[0].fixture.data,
-      referee: data.response[0].fixture.referee,
-      venue: data.response[0].fixture.venue.name,
-      events: data.response[0].events,
-      lineups: {
-        home: data.response[0].lineups[0],
-        away: data.response[0].lineups[1],
-      },
-      statistics: {
-        home: data.response[0].statistics[0],
-        away: data.response[0].statistics[1],
-      },
-    });
+    setFixtureDetails(data.response[0]);
     setLoadingGame(false);
   };
   useEffect(() => {
@@ -82,7 +54,7 @@ export const useApiGetGame = (fixtureId: number) => {
 
 export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   const [teamsDaysFixtures, setTeamsDaysFixtures] =
-    useState<DailyFixtureResponse[]>(tempLiveFixtures);
+    useState<FixtureResponse[]>(tempLiveFixtures);
   const [loadingTeams, setLoadingTeams] = useState<boolean>(false);
   const { favouriteTeams } = useInfo() as InfoContextType;
 
@@ -172,7 +144,7 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
 
 export const useApiGetLiveGames = () => {
   const [liveResults, setLiveResults] =
-    useState<DailyFixtureResponse[]>(tempLiveFixtures);
+    useState<FixtureResponse[]>(tempLiveFixtures);
   const [loadingLive, setLoadingLive] = useState<boolean>(false);
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;

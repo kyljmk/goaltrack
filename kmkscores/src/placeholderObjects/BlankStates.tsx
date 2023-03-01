@@ -1,24 +1,62 @@
 import { DailyFixture, IFixtureDetails } from "../Types";
 
 export const blankFixtureObject: IFixtureDetails = {
-  home: {
-    name: "",
-    logo: "",
-    score: 0,
+  fixture: {
+    id: 0,
+    referee: "",
+    timezone: "",
+    date: "",
+    timestamp: 0,
+    periods: {
+      first: null,
+      second: null,
+    },
+    venue: {
+      id: 0,
+      name: "",
+      city: "",
+    },
+    status: {
+      long: "",
+      short: "",
+      elapsed: null,
+    },
   },
-  away: {
+  league: {
+    id: 0,
     name: "",
+    country: "",
     logo: "",
-    score: 0,
+    flag: "",
+    season: 0,
+    round: "",
   },
-  matchStatus: "",
-  minutesPlayed: 0,
-  league: "",
-  leagueLogo: "",
-  round: "",
-  dateTime: "",
-  referee: "",
-  venue: "",
+  teams: {
+    home: { id: 0, name: "", logo: "", winner: null },
+    away: { id: 0, name: "", logo: "", winner: null },
+  },
+  goals: {
+    home: null,
+    away: null,
+  },
+  score: {
+    halftime: {
+      home: null,
+      away: null,
+    },
+    fulltime: {
+      home: null,
+      away: null,
+    },
+    extratime: {
+      home: null,
+      away: null,
+    },
+    penalty: {
+      home: null,
+      away: null,
+    },
+  },
   events: [
     {
       time: {
@@ -43,8 +81,8 @@ export const blankFixtureObject: IFixtureDetails = {
       comment: null,
     },
   ],
-  lineups: {
-    home: {
+  lineups: [
+    {
       team: {
         id: 0,
         name: "",
@@ -80,7 +118,7 @@ export const blankFixtureObject: IFixtureDetails = {
         },
       ],
     },
-    away: {
+    {
       team: {
         id: 0,
         name: "",
@@ -116,9 +154,9 @@ export const blankFixtureObject: IFixtureDetails = {
         },
       ],
     },
-  },
-  statistics: {
-    home: {
+  ],
+  statistics: [
+    {
       team: {
         id: 0,
         name: "",
@@ -131,7 +169,7 @@ export const blankFixtureObject: IFixtureDetails = {
         },
       ],
     },
-    away: {
+    {
       team: {
         id: 0,
         name: "",
@@ -144,7 +182,7 @@ export const blankFixtureObject: IFixtureDetails = {
         },
       ],
     },
-  },
+  ],
 };
 
 // export const blankDailyFixtures: DailyFixture[] = [

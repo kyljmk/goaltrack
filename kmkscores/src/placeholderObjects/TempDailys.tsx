@@ -1,11 +1,11 @@
 import {
   DailyFixture,
-  DailyFixtureResponse,
+  FixtureResponse,
   ILeagueDetails,
   ILeagueTable,
 } from "../Types";
 
-export const tempLiveFixtures: DailyFixtureResponse[] = [
+export const tempLiveFixtures: FixtureResponse[] = [
   {
     fixture: {
       id: 868168,
