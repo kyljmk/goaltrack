@@ -28,6 +28,7 @@
   border: 2px solid #f4a340;
   width: 150px;
   font-size: 18px;
+  text-align: center;
 }
 
 .homeOptions-item-selected {
@@ -39,6 +40,7 @@
   border: 2px solid #f4a340;
   width: 150px;
   font-size: 18px;
+  text-align: center;
 }
 
 @media (max-width: 750px) {
@@ -78,10 +80,18 @@
   display: flex;
   flex-direction: column;
   max-width: 800px;
+  min-height: 100px;
+  text-align: center;
+  justify-content: center;
 }
 
 .league {
   width: 100%;
+  margin-bottom: 10px;
+}
+
+.league:last-child {
+  margin-bottom: 0;
 }
 
 .league-header {
@@ -104,4 +114,5 @@
   font-size: 22px;
   cursor: pointer;
   border-bottom: 1px solid #f4a340;
+  margin: 0;
 }

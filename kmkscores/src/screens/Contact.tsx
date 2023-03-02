@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
+import Menu from "../components/Menu";
+import "../styles/Contact.css";
 
 function Contact() {
   const [menu, setMenu] = useState<boolean>(false);
   return (
-    <div>
+    <div className="App">
       <Header menu={menu} setMenu={setMenu} />
-      <p>Contact</p>
+      <div className="menu-container">
+        <Menu menu={true} dropdown={false} />
+        <div className="contact-container">
+          <div className="contact">
+            <h1 className="contact-title">Contact</h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

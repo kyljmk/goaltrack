@@ -44,6 +44,7 @@
   justify-content: space-between;
   height: 50%;
   align-items: center;
+  text-align: left;
 }
 .liveScore-teams-home-logo,
 .liveScore-teams-away-logo {

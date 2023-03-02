@@ -21,29 +21,38 @@ function Home() {
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
 
-  const { leaguesDaysFixtures, loadingLeagues } =
-    useApiGetFavouriteLeaguesFixtures(dateString);
+  const { leaguesDaysFixtures } = useApiGetFavouriteLeaguesFixtures(dateString);
   const { teamsDaysFixtures, loadingTeams } =
     useApiGetFavouriteTeamsFixtures(dateString);
+
   const { liveResults, loadingLive } = useApiGetLiveGames();
 
-  let leagueElements = leaguesDaysFixtures.map((league: DailyFixture) => {
-    if (league.response.length !== 0) {
+  let leagueElements = leaguesDaysFixtures.map((league: FixtureResponse[]) => {
+    if (league.length !== 0) {
       return (
         <LiveLeaguesComponent
-          key={league.response[0].league.id}
-          fixtures={league.response}
+          key={league[0].league.id}
+          fixtures={league}
           menu={menu}
         />
       );
     }
   });
 
-  if (leaguesDaysFixtures.length === 0) {
+  const lengthZeroCheck = (input: FixtureResponse[][]): boolean => {
+    input.forEach((array: FixtureResponse[]) => {
+      if (array.length !== 0) return false;
+    });
+    return true;
+  };
+
+  if (lengthZeroCheck(leaguesDaysFixtures)) {
     leagueElements = [
       <EmptyFixtures message="There are no fixtures from you favourites leages today." />,
     ];
   }
+
+  console.log(leaguesDaysFixtures);
 
   const orderedLiveElements: FixtureResponse[][] = Object.values(
     liveResults.reduce((x: any, y: any) => {
@@ -119,7 +128,7 @@ function Home() {
               marginBottom: "30px",
               fontSize: "24px",
               maxWidth: "800px",
-              textAlign: "justify",
+              textAlign: "center",
             }}
           >
             This website is currently under construction! It has limited
@@ -177,8 +186,7 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            {homeOptions === 0 &&
-              (loadingLeagues ? <div>Loading...</div> : leagueElements)}
+            {homeOptions === 0 && leagueElements}
             {homeOptions === 1 &&
               (loadingLive ? <div>Loading...</div> : liveElements)}
             {homeOptions === 2 &&

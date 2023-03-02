@@ -285,152 +285,148 @@ export const spanishFixtures = [
   },
 ];
 
-export const tempDailyFixtures: DailyFixture[] = [
-  { response: tempLiveFixtures },
-  {
-    response: spanishFixtures,
-  },
-  {
-    response: [
-      {
-        fixture: {
-          id: 871335,
-          referee: "Matthias Jollenbeck, Germany",
-          timezone: "UTC",
-          date: "2023-02-11T14:30:00+00:00",
-          timestamp: 1676125800,
-          periods: {
-            first: 1676125800,
-            second: 1676129400,
-          },
-          venue: {
-            id: 700,
-            name: "Allianz Arena",
-            city: "München",
-          },
-          status: {
-            long: "Match Finished",
-            short: "FT",
-            elapsed: 90,
-          },
+export const tempDailyFixtures: FixtureResponse[][] = [
+  tempLiveFixtures,
+  spanishFixtures,
+  [
+    {
+      fixture: {
+        id: 871335,
+        referee: "Matthias Jollenbeck, Germany",
+        timezone: "UTC",
+        date: "2023-02-11T14:30:00+00:00",
+        timestamp: 1676125800,
+        periods: {
+          first: 1676125800,
+          second: 1676129400,
         },
-        league: {
-          id: 78,
-          name: "Bundesliga",
-          country: "Germany",
-          logo: "https://media-3.api-sports.io/football/leagues/78.png",
-          flag: "https://media-3.api-sports.io/flags/de.svg",
-          season: 2022,
-          round: "Regular Season - 20",
+        venue: {
+          id: 700,
+          name: "Allianz Arena",
+          city: "München",
         },
-        teams: {
-          home: {
-            id: 157,
-            name: "Bayern Munich",
-            logo: "https://media.api-sports.io/football/teams/157.png",
-            winner: true,
-          },
-          away: {
-            id: 176,
-            name: "VfL BOCHUM",
-            logo: "https://media.api-sports.io/football/teams/176.png",
-            winner: false,
-          },
+        status: {
+          long: "Match Finished",
+          short: "FT",
+          elapsed: 90,
         },
-        goals: {
+      },
+      league: {
+        id: 78,
+        name: "Bundesliga",
+        country: "Germany",
+        logo: "https://media-3.api-sports.io/football/leagues/78.png",
+        flag: "https://media-3.api-sports.io/flags/de.svg",
+        season: 2022,
+        round: "Regular Season - 20",
+      },
+      teams: {
+        home: {
+          id: 157,
+          name: "Bayern Munich",
+          logo: "https://media.api-sports.io/football/teams/157.png",
+          winner: true,
+        },
+        away: {
+          id: 176,
+          name: "VfL BOCHUM",
+          logo: "https://media.api-sports.io/football/teams/176.png",
+          winner: false,
+        },
+      },
+      goals: {
+        home: 3,
+        away: 0,
+      },
+      score: {
+        halftime: {
+          home: 1,
+          away: 0,
+        },
+        fulltime: {
           home: 3,
           away: 0,
         },
-        score: {
-          halftime: {
-            home: 1,
-            away: 0,
-          },
-          fulltime: {
-            home: 3,
-            away: 0,
-          },
-          extratime: {
-            home: null,
-            away: null,
-          },
-          penalty: {
-            home: null,
-            away: null,
-          },
+        extratime: {
+          home: null,
+          away: null,
+        },
+        penalty: {
+          home: null,
+          away: null,
         },
       },
+    },
 
-      {
-        fixture: {
-          id: 871337,
-          referee: "Sascha Stegemann, Germany",
-          timezone: "UTC",
-          date: "2023-02-11T14:30:00+00:00",
-          timestamp: 1676125800,
-          periods: {
-            first: 1676125800,
-            second: 1676129400,
-          },
-          venue: {
-            id: 12717,
-            name: "Europa-Park Stadion",
-            city: "Freiburg im Breisgau",
-          },
-          status: {
-            long: "Match Finished",
-            short: "FT",
-            elapsed: 90,
-          },
+    {
+      fixture: {
+        id: 871337,
+        referee: "Sascha Stegemann, Germany",
+        timezone: "UTC",
+        date: "2023-02-11T14:30:00+00:00",
+        timestamp: 1676125800,
+        periods: {
+          first: 1676125800,
+          second: 1676129400,
         },
-        league: {
-          id: 78,
-          name: "Bundesliga",
-          country: "Germany",
-          logo: "https://media-3.api-sports.io/football/leagues/78.png",
-          flag: "https://media-3.api-sports.io/flags/de.svg",
-          season: 2022,
-          round: "Regular Season - 20",
+        venue: {
+          id: 12717,
+          name: "Europa-Park Stadion",
+          city: "Freiburg im Breisgau",
         },
-        teams: {
-          home: {
-            id: 160,
-            name: "SC Freiburg",
-            logo: "https://media.api-sports.io/football/teams/160.png",
-            winner: true,
-          },
-          away: {
-            id: 172,
-            name: "VfB Stuttgart",
-            logo: "https://media.api-sports.io/football/teams/172.png",
-            winner: false,
-          },
+        status: {
+          long: "Match Finished",
+          short: "FT",
+          elapsed: 90,
         },
-        goals: {
+      },
+      league: {
+        id: 78,
+        name: "Bundesliga",
+        country: "Germany",
+        logo: "https://media-3.api-sports.io/football/leagues/78.png",
+        flag: "https://media-3.api-sports.io/flags/de.svg",
+        season: 2022,
+        round: "Regular Season - 20",
+      },
+      teams: {
+        home: {
+          id: 160,
+          name: "SC Freiburg",
+          logo: "https://media.api-sports.io/football/teams/160.png",
+          winner: true,
+        },
+        away: {
+          id: 172,
+          name: "VfB Stuttgart",
+          logo: "https://media.api-sports.io/football/teams/172.png",
+          winner: false,
+        },
+      },
+      goals: {
+        home: 2,
+        away: 1,
+      },
+      score: {
+        halftime: {
+          home: 0,
+          away: 1,
+        },
+        fulltime: {
           home: 2,
           away: 1,
         },
-        score: {
-          halftime: {
-            home: 0,
-            away: 1,
-          },
-          fulltime: {
-            home: 2,
-            away: 1,
-          },
-          extratime: {
-            home: null,
-            away: null,
-          },
-          penalty: {
-            home: null,
-            away: null,
-          },
+        extratime: {
+          home: null,
+          away: null,
+        },
+        penalty: {
+          home: null,
+          away: null,
         },
       },
-    ],
-  },
+    },
+  ],
 ];
 
 export const tempLeagues: ILeagueDetails[] = [
