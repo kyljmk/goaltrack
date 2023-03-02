@@ -5,10 +5,12 @@ import { ILineUpProps } from "../Types";
 import "../styles/Lineups.css";
 
 function Lineups({ lineups }: ILineUpProps) {
-  let lineupsElement: ReactElement = <div></div>;
+  let lineupsElement: ReactElement = <div>hello</div>;
+
+  console.log(lineups);
 
   if (lineups !== null) {
-    const startHomeElements = lineups[0].startXI.map((x) => {
+    const startHomeElements = lineups[0]?.startXI.map((x) => {
       return (
         <div key={x.player.number} className="startLineups-home-player">
           <div className="startLineups-home-player-number-container">
@@ -26,7 +28,7 @@ function Lineups({ lineups }: ILineUpProps) {
       );
     });
 
-    const startAwayElements = lineups[1].startXI.map((x) => {
+    const startAwayElements = lineups[1]?.startXI.map((x) => {
       return (
         <div key={x.player.number} className="startLineups-away-player">
           <span className="startLineups-away-player-name">{x.player.name}</span>
@@ -58,8 +60,8 @@ function Lineups({ lineups }: ILineUpProps) {
         </div>
         <span className="coaches-title">Coaches</span>
         <div className="coaches-container">
-          <div>{lineups[0].coach.name}</div>
-          <div>{lineups[1].coach.name}</div>
+          <div>{lineups[0]?.coach.name}</div>
+          <div>{lineups[1]?.coach.name}</div>
         </div>
       </div>
     );

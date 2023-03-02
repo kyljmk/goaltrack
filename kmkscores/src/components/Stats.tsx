@@ -8,17 +8,17 @@ function Stats({ statistics }: IStatsProps) {
   if (statistics !== null) {
     const combinedStats: ICombinedStat[] = [];
 
-    for (let i = 0; i < statistics[0].statistics.length; i++) {
+    for (let i = 0; i < statistics[0]?.statistics.length; i++) {
       combinedStats[i] = {
-        type: statistics[0].statistics[i].type,
+        type: statistics[0]?.statistics[i].type,
         homeValue:
-          statistics[0].statistics[i].value === null
+          statistics[0]?.statistics[i].value === null
             ? 0
-            : statistics[0].statistics[i].value,
+            : statistics[0]?.statistics[i].value,
         awayValue:
-          statistics[1].statistics[i].value === null
+          statistics[1]?.statistics[i].value === null
             ? 0
-            : statistics[1].statistics[i].value,
+            : statistics[1]?.statistics[i].value,
       };
     }
 

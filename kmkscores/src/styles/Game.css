@@ -12,6 +12,11 @@
   width: 100%;
 }
 
+.game-info-leagueRound {
+  font-size: 14px;
+  margin: 20px;
+}
+
 .gameHeader {
   display: flex;
   justify-content: space-between;
@@ -48,10 +53,6 @@
   border-radius: 5px;
   background-color: #343231;
   width: 30px;
-}
-
-.game-info-leagueRound {
-  font-size: 9px;
 }
 
 .game-info-score {
