@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faEnvelope,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Menu from "./Menu";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
@@ -33,11 +37,9 @@ function Header({ menu, setMenu }: IHeaderProps) {
           }}
           className="header-title"
         />
-        <FontAwesomeIcon
-          className="header-searchIcon"
-          icon={faMagnifyingGlass}
-          size="xl"
-        />
+        <a href="mailto:contact@goaltrack.live">
+          <FontAwesomeIcon size="2xl" icon={faEnvelope} />
+        </a>
       </div>
     </div>
   );
