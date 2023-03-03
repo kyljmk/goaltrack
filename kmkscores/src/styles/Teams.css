@@ -29,3 +29,9 @@
   height: auto;
   text-align: center;
 }
+
+@media (max-width: 450px) {
+  .teams-container {
+    padding: 20px;
+  }
+}

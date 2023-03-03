@@ -1,5 +1,7 @@
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import LeagueSearch from "../components/LeagueSearch";
 import LeagueTable from "../components/LeagueTable";
@@ -8,6 +10,7 @@ import "../styles/Leagues.css";
 
 function Leagues() {
   const [menu, setMenu] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
@@ -22,7 +25,17 @@ function Leagues() {
         <Menu menu={true} dropdown={false} />
         <div className="leagues-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="leagues">
-            <h1 className="leagues-title">Leagues</h1>
+            <div className="leagues-title-container">
+              <h1 className="leagues-title">Leagues</h1>
+              {id !== 0 && (
+                <div
+                  onClick={() => navigate("/leagues")}
+                  className="leagues-title-return"
+                >
+                  <FontAwesomeIcon icon={faArrowLeft} size="2xl" />
+                </div>
+              )}
+            </div>
             {id ? <LeagueTable /> : <LeagueSearch />}
           </div>
         </div>

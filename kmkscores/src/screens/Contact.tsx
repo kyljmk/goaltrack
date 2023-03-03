@@ -12,7 +12,10 @@ function Contact() {
   return (
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />
-      <div className="menu-container">
+      <div
+        className="menu-container"
+        style={{ pointerEvents: menu ? "none" : "auto" }}
+      >
         <Menu menu={true} dropdown={false} />
         <div className="contact-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="contact">

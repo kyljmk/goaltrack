@@ -1,9 +1,13 @@
+import { faTable } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
 function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
   const [showFixtures, setShowFixtures] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const fixtureElements = fixtures.map((fixture) => {
     const fixtureDetails: IFixtureProps = {
@@ -35,6 +39,10 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
     if (!menu) setShowFixtures((prev) => !prev);
   };
 
+  const handleNavigate = () => {
+    navigate(`/leagues?id=${fixtures[0].league.id}`);
+  };
+
   return (
     <div className="league">
       <div className="league-header">
@@ -43,9 +51,14 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
           src={fixtures[0].league.logo}
           alt="logo of selected league"
         />
-        <h2 className="league-header-title" onClick={handleClick}>
-          {fixtures[0].league.name}
-        </h2>
+        <div className="league-header-title-container">
+          <h2 className="league-header-title" onClick={handleClick}>
+            {fixtures[0].league.name}
+          </h2>
+          <div className="league-header-title-icon" onClick={handleNavigate}>
+            <FontAwesomeIcon icon={faTable} size="xl" />
+          </div>
+        </div>
       </div>
       {showFixtures && fixtureElements}
     </div>

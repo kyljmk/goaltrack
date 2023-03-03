@@ -40,10 +40,14 @@ function Home() {
   });
 
   const lengthZeroCheck = (input: FixtureResponse[][]): boolean => {
+    let i: number = 0;
     input.forEach((array: FixtureResponse[]) => {
-      if (array.length !== 0) return false;
+      if (array.length !== 0) {
+        i++;
+      }
     });
-    return true;
+    console.log(i);
+    return i === 0;
   };
 
   if (lengthZeroCheck(leaguesDaysFixtures)) {
@@ -51,8 +55,6 @@ function Home() {
       <EmptyFixtures message="There are no fixtures from you favourites leages today." />,
     ];
   }
-
-  console.log(leaguesDaysFixtures);
 
   const orderedLiveElements: FixtureResponse[][] = Object.values(
     liveResults.reduce((x: any, y: any) => {
@@ -107,10 +109,10 @@ function Home() {
   return (
     <div className="App">
       <Helmet>
-        <title>This is GoalTrack</title>
+        <title>GoalTrack</title>
         <meta
           name="description"
-          content="Up-to-the-minutes and live football results."
+          content="Up-to-the-minute and live football results."
         />
       </Helmet>
       <Header menu={menu} setMenu={setMenu} />
@@ -123,18 +125,6 @@ function Home() {
           className="homefixtures-container"
           style={{ opacity: menu ? 0.1 : 1 }}
         >
-          <span
-            style={{
-              marginBottom: "30px",
-              fontSize: "24px",
-              maxWidth: "800px",
-              textAlign: "center",
-            }}
-          >
-            This website is currently under construction! It has limited
-            functionality, however all data should be accurate and up to data.
-            Construction should completed by the first weekend of March.
-          </span>
           <div className="homeOptions-container">
             <div
               onClick={() => {

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApiGetLeagues } from "../hooks/UseApi";
@@ -148,11 +148,17 @@ function LeagueSearch() {
         </div>
       </div>
       <form className="search-form">
+        <FontAwesomeIcon
+          className="search-form-icon"
+          icon={faMagnifyingGlass}
+          size="2xl"
+        />
         <input
           className="search-form-input"
           type="search"
           value={searchQuery}
           onChange={handleChange}
+          placeholder="League name or country.."
         />
       </form>
       <div className="searchLeague-container">{leaguesByCountryElements}</div>

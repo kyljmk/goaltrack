@@ -43,6 +43,14 @@ function LeagueTable() {
 
   return (
     <div>
+      <div className="leagueTable-title-container">
+        <img
+          src={leagueTable[0].league.logo}
+          alt="League logo"
+          className="leagueTable-title-logo"
+        />
+        <h1 className="leagueTable-title-text">{leagueTable[0].league.name}</h1>
+      </div>
       <table style={{ width: "100%" }}>
         <thead>
           <tr>
