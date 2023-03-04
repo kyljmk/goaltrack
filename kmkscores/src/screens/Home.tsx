@@ -13,6 +13,7 @@ import {
 } from "../hooks/UseApi";
 import "../styles/Home.css";
 import { FixtureResponse } from "../Types";
+import ProgressBar from "@badrap/bar-of-progress";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -28,7 +29,17 @@ function Home() {
 
   const { liveResults, loadingLive } = useApiGetLiveGames();
 
-  console.log(loadingLeagues);
+  const progress = new ProgressBar({
+    size: 4,
+    color: "#f4a340",
+    className: "progressBar",
+    delay: 100,
+  });
+
+  progress.start();
+  setTimeout(() => {
+    progress.finish();
+  }, 1000);
 
   let leagueElements = leaguesDaysFixtures.map((league: FixtureResponse[]) => {
     if (league.length !== 0) {
