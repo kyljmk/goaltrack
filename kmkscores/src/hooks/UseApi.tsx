@@ -1,6 +1,9 @@
 import { faL, faV } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { blankFixtureObject } from "../placeholderObjects/BlankStates";
+import {
+  blankFixtureObject,
+  blankFixtureResponse,
+} from "../placeholderObjects/BlankStates";
 import {
   tempCups,
   tempDailyFixtures,
@@ -54,7 +57,7 @@ export const useApiGetGame = (fixtureId: number) => {
 
 export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   const [teamsDaysFixtures, setTeamsDaysFixtures] =
-    useState<FixtureResponse[]>(tempLiveFixtures);
+    useState<FixtureResponse[]>(blankFixtureResponse);
   const [loadingTeams, setLoadingTeams] = useState<boolean>(false);
   const { favouriteTeams } = useInfo() as InfoContextType;
 
@@ -68,6 +71,7 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   };
 
   useEffect(() => {
+    setLoadingTeams(true);
     const promises = fetchApi();
     Promise.all(promises).then((values) => {
       const filteredValues = values.filter((element) => {
@@ -75,6 +79,7 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
       });
       setTeamsDaysFixtures(filteredValues);
     });
+    setLoadingTeams(false);
   }, []);
 
   const fetchApi = () => {
@@ -83,13 +88,11 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
         return a - b;
       })
       .map(async (i) => {
-        setLoadingTeams(true);
         const response = await fetch(
           `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=2022`,
           options
         );
         const data = await response.json();
-        setLoadingTeams(false);
         if (data.response.length !== 0) {
           return data.response[0];
         }
@@ -101,8 +104,10 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
 };
 
 export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
-  const [leaguesDaysFixtures, setLeaguesDaysFixtures] =
-    useState<FixtureResponse[][]>(tempDailyFixtures);
+  const [leaguesDaysFixtures, setLeaguesDaysFixtures] = useState<
+    FixtureResponse[][]
+  >([blankFixtureResponse]);
+  const [loadingLeagues, setLoadingLeagues] = useState<boolean>(false);
   const { favouriteLeagues } = useInfo() as InfoContextType;
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
@@ -115,10 +120,12 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
   };
 
   useEffect(() => {
+    setLoadingLeagues(true);
     const promises = fetchApi();
     Promise.all(promises).then((values) => {
       setLeaguesDaysFixtures(values);
     });
+    setLoadingLeagues(false);
   }, []);
 
   const fetchApi = () => {
@@ -137,12 +144,12 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
     return data;
   };
 
-  return { leaguesDaysFixtures };
+  return { leaguesDaysFixtures, loadingLeagues };
 };
 
 export const useApiGetLiveGames = () => {
   const [liveResults, setLiveResults] =
-    useState<FixtureResponse[]>(tempLiveFixtures);
+    useState<FixtureResponse[]>(blankFixtureResponse);
   const [loadingLive, setLoadingLive] = useState<boolean>(false);
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;

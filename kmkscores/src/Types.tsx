@@ -9,7 +9,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export interface IFixtureProps {
   details: {
-    id: number;
+    id: number | null;
     homeName: string;
     homeLogo: string;
     awayName: string;
@@ -230,17 +230,17 @@ export interface DailyFixture {
 
 export interface FixtureResponse {
   fixture: {
-    id: number;
+    id: number | null;
     referee: string;
     timezone: string;
     date: string;
-    timestamp: number;
+    timestamp: number | null;
     periods: {
       first: number | null;
       second: number | null;
     };
     venue: {
-      id: number;
+      id: number | null;
       name: string;
       city: string;
     };
@@ -251,12 +251,12 @@ export interface FixtureResponse {
     };
   };
   league: {
-    id: number;
+    id: number | null;
     name: string;
     country: string;
     logo: string;
     flag: string;
-    season: number;
+    season: number | null;
     round: string;
   };
   teams: {
@@ -273,7 +273,7 @@ export interface FixtureResponse {
 }
 
 export interface ITeam {
-  id: number;
+  id: number | null;
   name: string;
   logo: string;
   winner: boolean | null;

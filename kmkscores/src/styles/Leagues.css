@@ -201,6 +201,7 @@ td {
   border-left: solid 1px #f4a340;
   height: 40px;
   text-align: center;
+  padding: 0 5px;
 }
 
 .logo-container {
@@ -228,6 +229,7 @@ td {
   justify-content: center;
   width: 100%;
   justify-content: flex-start;
+  text-align: left;
 }
 
 .web-display,
@@ -235,7 +237,7 @@ td {
   display: none;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 850px) {
   .web-display,
   .web-display-form {
     display: table-cell;

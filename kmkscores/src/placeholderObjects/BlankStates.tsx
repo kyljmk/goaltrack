@@ -1,4 +1,4 @@
-import { DailyFixture, IFixtureDetails } from "../Types";
+import { DailyFixture, FixtureResponse, IFixtureDetails } from "../Types";
 
 export const blankFixtureObject: IFixtureDetails = {
   fixture: {
@@ -184,6 +184,77 @@ export const blankFixtureObject: IFixtureDetails = {
     },
   ],
 };
+
+export const blankFixtureResponse: FixtureResponse[] = [
+  {
+    fixture: {
+      id: null,
+      referee: "",
+      timezone: "",
+      date: "",
+      timestamp: null,
+      periods: {
+        first: null,
+        second: null,
+      },
+      venue: {
+        id: null,
+        name: "",
+        city: "",
+      },
+      status: {
+        long: "",
+        short: "",
+        elapsed: null,
+      },
+    },
+    league: {
+      id: null,
+      name: "",
+      country: "",
+      logo: "logo-icon.png",
+      flag: "",
+      season: null,
+      round: "",
+    },
+    teams: {
+      home: {
+        id: null,
+        name: "LOADING..",
+        logo: "logo-icon.png",
+        winner: null,
+      },
+      away: {
+        id: null,
+        name: "LOADING.",
+        logo: "logo-icon.png",
+        winner: null,
+      },
+    },
+    goals: {
+      home: null,
+      away: null,
+    },
+    score: {
+      halftime: {
+        home: null,
+        away: null,
+      },
+      fulltime: {
+        home: null,
+        away: null,
+      },
+      extratime: {
+        home: null,
+        away: null,
+      },
+      penalty: {
+        home: null,
+        away: null,
+      },
+    },
+  },
+];
 
 // export const blankDailyFixtures: DailyFixture[] = [
 //   {

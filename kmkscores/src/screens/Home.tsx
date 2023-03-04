@@ -12,7 +12,7 @@ import {
   useApiGetLiveGames,
 } from "../hooks/UseApi";
 import "../styles/Home.css";
-import { DailyFixture, FixtureResponse } from "../Types";
+import { FixtureResponse } from "../Types";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -21,11 +21,14 @@ function Home() {
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
 
-  const { leaguesDaysFixtures } = useApiGetFavouriteLeaguesFixtures(dateString);
+  const { leaguesDaysFixtures, loadingLeagues } =
+    useApiGetFavouriteLeaguesFixtures(dateString);
   const { teamsDaysFixtures, loadingTeams } =
     useApiGetFavouriteTeamsFixtures(dateString);
 
   const { liveResults, loadingLive } = useApiGetLiveGames();
+
+  console.log(loadingLeagues);
 
   let leagueElements = leaguesDaysFixtures.map((league: FixtureResponse[]) => {
     if (league.length !== 0) {
@@ -46,7 +49,7 @@ function Home() {
         i++;
       }
     });
-    console.log(i);
+
     return i === 0;
   };
 
@@ -109,11 +112,31 @@ function Home() {
   return (
     <div className="App">
       <Helmet>
-        <title>GoalTrack</title>
+        <title> GoalTrack</title>
         <meta
           name="description"
           content="Up-to-the-minute and live football results."
         />
+        <meta name="twitter:card" content="summary_large_image" />{" "}
+        <meta name="twitter:site" content="@user" />{" "}
+        <meta name="twitter:creator" content="@user" />{" "}
+        <meta name="twitter:title" content="GoalTrack" />{" "}
+        <meta
+          name="twitter:description"
+          content="Live football results up-to-the-minute"
+        />{" "}
+        <meta name="twitter:image" content="logo-icon.png" />{" "}
+        <meta property="og:title" content="GoalTrack" />{" "}
+        <meta
+          property="og:description"
+          content="Live football results up-to-the-minute"
+        />{" "}
+        <meta property="og:image" content="logo-icon.png" />
+        <meta property="og:url" content="goaltrack.live" />
+        <meta property="og:site_name" content="GoalTrack" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="article" />
+        <meta property="fb:app_id" content="ID_APP_FACEBOOK" />
       </Helmet>
       <Header menu={menu} setMenu={setMenu} />
       <div
@@ -176,7 +199,8 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            {homeOptions === 0 && leagueElements}
+            {homeOptions === 0 &&
+              (loadingLeagues ? <div>Loading...</div> : leagueElements)}
             {homeOptions === 1 &&
               (loadingLive ? <div>Loading...</div> : liveElements)}
             {homeOptions === 2 &&
