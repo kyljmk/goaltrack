@@ -12,9 +12,19 @@
   width: 100%;
 }
 
+.game-info-flagContainer {
+  margin: 10px 0 0 10px;
+  display: flex;
+}
+
+.game-info-flag {
+  width: 25px;
+  border-radius: 5px;
+}
+
 .game-info-leagueRound {
   font-size: 14px;
-  margin: 20px;
+  margin-left: 5px;
 }
 
 .gameHeader {
@@ -38,7 +48,7 @@
 .game-away-logo {
   height: 100px;
   margin-bottom: 10px;
-  background-color: #343231;
+  background-color: white;
   border-radius: 15px;
   padding: 5px;
 }
@@ -47,11 +57,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  border: 1px solid pink;
 }
 
 .game-info-leagueLogo {
   border-radius: 5px;
-  background-color: #343231;
   width: 30px;
 }
 

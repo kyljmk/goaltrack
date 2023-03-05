@@ -11,26 +11,30 @@ import { useApiGetGame } from "../hooks/UseApi";
 function Game() {
   const [options, setOptions] = useState<number>(0);
   const [menu, setMenu] = useState<boolean>(false);
+  const [scoreCount, setScoreCount] = useState<number[]>([0, 0]);
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
   const { fixtureDetails, loadingGame } = useApiGetGame(id);
+  console.log(fixtureDetails);
 
   const { fixture, league, teams, goals, score, events, lineups, statistics } =
     fixtureDetails;
 
-  const eventElements = events?.map((e, i) => {
+  const eventElements = events?.map((event, i) => {
     return (
       <Events
         key={i}
         homeName={teams.home.name}
-        time={e.time}
-        team={e.team}
-        player={e.player}
-        assist={e.assist}
-        type={e.type}
-        detail={e.detail}
-        comment={e.comment}
+        time={event.time}
+        team={event.team}
+        player={event.player}
+        assist={event.assist}
+        type={event.type}
+        detail={event.detail}
+        comment={event.comment}
+        scoreCount={scoreCount}
+        setScoreCount={setScoreCount}
       />
     );
   });
@@ -55,6 +59,7 @@ function Game() {
               minutesPlayed={fixture.status.elapsed}
               league={league.name}
               leagueLogo={league.logo}
+              flag={league.flag}
               round={league.round}
               dateTime={fixture.date}
             />

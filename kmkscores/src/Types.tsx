@@ -132,6 +132,7 @@ export interface IGameHeaderProps {
   minutesPlayed: number | null;
   league: string;
   leagueLogo: string;
+  flag: string;
   round: string;
   dateTime: string;
 }
@@ -188,6 +189,8 @@ export interface IEventProps {
   type: string;
   detail: string;
   comment: string | null;
+  scoreCount: number[];
+  setScoreCount: Dispatch<SetStateAction<number[]>>;
 }
 
 export interface IStatsProps {

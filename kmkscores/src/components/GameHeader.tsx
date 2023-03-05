@@ -8,6 +8,7 @@ function GameHeader({
   awayScore,
   league,
   leagueLogo,
+  flag,
   round,
   dateTime,
   matchStatus,
@@ -25,9 +26,16 @@ function GameHeader({
 
   return (
     <div className="leagueRound-container">
-      <span className="game-info-leagueRound">{`${league} | Round ${
-        round.split("- ")[1]
-      }`}</span>
+      <div className="game-info-flagContainer">
+        <img
+          src={flag}
+          alt="Flag of the country that the league is in"
+          className="game-info-flag"
+        />
+        <span className="game-info-leagueRound">{`${league} | Round ${
+          round.split("- ")[1]
+        }`}</span>
+      </div>
       <div className="gameHeader">
         <div className="game-home">
           <img

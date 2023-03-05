@@ -39,7 +39,7 @@ function Home() {
   progress.start();
   setTimeout(() => {
     progress.finish();
-  }, 1000);
+  }, 700);
 
   let leagueElements = leaguesDaysFixtures.map((league: FixtureResponse[]) => {
     if (league.length !== 0) {

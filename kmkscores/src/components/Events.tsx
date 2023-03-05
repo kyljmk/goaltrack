@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IEventProps } from "../Types";
 import "../styles/Events.css";
 
@@ -10,13 +10,17 @@ function Events({
   type,
   detail,
   homeName,
+  scoreCount,
+  setScoreCount,
 }: IEventProps) {
   let imageUrl: string = "";
+
   if (type === "Goal") imageUrl = "goal.png";
   if (detail === "Yellow Card") imageUrl = "yellow_card.png";
   if (detail === "Second Yellow Card") imageUrl = "second_yellow.png";
   if (type === "subst") imageUrl = "substitution.jpg";
   if (detail === "Red Card") imageUrl = "red_card.png";
+  console.log();
 
   return (
     <div className={team.name === homeName ? "homeEvent" : "awayEvent"}>
