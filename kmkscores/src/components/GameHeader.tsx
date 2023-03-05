@@ -16,6 +16,17 @@ function GameHeader({
 }: IGameHeaderProps) {
   let timeStamp: string = "";
 
+  const inProgressStatuses: string[] = [
+    "1H",
+    "HT",
+    "2H",
+    "ET",
+    "BT",
+    "P",
+    "INT",
+    "LIVE",
+  ];
+  const gameInProgress: boolean = inProgressStatuses.includes(matchStatus);
   if (matchStatus === "HT" || matchStatus === "FT") {
     timeStamp = matchStatus;
   } else if (matchStatus === "NS") {
@@ -23,6 +34,8 @@ function GameHeader({
   } else {
     timeStamp = `${minutesPlayed?.toString()}'`;
   }
+  console.log(gameInProgress);
+  const date: string = dateTime.slice(0, 10);
 
   return (
     <div className="leagueRound-container">
@@ -62,6 +75,9 @@ function GameHeader({
             style={{ fontSize: matchStatus === "NS" ? "18px" : "12px" }}
           >
             {timeStamp}
+          </span>
+          <span style={{ display: gameInProgress ? "none" : "inline" }}>
+            {date}
           </span>
         </div>
         <div className="game-away">

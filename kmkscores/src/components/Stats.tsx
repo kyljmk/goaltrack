@@ -23,11 +23,13 @@ function Stats({ statistics }: IStatsProps) {
     }
 
     statsElements = combinedStats.map((x, i) => {
+      const percentageCheck: boolean =
+        x.type === "Ball Possession" || x.type === "Passes %";
       let homePercentage: number =
         (x.homeValue / (x.homeValue + x.awayValue)) * 100;
       let awayPercentage: number =
         (x.awayValue / (x.homeValue + x.awayValue)) * 100;
-      if (x.type === "Ball Possession" || x.type === "Passes %") {
+      if (percentageCheck) {
         homePercentage = x.homeValue;
         awayPercentage = x.awayValue;
       }
@@ -43,7 +45,9 @@ function Stats({ statistics }: IStatsProps) {
               <div
                 className="stat-bar-home"
                 style={{
-                  width: `${homePercentage}%`,
+                  width: percentageCheck
+                    ? homePercentage
+                    : `${homePercentage}%`,
                   backgroundColor:
                     homePercentage > awayPercentage ? "#F4A340" : "gray",
                 }}
@@ -53,7 +57,9 @@ function Stats({ statistics }: IStatsProps) {
               <div
                 className="stat-bar-away"
                 style={{
-                  width: `${awayPercentage}%`,
+                  width: percentageCheck
+                    ? awayPercentage
+                    : `${awayPercentage}%`,
                   backgroundColor:
                     awayPercentage > homePercentage ? "#F4A340" : "gray",
                 }}

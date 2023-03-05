@@ -20,7 +20,6 @@ function Events({
   if (detail === "Second Yellow Card") imageUrl = "second_yellow.png";
   if (type === "subst") imageUrl = "substitution.jpg";
   if (detail === "Red Card") imageUrl = "red_card.png";
-  console.log();
 
   return (
     <div className={team.name === homeName ? "homeEvent" : "awayEvent"}>
