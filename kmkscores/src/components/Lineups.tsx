@@ -7,10 +7,26 @@ import "../styles/Lineups.css";
 function Lineups({ lineups }: ILineUpProps) {
   let lineupsElement: ReactElement = <div>hello</div>;
 
-  console.log(lineups);
-
   if (lineups !== null) {
     const startHomeElements = lineups[0]?.startXI.map((x) => {
+      return (
+        <div key={x.player.number} className="startLineups-home-player">
+          <div className="startLineups-home-player-number-container">
+            <FontAwesomeIcon
+              className="startLineups-home-player-number-shirt"
+              size="2xl"
+              icon={faShirt}
+            />
+            <span className="startLineups-home-player-number">
+              {x.player.number}
+            </span>
+          </div>
+          <span className="startLineups-home-player-name">{x.player.name}</span>
+        </div>
+      );
+    });
+
+    const subHomeElements = lineups[0]?.substitutes.map((x) => {
       return (
         <div key={x.player.number} className="startLineups-home-player">
           <div className="startLineups-home-player-number-container">
@@ -46,6 +62,24 @@ function Lineups({ lineups }: ILineUpProps) {
       );
     });
 
+    const subAwayElements = lineups[1]?.startXI.map((x) => {
+      return (
+        <div key={x.player.number} className="startLineups-away-player">
+          <span className="startLineups-away-player-name">{x.player.name}</span>
+          <div className="startLineups-away-player-number-container">
+            <FontAwesomeIcon
+              className="startLineups-away-player-number-shirt"
+              size="2xl"
+              icon={faShirt}
+            />
+            <span className="startLineups-away-player-number">
+              {x.player.number}
+            </span>
+          </div>
+        </div>
+      );
+    });
+
     lineupsElement = (
       <div className="lineups-container">
         <span className="startLineups-title">Starting Line-Ups</span>
@@ -55,8 +89,8 @@ function Lineups({ lineups }: ILineUpProps) {
         </div>
         <span className="substitutes-title">Substitutes</span>
         <div className="substitutes-container">
-          <div>{startHomeElements}</div>
-          <div className="substitutes-away-container">{startAwayElements}</div>
+          <div>{subHomeElements}</div>
+          <div className="substitutes-away-container">{subAwayElements}</div>
         </div>
         <span className="coaches-title">Coaches</span>
         <div className="coaches-container">

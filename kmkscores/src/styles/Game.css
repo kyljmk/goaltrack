@@ -1,8 +1,14 @@
+.menu-container {
+  display: flex;
+  width: 100%;
+}
+
 .gameContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 40px;
+  width: 100%;
 }
 
 .game {
@@ -10,6 +16,16 @@
   border-radius: 15px;
   max-width: 800px;
   width: 100%;
+}
+
+@media (max-width: 450px) {
+  .gameContainer {
+    padding: 20px;
+  }
+
+  .game-info-date {
+    font-size: 11px;
+  }
 }
 
 .game-info-flagContainer {
@@ -112,4 +128,15 @@
 
 .events-container {
   padding: 20px;
+}
+
+.game-prematchMessage {
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 450px) {
+  .game-prematchMessage {
+    font-size: 13px;
+  }
 }

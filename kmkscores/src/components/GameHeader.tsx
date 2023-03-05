@@ -34,7 +34,6 @@ function GameHeader({
   } else {
     timeStamp = `${minutesPlayed?.toString()}'`;
   }
-  console.log(gameInProgress);
   const date: string = dateTime.slice(0, 10);
 
   return (
@@ -76,7 +75,10 @@ function GameHeader({
           >
             {timeStamp}
           </span>
-          <span style={{ display: gameInProgress ? "none" : "inline" }}>
+          <span
+            className="game-info-date"
+            style={{ display: gameInProgress ? "none" : "inline" }}
+          >
             {date}
           </span>
         </div>
