@@ -69,6 +69,20 @@
   padding: 5px;
 }
 
+@media (max-width: 850px) {
+  .game-home-logo,
+  .game-away-logo {
+    height: 75px;
+  }
+}
+
+@media (max-width: 450px) {
+  .game-home-logo,
+  .game-away-logo {
+    height: 50px;
+  }
+}
+
 .game-info {
   display: flex;
   flex-direction: column;
@@ -77,7 +91,9 @@
 
 .game-info-leagueLogo {
   border-radius: 5px;
-  width: 30px;
+  width: 35px;
+  background: white;
+  padding: 5px;
 }
 
 .game-info-score {
@@ -139,4 +155,18 @@
   .game-prematchMessage {
     font-size: 13px;
   }
+}
+
+.events-halftimeBanner,
+.events-fulltimeBanner {
+  border: 1px solid #f4a340;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.events-halftimeText,
+.events-fulltimeText {
+  justify-self: flex-start;
 }

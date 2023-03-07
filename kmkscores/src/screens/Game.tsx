@@ -21,23 +21,64 @@ function Game() {
   const { fixture, league, teams, goals, score, events, lineups, statistics } =
     fixtureDetails;
 
-  const eventElements = events?.map((event, i) => {
-    return (
-      <Events
-        key={i}
-        homeName={teams.home.name}
-        time={event.time}
-        team={event.team}
-        player={event.player}
-        assist={event.assist}
-        type={event.type}
-        detail={event.detail}
-        comment={event.comment}
-        scoreCount={scoreCount}
-        setScoreCount={setScoreCount}
-      />
-    );
-  });
+  console.log(fixtureDetails);
+
+  const firstHalfElements = events
+    ?.filter((event) => event.time.elapsed <= 45)
+    .map((event, i) => {
+      return (
+        <Events
+          key={i}
+          homeName={teams.home.name}
+          time={event.time}
+          team={event.team}
+          player={event.player}
+          assist={event.assist}
+          type={event.type}
+          detail={event.detail}
+          comment={event.comment}
+          scoreCount={scoreCount}
+          setScoreCount={setScoreCount}
+        />
+      );
+    });
+
+  const secondHalfElements = events
+    ?.filter((event) => event.time.elapsed > 45)
+    .map((event, i) => {
+      return (
+        <Events
+          key={i}
+          homeName={teams.home.name}
+          time={event.time}
+          team={event.team}
+          player={event.player}
+          assist={event.assist}
+          type={event.type}
+          detail={event.detail}
+          comment={event.comment}
+          scoreCount={scoreCount}
+          setScoreCount={setScoreCount}
+        />
+      );
+    });
+
+  const halftimeCheck: string[] = [
+    "HT",
+    "2H",
+    "ET",
+    "BT",
+    "P",
+    "FT",
+    "AET",
+    "PEN",
+  ];
+  const fulltimeCheck: string[] = ["ET", "BT", "P", "FT", "AET", "PEN"];
+  const aetCheck: string[] = ["P", "AET", "PEN"];
+  const halftimeScore: string = `${fixtureDetails.score.halftime.home} - ${fixtureDetails.score.halftime.away}`;
+  const fulltimeScore: string = `${fixtureDetails.score.fulltime.home} - ${fixtureDetails.score.fulltime.away}`;
+  const aetScore: string = `${fixtureDetails.score.extratime.home} - ${fixtureDetails.score.extratime.away}`;
+  const penScore: string = `${fixtureDetails.score.penalty.home} - ${fixtureDetails.score.penalty.away}`;
 
   return (
     <div className="App">
@@ -64,6 +105,7 @@ function Game() {
                 flag={league.flag}
                 round={league.round}
                 dateTime={fixture.date}
+                country={league.country}
               />
               <div className="game-refVenue-container">
                 <span className="game-referee">{fixture.referee}</span>
@@ -113,7 +155,26 @@ function Game() {
                     The match hasn't kicked off yet.
                   </div>
                 ) : (
-                  <div className="events-container">{eventElements}</div>
+                  <div className="events-container">
+                    {firstHalfElements}
+                    {halftimeCheck.includes(
+                      fixtureDetails.fixture.status.short
+                    ) && (
+                      <div className="events-halftimeBanner">
+                        <span className="events-halftimeText">HT</span>
+                        <span>{halftimeScore}</span>
+                      </div>
+                    )}
+                    {secondHalfElements}
+                    {fulltimeCheck.includes(
+                      fixtureDetails.fixture.status.short
+                    ) && (
+                      <div className="events-fulltimeBanner">
+                        <span className="events-fulltimeText">FT</span>
+                        <span>{fulltimeScore}</span>
+                      </div>
+                    )}
+                  </div>
                 ))}
               {options === 1 &&
                 (fixtureDetails.statistics?.length === 0 ? (

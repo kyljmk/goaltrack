@@ -133,6 +133,7 @@ export interface IGameHeaderProps {
   league: string;
   leagueLogo: string;
   flag: string;
+  country: string;
   round: string;
   dateTime: string;
 }

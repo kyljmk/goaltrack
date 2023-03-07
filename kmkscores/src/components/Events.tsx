@@ -10,8 +10,6 @@ function Events({
   type,
   detail,
   homeName,
-  scoreCount,
-  setScoreCount,
 }: IEventProps) {
   let imageUrl: string = "";
 
@@ -24,7 +22,7 @@ function Events({
   return (
     <div className={team.name === homeName ? "homeEvent" : "awayEvent"}>
       <span className="event-timeStamp">
-        {time.elapsed === 90
+        {time.extra !== null
           ? `${time.elapsed}'+${time.extra}`
           : `${time.elapsed}'`}
       </span>

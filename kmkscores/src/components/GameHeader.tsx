@@ -9,12 +9,26 @@ function GameHeader({
   league,
   leagueLogo,
   flag,
+  country,
   round,
   dateTime,
   matchStatus,
   minutesPlayed,
 }: IGameHeaderProps) {
   let timeStamp: string = "";
+
+  if (country === "England") {
+    flag = "https://www.flashscore.com/res/_fs/build/en.e20b07c.png";
+  }
+  if (country === "Scotland") {
+    flag = "https://www.flashscore.com/res/_fs/build/sc.a2615a8.png";
+  }
+  if (country === "Wales") {
+    flag = "https://www.flashscore.com/res/_fs/build/wa.768307e.png";
+  }
+  if (country === "Northern-Ireland") {
+    flag = "https://www.flashscore.com/res/_fs/build/nirl.dab832b.png";
+  }
 
   const inProgressStatuses: string[] = [
     "1H",
@@ -34,19 +48,25 @@ function GameHeader({
   } else {
     timeStamp = `${minutesPlayed?.toString()}'`;
   }
+
   const date: string = dateTime.slice(0, 10);
+  const refactoredRound: string = round.includes("-")
+    ? `Round ${round.split("- ")[1]}`
+    : round;
 
   return (
     <div className="leagueRound-container">
       <div className="game-info-flagContainer">
         <img
-          src={flag}
+          src={
+            flag
+              ? flag
+              : "https://www.flashscore.com/res/_fs/build/world.b7d16db.png"
+          }
           alt="Flag of the country that the league is in"
           className="game-info-flag"
         />
-        <span className="game-info-leagueRound">{`${league} | Round ${
-          round.split("- ")[1]
-        }`}</span>
+        <span className="game-info-leagueRound">{`${league} | ${refactoredRound}`}</span>
       </div>
       <div className="gameHeader">
         <div className="game-home">
