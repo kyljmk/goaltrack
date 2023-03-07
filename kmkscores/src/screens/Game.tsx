@@ -162,7 +162,9 @@ function Game() {
                     ) && (
                       <div className="events-halftimeBanner">
                         <span className="events-halftimeText">HT</span>
-                        <span>{halftimeScore}</span>
+                        <span className="events-halftimeScore">
+                          {halftimeScore}
+                        </span>
                       </div>
                     )}
                     {secondHalfElements}
@@ -171,7 +173,9 @@ function Game() {
                     ) && (
                       <div className="events-fulltimeBanner">
                         <span className="events-fulltimeText">FT</span>
-                        <span>{fulltimeScore}</span>
+                        <span className="events-fulltimeScore">
+                          {fulltimeScore}
+                        </span>
                       </div>
                     )}
                   </div>

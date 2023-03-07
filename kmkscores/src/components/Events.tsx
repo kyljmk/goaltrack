@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { IEventProps } from "../Types";
 import "../styles/Events.css";
 
@@ -18,6 +17,7 @@ function Events({
   if (detail === "Second Yellow Card") imageUrl = "second_yellow.png";
   if (type === "subst") imageUrl = "substitution.jpg";
   if (detail === "Red Card") imageUrl = "red_card.png";
+  if (type === "Var") imageUrl = "var-icon.png";
 
   return (
     <div className={team.name === homeName ? "homeEvent" : "awayEvent"}>
@@ -33,8 +33,13 @@ function Events({
           alt="A symbol determining what type of event took place"
         />
       </div>
-      <span className="event-playerName">{player.name}</span>
+      <span className="event-playerName">
+        {type === "Var" ? detail : player.name}
+      </span>
       {assist.name && <span className="event-assistName">({assist.name})</span>}
+      {type === "Var" && (
+        <span className="event-assistName">({player.name})</span>
+      )}
     </div>
   );
 }
