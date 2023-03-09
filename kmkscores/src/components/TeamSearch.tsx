@@ -3,9 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApiGetCountries } from "../hooks/UseApi";
-import { ICountry, ILeagueDetails, ITeamInfo } from "../Types";
+import {
+  ICountry,
+  ILeagueDetails,
+  ITeamInfo,
+  ITeamSearchProps,
+} from "../Types";
 
-function TeamSearch() {
+function TeamSearch({ country, setCountry }: ITeamSearchProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const countries = useApiGetCountries();
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
@@ -14,7 +19,6 @@ function TeamSearch() {
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [country, setCountry] = useState<string | null>();
 
   const [teams, setTeams] = useState<ITeamInfo[]>([]);
   const apiKey: string = process.env.REACT_APP_API_KEY as string;

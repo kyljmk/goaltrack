@@ -340,29 +340,29 @@ export const useApiGetCountries = () => {
   return countries;
 };
 
-// export const useApiGetTeams = (country: string | null) => {
-//   const [teams, setTeams] = useState<ITeamInfo[]>([]);
-//   const apiKey: string = process.env.REACT_APP_API_KEY as string;
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       "X-RapidAPI-Key": apiKey,
-//       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-//     },
-//   };
+export const useApiGetTeamInfo = (id: number) => {
+  const [teamInfo, setTeamInfo] = useState<ITeamInfo[]>([]);
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
 
-//   const fetchApi = async () => {
-//     const resposne = await fetch(
-//       `https://api-football-v1.p.rapidapi.com/v3/teams?country=${country}`,
-//       options
-//     );
-//     const data = await resposne.json();
-//     setTeams(data.response);
-//   };
+  const fetchApi = async () => {
+    const resposne = await fetch(
+      `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`,
+      options
+    );
+    const data = await resposne.json();
+    setTeamInfo(data.response);
+  };
 
-//   useEffect(() => {
-//     fetchApi();
-//   }, []);
+  useEffect(() => {
+    fetchApi();
+  }, []);
 
-//   return country ? teams : null;
-// };
+  return;
+};

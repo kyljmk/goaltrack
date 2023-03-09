@@ -554,3 +554,8 @@ export interface ICountry {
   code: string;
   flag: string;
 }
+
+export interface ITeamSearchProps {
+  country: string | null;
+  setCountry: Dispatch<SetStateAction<string | null>>;
+}

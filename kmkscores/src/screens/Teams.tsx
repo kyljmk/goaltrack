@@ -1,16 +1,28 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import "../styles/Teams.css";
 import TeamInfo from "../components/TeamInfo";
 import TeamSearch from "../components/TeamSearch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 function Teams() {
   const [menu, setMenu] = useState<boolean>(false);
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
+  const [country, setCountry] = useState<string | null>(
+    searchParams.get("country")
+  );
+
+  const navigate = useNavigate();
+
+  const handleReturn = () => {
+    navigate("/teams");
+    setCountry("");
+  };
 
   return (
     <div className="App">
@@ -22,11 +34,19 @@ function Teams() {
         <Menu menu={true} dropdown={false} />
         <div className="teams-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="teams">
-            <h1 className="teams-title">Teams</h1>
-            {id ? <TeamInfo /> : <TeamSearch />}
-            {/* <span>
-              This feature is currently under construction and coming soon.
-            </span> */}
+            <div className="teams-title-container">
+              <h1 className="teams-title">Teams</h1>
+              <div onClick={handleReturn} className="teams-title-return">
+                {(country || id === null) && (
+                  <FontAwesomeIcon icon={faArrowLeft} size="2xl" />
+                )}
+              </div>
+            </div>
+            {id ? (
+              <TeamInfo />
+            ) : (
+              <TeamSearch country={country} setCountry={setCountry} />
+            )}
           </div>
         </div>
       </div>

@@ -180,8 +180,11 @@
   margin-bottom: 20px;
 }
 .leagueTable-title-logo {
-  width: 60px;
+  width: 70px;
   margin-right: 10px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px;
 }
 .leagueTable-title-text {
   margin: 0;
