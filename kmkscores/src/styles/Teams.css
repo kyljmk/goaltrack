@@ -49,3 +49,14 @@
 
 .teamSearch-country-name {
 }
+
+.teamSearch-team {
+  display: flex;
+}
+
+.teamSearch-team-logo {
+  width: 30px;
+}
+
+.teamSearch-team-name {
+}

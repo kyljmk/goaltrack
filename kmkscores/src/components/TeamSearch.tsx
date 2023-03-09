@@ -1,72 +1,81 @@
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useApiGetCountries, useApiGetLeagues } from "../hooks/UseApi";
-import { ICountry, ILeagueDetails } from "../Types";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useApiGetCountries } from "../hooks/UseApi";
+import { ICountry, ILeagueDetails, ITeamInfo } from "../Types";
 
 function TeamSearch() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const countries = useApiGetCountries();
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
-  const [groupedFilteredLeagues, setGroupedFilteredLeagues] = useState<
-    ILeagueDetails[][]
-  >([]);
-  const navigate = useNavigate();
-  console.log(filteredCountries);
+  const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [country, setCountry] = useState<string | null>(
+    searchParams.get("country")
+  );
+
+  const [teams, setTeams] = useState<ITeamInfo[]>([]);
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  const fetchApi = async () => {
+    const resposne = await fetch(
+      `https://api-football-v1.p.rapidapi.com/v3/teams?country=${country}`,
+      options
+    );
+    const data = await resposne.json();
+    setTeams(data.response);
+  };
+
+  useEffect(() => {
+    fetchApi();
+  }, [country]);
+
+  const handleCountryChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.currentTarget.value);
     setFilteredCountries(
       countries.filter((country) =>
         country.name
-          .toLocaleLowerCase()
-          .includes(e.currentTarget.value.toLowerCase())
+          .toLowerCase()
+          .startsWith(e.currentTarget.value.toLowerCase())
       )
     );
   };
-  // setGroupedFilteredLeagues(
-  //   Object.values(
-  //     leagues
-  //       .filter(
-  //         (league) =>
-  //           league.country.name
-  //             .toLocaleLowerCase()
-  //             .includes(e.currentTarget.value.toLowerCase()) ||
-  //           league.league.name
-  //             .toLocaleLowerCase()
-  //             .includes(e.currentTarget.value.toLowerCase())
-  //       )
-  //       .reduce((x: any, y: any) => {
-  //         (x[y.country.code] = x[y.country.code] || []).push(y);
 
-  //         return x;
-  //       }, {})
-  //   )
-  // );
+  const handleTeamChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.currentTarget.value);
+    if (teams) {
+      setFilteredTeams(
+        teams.filter((team) =>
+          team.team.name
+            .toLocaleLowerCase()
+            .startsWith(e.currentTarget.value.toLocaleLowerCase())
+        )
+      );
+    }
+  };
 
-  // const leaguesByCountryElements = groupedFilteredLeagues.map((country) => {
-  //   country.sort((a, b) => a.league.id - b.league.id);
-  //   const leagueElements = country.map((league) => {
-  //     return (
-  //       <div
-  //         key={league.league.id}
-  //         onClick={() => navigate(`/leagues?id=${league.league.id}`)}
-  //       >
-  //         <span>{league.league.name}</span>
-  //         <span>{league.league.id}</span>
-  //       </div>
-  //     );
-  //   });
-  //   return (
-  //     <div key={country[0].country.code}>
-  //       <span style={{ fontSize: "30px" }}>{country[0].country.name}</span>
-  //       {leagueElements}
-  //     </div>
-  //   );
-  // });
+  const handleCountryClick = (country: string) => {
+    setFilteredCountries([]);
+    navigate(`/teams?country=${country}`);
+    setCountry(country);
+    setSearchQuery("");
+  };
 
   const countryElements = filteredCountries.map((country: ICountry) => {
     return (
-      <div className="teamSearch-country">
+      <div
+        className="teamSearch-country"
+        onClick={() => handleCountryClick(country.name)}
+        key={country.name}
+      >
         <img
           className="teamSearch-country-flag"
           src={country.flag}
@@ -77,12 +86,33 @@ function TeamSearch() {
     );
   });
 
+  const teamElements = filteredTeams.map((team: ITeamInfo) => {
+    return (
+      <div
+        className="teamSearch-team"
+        onClick={() => navigate(`/teams?id=${team.team.id}`)}
+      >
+        <img
+          className="teamSearch-team-logo"
+          src={team.team.logo}
+          alt="team logo"
+        />
+        <span className="teamSearch-team-name">{team.team.name}</span>
+      </div>
+    );
+  });
+
   return (
     <div className="search-container">
       <form>
-        <input type="search" value={searchQuery} onChange={handleChange} />
+        <input
+          type="search"
+          value={searchQuery}
+          onChange={country ? handleTeamChange : handleCountryChange}
+        />
       </form>
-      {countryElements}
+      {!country && countryElements}
+      {searchQuery.length >= 2 && teamElements}
     </div>
   );
 }

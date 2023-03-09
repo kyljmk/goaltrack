@@ -340,4 +340,29 @@ export const useApiGetCountries = () => {
   return countries;
 };
 
-export const useApiGetTeams = (country: string) => {};
+// export const useApiGetTeams = (country: string | null) => {
+//   const [teams, setTeams] = useState<ITeamInfo[]>([]);
+//   const apiKey: string = process.env.REACT_APP_API_KEY as string;
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       "X-RapidAPI-Key": apiKey,
+//       "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+//     },
+//   };
+
+//   const fetchApi = async () => {
+//     const resposne = await fetch(
+//       `https://api-football-v1.p.rapidapi.com/v3/teams?country=${country}`,
+//       options
+//     );
+//     const data = await resposne.json();
+//     setTeams(data.response);
+//   };
+
+//   useEffect(() => {
+//     fetchApi();
+//   }, []);
+
+//   return country ? teams : null;
+// };
