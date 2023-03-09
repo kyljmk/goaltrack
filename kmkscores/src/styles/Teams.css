@@ -36,18 +36,63 @@
   }
 }
 
+.search-container {
+}
+
+.teamSearch-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-countryFlag {
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 20px;
+}
+
+.search-input {
+  background-color: black;
+  color: #f4a340;
+  border: 2px solid #f4a340;
+  border-radius: 20px;
+  height: 40px;
+  width: 30%;
+  font-size: 18px;
+  padding: 0 15px;
+  transition: 0.9s;
+}
+
+.search-input::placeholder {
+  opacity: 0;
+}
+
+.search-input:focus::placeholder {
+  opacity: 0.4;
+}
+
+.search-input:focus {
+  outline: none;
+  width: 80%;
+  border: 3px solid lightgoldenrodyellow;
+}
+
 .teamSearch-country {
   display: flex;
   margin-bottom: 10px;
-  border: 1px solid #f4a340;
-  height: 75px;
+  align-items: flex-end;
 }
 
 .teamSearch-country-flag {
-  width: 100px;
+  width: 50px;
+  border-radius: 15px;
 }
 
 .teamSearch-country-name {
+  padding: 0 0 5px 20px;
+  text-align: left;
+  width: 100%;
+  border-bottom: 1px solid #f4a340;
 }
 
 .teamSearch-team {

@@ -1,3 +1,5 @@
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApiGetCountries } from "../hooks/UseApi";
@@ -8,12 +10,11 @@ function TeamSearch() {
   const countries = useApiGetCountries();
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
+  const [flag, setFlag] = useState<string>("");
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [country, setCountry] = useState<string | null>(
-    searchParams.get("country")
-  );
+  const [country, setCountry] = useState<string | null>();
 
   const [teams, setTeams] = useState<ITeamInfo[]>([]);
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
@@ -62,18 +63,38 @@ function TeamSearch() {
     }
   };
 
-  const handleCountryClick = (country: string) => {
+  const handleCountryClick = (country: ICountry) => {
     setFilteredCountries([]);
-    navigate(`/teams?country=${country}`);
-    setCountry(country);
+    navigate(`/teams?country=${country.name}`);
+    setCountry(country.name);
+    setFlag(country.flag);
     setSearchQuery("");
   };
 
   const countryElements = filteredCountries.map((country: ICountry) => {
+    if (country.name === "England") {
+      country.flag =
+        "https://upload.wikimedia.org/wikipedia/en/b/be/Flag_of_England.svg";
+    }
+    if (country.name === "Scotland") {
+      country.flag =
+        "https://upload.wikimedia.org/wikipedia/commons/1/10/Flag_of_Scotland.svg";
+    }
+    if (country.name === "Wales") {
+      country.flag =
+        "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_Wales.svg";
+    }
+    if (country.name === "Northern-Ireland") {
+      country.flag =
+        "https://upload.wikimedia.org/wikipedia/commons/4/43/Flag_of_Northern_Ireland_%281953%E2%80%931972%29.svg";
+    }
+    if (country.name === "World") {
+      country.flag = "world.png";
+    }
     return (
       <div
         className="teamSearch-country"
-        onClick={() => handleCountryClick(country.name)}
+        onClick={() => handleCountryClick(country)}
         key={country.name}
       >
         <img
@@ -91,6 +112,7 @@ function TeamSearch() {
       <div
         className="teamSearch-team"
         onClick={() => navigate(`/teams?id=${team.team.id}`)}
+        key={team.team.id}
       >
         <img
           className="teamSearch-team-logo"
@@ -104,10 +126,22 @@ function TeamSearch() {
 
   return (
     <div className="search-container">
-      <form>
+      <form className="teamSearch-form">
+        {country && (
+          <img className="search-countryFlag" src={flag} alt="country's flag" />
+        )}
+        {!country && (
+          <FontAwesomeIcon
+            className="search-form-icon"
+            icon={faMagnifyingGlass}
+            size="2xl"
+          />
+        )}
         <input
+          className="search-input"
           type="search"
           value={searchQuery}
+          placeholder={country ? "Enter team name.." : "Search by country.."}
           onChange={country ? handleTeamChange : handleCountryChange}
         />
       </form>

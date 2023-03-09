@@ -52,6 +52,10 @@
   align-items: center;
 }
 
+.search-form-icon {
+  margin-right: 10px;
+}
+
 @media (min-width: 450px) {
   .search-form {
     padding: 0 20px;
