@@ -35,3 +35,17 @@
     padding: 20px;
   }
 }
+
+.teamSearch-country {
+  display: flex;
+  margin-bottom: 10px;
+  border: 1px solid #f4a340;
+  height: 75px;
+}
+
+.teamSearch-country-flag {
+  width: 100px;
+}
+
+.teamSearch-country-name {
+}

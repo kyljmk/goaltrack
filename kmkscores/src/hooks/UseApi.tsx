@@ -16,6 +16,7 @@ import {
 import {
   DailyFixture,
   FixtureResponse,
+  ICountry,
   IFixtureDetails,
   ILeagueDetails,
   ILeagueInfo,
@@ -311,3 +312,32 @@ export const useApiGetFavouriteLeagues = () => {
 
   return favouriteLeaguesInfo;
 };
+
+export const useApiGetCountries = () => {
+  const [countries, setCountries] = useState<ICountry[]>([]);
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  const fetchApi = async () => {
+    const response = await fetch(
+      "https://api-football-v1.p.rapidapi.com/v3/countries",
+      options
+    );
+    const data = await response.json();
+    setCountries(data.response);
+  };
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
+  return countries;
+};
+
+export const useApiGetTeams = (country: string) => {};

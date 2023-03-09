@@ -7,6 +7,9 @@ import {
   faStar,
   faMessage,
   faShirt,
+  faHome,
+  faHouse,
+  faHomeAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +23,17 @@ function Menu({ menu, dropdown }: IMenuProps) {
       className={dropdown ? "header-dropdown" : "menu"}
     >
       <li style={{ height: "90px" }}></li>
+      <li
+        className="header-dropdown-item-container"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <div className="header-dropdown-item">
+          <FontAwesomeIcon className="menu-icon" icon={faHome} />
+          <span>Home</span>
+        </div>
+      </li>
       <li
         className="header-dropdown-item-container"
         onClick={() => {

@@ -548,3 +548,9 @@ export interface ILeagueInfo {
 export interface ISearchProps {
   isLeague: boolean;
 }
+
+export interface ICountry {
+  name: string;
+  code: string;
+  flag: string;
+}

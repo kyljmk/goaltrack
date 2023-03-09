@@ -23,10 +23,10 @@ function Teams() {
         <div className="teams-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="teams">
             <h1 className="teams-title">Teams</h1>
-            {/* {id ? <TeamInfo /> : <TeamSearch />} */}
-            <span>
+            {id ? <TeamInfo /> : <TeamSearch />}
+            {/* <span>
               This feature is currently under construction and coming soon.
-            </span>
+            </span> */}
           </div>
         </div>
       </div>
