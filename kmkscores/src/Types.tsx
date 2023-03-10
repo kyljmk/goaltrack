@@ -1,3 +1,4 @@
+import { type } from "os";
 import { Dispatch, SetStateAction } from "react";
 
 // export interface ITeamInfo {
@@ -558,4 +559,98 @@ export interface ICountry {
 export interface ITeamSearchProps {
   country: string | null;
   setCountry: Dispatch<SetStateAction<string | null>>;
+  setTeamInfo: Dispatch<SetStateAction<ITeamInfo | undefined>>;
+}
+
+export interface ITeamStatsResponse {
+  biggest: {
+    goals: {
+      against: Score;
+      for: Score;
+    };
+    loses: {
+      away: string | null;
+      home: string | null;
+    };
+    streak: {
+      draws: number | null;
+      loses: number | null;
+      wins: number | null;
+    };
+    wins: {
+      away: string;
+      home: string;
+    };
+  };
+  cards: {
+    red: MinutesStats;
+    yellow: MinutesStats;
+  };
+  clean_sheets: HomeAwayTotal;
+  failed_to_score: HomeAwayTotal;
+  fixtures: {
+    draws: HomeAwayTotal;
+    loses: HomeAwayTotal;
+    played: HomeAwayTotal;
+    wins: HomeAwayTotal;
+  };
+  form: string;
+  goals: {
+    against: {
+      average: {
+        home: string;
+        away: string;
+        total: string;
+      };
+      minutes: MinutesStats;
+      total: HomeAwayTotal;
+    };
+    home: {
+      average: {
+        home: string;
+        away: string;
+        total: string;
+      };
+      minutes: MinutesStats;
+      total: HomeAwayTotal;
+    };
+  };
+  league: {
+    country: string;
+    flag: string;
+    id: number;
+    logo: string;
+    name: string;
+    season: number;
+  };
+  lineups: {
+    formation: string;
+    played: number;
+  }[];
+  penalty: {
+    missed: {
+      percentage: string;
+      total: number;
+    };
+    scored: {
+      percentage: string;
+      total: number;
+    };
+    total: number | null;
+  };
+  team: {
+    id: number;
+    logo: string;
+    name: string;
+  };
+}
+
+export type HomeAwayTotal = {
+  home: number | null;
+  away: number | null;
+  total: number | null;
+};
+
+export interface ITeamInfoProps {
+  teamInfo: ITeamInfo | undefined;
 }

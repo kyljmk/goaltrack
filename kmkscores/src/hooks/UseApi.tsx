@@ -23,7 +23,9 @@ import {
   ILeagueTable,
   InfoContextType,
   ITeamInfo,
+  ITeamStatsResponse,
 } from "../Types";
+import { useCurrentSeason } from "./UseCurrentYear";
 import useInfo from "./UseInfo";
 
 export const useApiGetGame = (fixtureId: number) => {
@@ -61,6 +63,7 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
     useState<FixtureResponse[]>(blankFixtureResponse);
   const [loadingTeams, setLoadingTeams] = useState<boolean>(false);
   const { favouriteTeams } = useInfo() as InfoContextType;
+  const season = useCurrentSeason();
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -90,7 +93,7 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
       })
       .map(async (i) => {
         const response = await fetch(
-          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=2022`,
+          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=${season}`,
           options
         );
         const data = await response.json();
@@ -110,6 +113,7 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
   >([blankFixtureResponse]);
   const [loadingLeagues, setLoadingLeagues] = useState<boolean>(false);
   const { favouriteLeagues } = useInfo() as InfoContextType;
+  const season = useCurrentSeason();
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -136,7 +140,7 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
       })
       .map(async (i) => {
         const response = await fetch(
-          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&league=${i}&season=2022`,
+          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&league=${i}&season=${season}`,
           options
         );
         const data = await response.json();
@@ -183,6 +187,7 @@ export const useApiGetLeagues = () => {
   const [leaguesLoading, setLeaguesLoading] = useState<boolean>(false);
   const [leagues, setLeagues] = useState<ILeagueDetails[]>(tempLeagues);
   const [cups, setCups] = useState<ILeagueDetails[]>(tempCups);
+  const season = useCurrentSeason();
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -196,7 +201,7 @@ export const useApiGetLeagues = () => {
   const fetchApi = async (option: string) => {
     setLeaguesLoading(true);
     const response = await fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/leagues?season=2022&type=${option}`,
+      `https://api-football-v1.p.rapidapi.com/v3/leagues?season=${season}&type=${option}`,
       options
     );
     const data = await response.json();
@@ -217,6 +222,7 @@ export const useApiGetLeagueTable = (id: number) => {
   const [leagueTable, setLeagueTable] = useState<ILeagueTable[]>([
     tempLeagueTable,
   ]);
+  const season = useCurrentSeason();
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -230,7 +236,7 @@ export const useApiGetLeagueTable = (id: number) => {
   const fetchApi = async () => {
     setLoading(true);
     const response = await fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=${id}`,
+      `https://api-football-v1.p.rapidapi.com/v3/standings?season=${season}&league=${id}`,
       options
     );
     const data = await response.json();
@@ -283,6 +289,8 @@ export const useApiGetFavouriteLeagues = () => {
   const [favouriteLeaguesInfo, setFavouriteLeaguesInfo] = useState<
     ILeagueInfo[]
   >([]);
+  const season = useCurrentSeason();
+
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
     method: "GET",
@@ -301,7 +309,7 @@ export const useApiGetFavouriteLeagues = () => {
   const fetchApi = () => {
     const data = favouriteLeagues.map(async (i) => {
       const response = await fetch(
-        `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${i}&&season=2022`,
+        `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${i}&&season=${season}`,
         options
       );
       const data = await response.json();
@@ -340,8 +348,10 @@ export const useApiGetCountries = () => {
   return countries;
 };
 
-export const useApiGetTeamInfo = (id: number) => {
-  const [teamInfo, setTeamInfo] = useState<ITeamInfo[]>([]);
+export const useApiGetTeamStats = (teamId: number, leagueId: number) => {
+  const [teamStats, setTeamStats] = useState<ITeamStatsResponse>();
+  const season = useCurrentSeason();
+
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
     method: "GET",
@@ -353,16 +363,16 @@ export const useApiGetTeamInfo = (id: number) => {
 
   const fetchApi = async () => {
     const resposne = await fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`,
+      `https://api-football-v1.p.rapidapi.com/v3/teams/statistics?league=${leagueId}&season=${season}&id=${teamId}`,
       options
     );
     const data = await resposne.json();
-    setTeamInfo(data.response);
+    setTeamStats(data.response);
   };
 
   useEffect(() => {
     fetchApi();
   }, []);
 
-  return;
+  return teamStats;
 };

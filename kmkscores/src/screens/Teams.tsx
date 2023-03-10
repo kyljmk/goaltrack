@@ -7,6 +7,7 @@ import TeamInfo from "../components/TeamInfo";
 import TeamSearch from "../components/TeamSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { ITeamInfo } from "../Types";
 
 function Teams() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -16,6 +17,7 @@ function Teams() {
   const [country, setCountry] = useState<string | null>(
     searchParams.get("country")
   );
+  const [teamInfo, setTeamInfo] = useState<ITeamInfo>();
 
   const navigate = useNavigate();
 
@@ -43,9 +45,13 @@ function Teams() {
               </div>
             </div>
             {id ? (
-              <TeamInfo />
+              <TeamInfo teamInfo={teamInfo} />
             ) : (
-              <TeamSearch country={country} setCountry={setCountry} />
+              <TeamSearch
+                country={country}
+                setCountry={setCountry}
+                setTeamInfo={setTeamInfo}
+              />
             )}
           </div>
         </div>

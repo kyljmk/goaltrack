@@ -62,7 +62,7 @@ function Lineups({ lineups }: ILineUpProps) {
       );
     });
 
-    const subAwayElements = lineups[1]?.startXI.map((x) => {
+    const subAwayElements = lineups[1]?.substitutes.map((x) => {
       return (
         <div key={x.player.number} className="startLineups-away-player">
           <span className="startLineups-away-player-name">{x.player.name}</span>

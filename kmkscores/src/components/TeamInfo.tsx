@@ -1,7 +1,8 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { ITeamInfo, ITeamInfoProps } from "../Types";
 
-function TeamInfo() {
+function TeamInfo({ teamInfo }: ITeamInfoProps) {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
 

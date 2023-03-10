@@ -35,8 +35,10 @@
 
 .stat-bar-home {
   height: 10px;
+  border-radius: 5px;
 }
 
 .stat-bar-away {
   height: 10px;
+  border-radius: 5px;
 }

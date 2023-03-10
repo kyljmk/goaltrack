@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import LeagueSearch from "../components/LeagueSearch";
 import LeagueTable from "../components/LeagueTable";
 import Menu from "../components/Menu";
+import { useCurrentSeason } from "../hooks/UseCurrentYear";
 import "../styles/Leagues.css";
 
 function Leagues() {
@@ -14,6 +15,8 @@ function Leagues() {
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
+
+  console.log(useCurrentSeason());
 
   return (
     <div className="App">

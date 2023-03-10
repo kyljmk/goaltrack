@@ -10,7 +10,7 @@ import {
   ITeamSearchProps,
 } from "../Types";
 
-function TeamSearch({ country, setCountry }: ITeamSearchProps) {
+function TeamSearch({ country, setCountry, setTeamInfo }: ITeamSearchProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const countries = useApiGetCountries();
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
@@ -115,7 +115,10 @@ function TeamSearch({ country, setCountry }: ITeamSearchProps) {
     return (
       <div
         className="teamSearch-team"
-        onClick={() => navigate(`/teams?id=${team.team.id}`)}
+        onClick={() => {
+          navigate(`/teams?id=${team.team.id}`);
+          setTeamInfo(team);
+        }}
         key={team.team.id}
       >
         <img
