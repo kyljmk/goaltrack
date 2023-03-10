@@ -644,3 +644,11 @@ export type HomeAwayTotal = {
   away: number | null;
   total: number | null;
 };
+
+export interface ILeagueTableProps {
+  id: number;
+}
+
+export interface ITeamInfoProps {
+  id: number;
+}

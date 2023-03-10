@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApiGetLeagueTable } from "../hooks/UseApi";
+import { ILeagueInfo, ILeagueTableProps } from "../Types";
 
-function LeagueTable() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const id = searchParams.get("id");
-  const { leagueTable, loading } = useApiGetLeagueTable(Number(id));
+function LeagueTable({ id }: ILeagueTableProps) {
+  const { leagueTable } = useApiGetLeagueTable(id);
 
   const navigate = useNavigate();
+
+  console.log(leagueTable);
 
   const tableElements = leagueTable[0].league.standings[0].map((team) => {
     const regExArray = team.form.match(/.{1,1}/g);

@@ -16,8 +16,6 @@ function Leagues() {
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
 
-  console.log(useCurrentSeason());
-
   return (
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />
@@ -39,7 +37,7 @@ function Leagues() {
                 </div>
               )}
             </div>
-            {id ? <LeagueTable /> : <LeagueSearch />}
+            {id ? <LeagueTable id={id} /> : <LeagueSearch />}
           </div>
         </div>
       </div>

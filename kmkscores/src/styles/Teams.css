@@ -159,10 +159,11 @@
 }
 
 .teams-option {
-  border: 2px solid #f4a340;
+  border: 2px solid grey;
+  color: grey;
   padding: 3px 8px;
   border-radius: 20px;
-  cursor: pointer;
+  cursor: default;
 }
 
 .teams-option-selected {
