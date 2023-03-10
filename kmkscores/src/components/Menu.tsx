@@ -14,7 +14,7 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function Menu({ menu, dropdown }: IMenuProps) {
+function Menu({ menu, dropdown, setMenu }: IMenuProps) {
   const navigate = useNavigate();
 
   return (
@@ -27,6 +27,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
         className="header-dropdown-item-container"
         onClick={() => {
           navigate("/");
+          setMenu(false);
         }}
       >
         <div className="header-dropdown-item">
@@ -38,6 +39,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
         className="header-dropdown-item-container"
         onClick={() => {
           navigate("/favourites");
+          setMenu(false);
         }}
       >
         <div className="header-dropdown-item">
@@ -49,6 +51,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
         className="header-dropdown-item-container"
         onClick={() => {
           navigate("/leagues");
+          setMenu(false);
         }}
       >
         <div className="header-dropdown-item">
@@ -60,6 +63,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
         className="header-dropdown-item-container"
         onClick={() => {
           navigate("/teams");
+          setMenu(false);
         }}
       >
         <div className="header-dropdown-item">
@@ -71,6 +75,7 @@ function Menu({ menu, dropdown }: IMenuProps) {
         className="header-dropdown-item-container"
         onClick={() => {
           navigate("/contact");
+          setMenu(false);
         }}
       >
         <div className="header-dropdown-item">

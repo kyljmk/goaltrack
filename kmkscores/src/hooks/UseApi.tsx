@@ -348,10 +348,8 @@ export const useApiGetCountries = () => {
   return countries;
 };
 
-export const useApiGetTeamStats = (teamId: number, leagueId: number) => {
-  const [teamStats, setTeamStats] = useState<ITeamStatsResponse>();
-  const season = useCurrentSeason();
-
+export const useApiGetTeamInfo = (id: number) => {
+  const [teamInfo, setTeamInfo] = useState<ITeamInfo>();
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
     method: "GET",
@@ -363,16 +361,16 @@ export const useApiGetTeamStats = (teamId: number, leagueId: number) => {
 
   const fetchApi = async () => {
     const resposne = await fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/teams/statistics?league=${leagueId}&season=${season}&id=${teamId}`,
+      `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`,
       options
     );
     const data = await resposne.json();
-    setTeamStats(data.response);
+    setTeamInfo(data.response[0]);
   };
 
   useEffect(() => {
     fetchApi();
   }, []);
 
-  return teamStats;
+  return teamInfo;
 };

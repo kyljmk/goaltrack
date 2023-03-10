@@ -17,7 +17,6 @@ function Teams() {
   const [country, setCountry] = useState<string | null>(
     searchParams.get("country")
   );
-  const [teamInfo, setTeamInfo] = useState<ITeamInfo>();
 
   const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ function Teams() {
         className="menu-container"
         style={{ pointerEvents: menu ? "none" : "auto" }}
       >
-        <Menu menu={true} dropdown={false} />
+        <Menu menu={true} dropdown={false} setMenu={setMenu} />
         <div className="teams-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="teams">
             <div className="teams-title-container">
@@ -45,13 +44,9 @@ function Teams() {
               </div>
             </div>
             {id ? (
-              <TeamInfo teamInfo={teamInfo} />
+              <TeamInfo />
             ) : (
-              <TeamSearch
-                country={country}
-                setCountry={setCountry}
-                setTeamInfo={setTeamInfo}
-              />
+              <TeamSearch country={country} setCountry={setCountry} />
             )}
           </div>
         </div>

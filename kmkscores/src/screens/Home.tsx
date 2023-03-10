@@ -154,7 +154,7 @@ function Home() {
         className="menu-container"
         style={{ pointerEvents: menu ? "none" : "auto" }}
       >
-        <Menu menu={true} dropdown={false} />
+        <Menu menu={true} dropdown={false} setMenu={setMenu} />
         <div
           className="homefixtures-container"
           style={{ opacity: menu ? 0.1 : 1 }}

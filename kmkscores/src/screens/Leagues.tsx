@@ -25,7 +25,7 @@ function Leagues() {
         className="menu-container"
         style={{ pointerEvents: menu ? "none" : "auto" }}
       >
-        <Menu menu={true} dropdown={false} />
+        <Menu menu={true} dropdown={false} setMenu={setMenu} />
         <div className="leagues-container" style={{ opacity: menu ? 0.1 : 1 }}>
           <div className="leagues">
             <div className="leagues-title-container">

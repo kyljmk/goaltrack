@@ -130,7 +130,7 @@ function Favourites() {
         className="menu-container"
         style={{ pointerEvents: menu ? "none" : "auto" }}
       >
-        <Menu menu={true} dropdown={false} />
+        <Menu menu={true} dropdown={false} setMenu={setMenu} />
         <div
           className="favourites-container"
           style={{ opacity: menu ? 0.1 : 1 }}

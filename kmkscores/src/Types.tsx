@@ -119,15 +119,9 @@ export interface IPlayer {
 }
 
 export interface IGameHeaderProps {
-  home: {
-    name: string;
-    logo: string;
-  };
+  home: ITeam;
   homeScore: number | null;
-  away: {
-    name: string;
-    logo: string;
-  };
+  away: ITeam;
   awayScore: number | null;
   matchStatus: string;
   minutesPlayed: number | null;
@@ -297,6 +291,7 @@ export interface IDailyLeagueProps {
 export interface IMenuProps {
   menu: boolean;
   dropdown: boolean;
+  setMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IHeaderProps {
@@ -559,7 +554,6 @@ export interface ICountry {
 export interface ITeamSearchProps {
   country: string | null;
   setCountry: Dispatch<SetStateAction<string | null>>;
-  setTeamInfo: Dispatch<SetStateAction<ITeamInfo | undefined>>;
 }
 
 export interface ITeamStatsResponse {
@@ -650,7 +644,3 @@ export type HomeAwayTotal = {
   away: number | null;
   total: number | null;
 };
-
-export interface ITeamInfoProps {
-  teamInfo: ITeamInfo | undefined;
-}

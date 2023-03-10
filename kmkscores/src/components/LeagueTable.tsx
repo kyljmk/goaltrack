@@ -1,11 +1,13 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApiGetLeagueTable } from "../hooks/UseApi";
 
 function LeagueTable() {
   const [searchParams, setSearchParams] = useSearchParams();
   const id = searchParams.get("id");
   const { leagueTable, loading } = useApiGetLeagueTable(Number(id));
+
+  const navigate = useNavigate();
 
   const tableElements = leagueTable[0].league.standings[0].map((team) => {
     const regExArray = team.form.match(/.{1,1}/g);
@@ -15,7 +17,10 @@ function LeagueTable() {
       <tr className="team-row">
         <td>{team.rank}</td>
         <td>
-          <div className="team-name">
+          <div
+            className="team-name"
+            onClick={() => navigate(`/teams?id=${team.team.id}`)}
+          >
             <div className="logo-container">
               <img
                 src={team.team.logo}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { IGameHeaderProps } from "../Types";
 
 function GameHeader({
@@ -15,7 +16,7 @@ function GameHeader({
   matchStatus,
   minutesPlayed,
 }: IGameHeaderProps) {
-  let timeStamp: string = "";
+  const navigate = useNavigate();
 
   if (country === "England") {
     flag = "https://www.flashscore.com/res/_fs/build/en.e20b07c.png";
@@ -40,6 +41,8 @@ function GameHeader({
     "INT",
     "LIVE",
   ];
+
+  let timeStamp: string = "";
   const gameInProgress: boolean = inProgressStatuses.includes(matchStatus);
   if (matchStatus === "HT" || matchStatus === "FT") {
     timeStamp = matchStatus;
@@ -69,7 +72,10 @@ function GameHeader({
         <span className="game-info-leagueRound">{`${league} | ${refactoredRound}`}</span>
       </div>
       <div className="gameHeader">
-        <div className="game-home">
+        <div
+          className="game-home"
+          onClick={() => navigate(`/teams?id=${home.id}`)}
+        >
           <img
             className="game-home-logo"
             src={home.logo}
@@ -102,7 +108,10 @@ function GameHeader({
             {date}
           </span>
         </div>
-        <div className="game-away">
+        <div
+          className="game-away"
+          onClick={() => navigate(`/teams?id=${away.id}`)}
+        >
           <img
             className="game-away-logo"
             src={away.logo}

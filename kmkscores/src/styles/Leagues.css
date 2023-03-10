@@ -228,6 +228,7 @@ td {
 .team-name {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .team-name-text {

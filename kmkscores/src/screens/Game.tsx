@@ -84,7 +84,7 @@ function Game() {
     <div className="App">
       <Header menu={menu} setMenu={setMenu} />
       <div className="menu-container">
-        <Menu menu={true} dropdown={false} />
+        <Menu menu={true} dropdown={false} setMenu={setMenu} />
         <div className="gameContainer">
           {loadingGame === true ? (
             <div>

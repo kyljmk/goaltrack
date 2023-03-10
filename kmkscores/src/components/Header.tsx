@@ -20,7 +20,7 @@ function Header({ menu, setMenu }: IHeaderProps) {
   };
   return (
     <div className="header-container">
-      <Menu menu={menu} dropdown={true} />
+      <Menu menu={menu} dropdown={true} setMenu={setMenu} />
       <div className="header">
         <FontAwesomeIcon
           className="header-menuIcon"

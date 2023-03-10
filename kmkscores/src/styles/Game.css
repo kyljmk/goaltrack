@@ -60,9 +60,15 @@
   width: 33.3%;
 }
 
+.game-home,
+.game-away {
+  cursor: pointer;
+}
+
 .game-home-logo,
 .game-away-logo {
   height: 100px;
+
   margin-bottom: 10px;
   background-color: white;
   border-radius: 15px;
