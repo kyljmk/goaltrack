@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useApiGetTeamInfo } from "../hooks/UseApi";
+import {
+  useApiGetTeamFixturesResults,
+  useApiGetTeamInfo,
+} from "../hooks/UseApi";
+import { FixtureResponse } from "../Types";
 import LeagueTable from "./LeagueTable";
 import TeamFixtures from "./TeamFixtures";
 import TeamResults from "./TeamResults";
@@ -12,6 +16,17 @@ function TeamInfo() {
   const [options, setOptions] = useState<number>(0);
 
   const teamInfo = useApiGetTeamInfo(id);
+  const teamFixturesResults: FixtureResponse[] =
+    useApiGetTeamFixturesResults(id);
+  const todaysDate = new Date().toISOString();
+
+  // greater than new Date === fixture
+  const teamFixtures = teamFixturesResults?.filter(
+    (fixture) => fixture.fixture.date > todaysDate
+  );
+  const teamResults = teamFixturesResults?.filter(
+    (fixture) => fixture.fixture.date < todaysDate
+  );
 
   return (
     <div>
@@ -52,7 +67,7 @@ function TeamInfo() {
           Squad
         </div>
       </div>
-      {options === 0 && <TeamResults id={id} />}
+      {options === 0 && <TeamResults teamResults={teamResults} id={id} />}
       {options === 1 && <TeamFixtures />}
       {options === 2 && <LeagueTable id={39} />}
       {options === 3 && <TeamSquad />}

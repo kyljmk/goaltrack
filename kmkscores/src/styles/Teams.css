@@ -130,6 +130,7 @@
 
 .teamHeader {
   display: flex;
+  align-items: center;
 }
 
 .teamHeader-logo {
@@ -173,4 +174,32 @@
   background-color: #f4a340;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.team-result {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  border-bottom: 1px solid #f4a340;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.team-result-names,
+.team-result-scores {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-result-names {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.team-result-matchResult {
+  margin-left: 20px;
+  color: black;
+  padding: 3px 8px;
+  border-radius: 10px;
 }

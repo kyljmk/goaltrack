@@ -649,6 +649,7 @@ export interface ILeagueTableProps {
   id: number;
 }
 
-export interface ITeamInfoProps {
+export interface ITeamResultsProps {
+  teamResults: FixtureResponse[];
   id: number;
 }
