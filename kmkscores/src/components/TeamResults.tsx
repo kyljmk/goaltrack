@@ -1,8 +1,11 @@
 import { match } from "assert";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FixtureResponse, ITeamResultsProps } from "../Types";
 
 function TeamResults({ teamResults, id }: ITeamResultsProps) {
+  const navigate = useNavigate();
+
   function compare(a: FixtureResponse, b: FixtureResponse) {
     if (a.fixture.date < b.fixture.date) {
       return 1;
@@ -20,10 +23,10 @@ function TeamResults({ teamResults, id }: ITeamResultsProps) {
     let backgroundColor = "";
     if (team.winner) {
       matchResult = "Win";
-      backgroundColor = "green";
+      backgroundColor = "darkgreen";
     } else if (opposition.winner) {
       matchResult = "Loss";
-      backgroundColor = "red";
+      backgroundColor = "darkred";
     } else {
       matchResult = "Draw";
       backgroundColor = "#f4a340";
@@ -33,14 +36,33 @@ function TeamResults({ teamResults, id }: ITeamResultsProps) {
     const day = t.fixture.date.slice(8, 10);
 
     return (
-      <div key={t.fixture.id} className="team-result">
+      <div
+        key={t.fixture.id}
+        className="team-result"
+        onClick={() => navigate(`/game?id=${t.fixture.id}`)}
+      >
         <span>{`${day}.${month}`}</span>
+
         <div className="team-result-names">
-          <span style={{ marginBottom: "5px" }}>{t.teams.home.name}</span>
-          <span>{t.teams.away.name}</span>
+          <div className="team-result-nameContainer">
+            <img
+              src={t.teams.home.logo}
+              alt="team logo"
+              className="team-result-logo"
+            />
+            <span>{t.teams.home.name}</span>
+          </div>
+          <div className="team-result-nameContainer">
+            <img
+              src={t.teams.away.logo}
+              alt="team logo"
+              className="team-result-logo"
+            />
+            <span>{t.teams.away.name}</span>
+          </div>
         </div>
         <div className="team-result-scores">
-          <span style={{ marginBottom: "5px" }}>{t.goals.home}</span>
+          <span>{t.goals.home}</span>
           <span>{t.goals.away}</span>
         </div>
         <span style={{ backgroundColor }} className="team-result-matchResult">
