@@ -160,6 +160,14 @@
 }
 
 .teams-option {
+  border: 2px solid #f4a340;
+  color: #f4a340;
+  padding: 3px 8px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.teams-option-notReady {
   border: 2px solid grey;
   color: grey;
   padding: 3px 8px;
@@ -173,18 +181,53 @@
   color: black;
   background-color: #f4a340;
   border-radius: 20px;
-  cursor: pointer;
+  cursor: default;
+}
+
+.team-resultContainer {
+  display: flex;
+  align-items: center;
 }
 
 .team-result {
-  display: flex;
-  align-items: center;
   margin-top: 15px;
   border: 2px solid #f4a340;
   padding: 10px;
   border-radius: 10px;
   text-align: left;
   cursor: pointer;
+}
+
+.team-result-leagueLogo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2px;
+  margin-right: 10px;
+}
+
+.team-result-leagueContainer {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f4a340;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.team-result-leagueNameContainer {
+  display: flex;
+  align-items: center;
+}
+
+.team-result-leagueName {
+  font-size: 14px;
+}
+
+.team-result-leagueFlag {
+  height: 12px;
+  margin-left: 5px;
 }
 
 .team-result-date {
@@ -201,6 +244,8 @@
 .team-result-nameContainer {
   display: flex;
   align-items: center;
+}
+.team-result-nameContainer:first-child {
   margin-bottom: 5px;
 }
 

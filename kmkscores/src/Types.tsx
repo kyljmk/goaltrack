@@ -652,4 +652,5 @@ export interface ILeagueTableProps {
 export interface ITeamResultsProps {
   teamResults: FixtureResponse[];
   id: number;
+  resultsFixtures: string;
 }

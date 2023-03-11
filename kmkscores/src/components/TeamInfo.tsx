@@ -6,8 +6,7 @@ import {
 } from "../hooks/UseApi";
 import { FixtureResponse } from "../Types";
 import LeagueTable from "./LeagueTable";
-import TeamFixtures from "./TeamFixtures";
-import TeamResults from "./TeamResults";
+import TeamResultsFixtures from "./TeamResultsFixtures";
 import TeamSquad from "./TeamSquad";
 
 function TeamInfo() {
@@ -50,25 +49,41 @@ function TeamInfo() {
         </div>
         <div
           className={options === 1 ? "teams-option-selected" : "teams-option"}
-          // onClick={() => setOptions(1)}
+          onClick={() => setOptions(1)}
         >
           Fixtures
         </div>
         <div
-          className={options === 2 ? "teams-option-selected" : "teams-option"}
+          className={
+            options === 2 ? "teams-option-selected" : "teams-option-notReady"
+          }
           // onClick={() => setOptions(2)}
         >
           Standings
         </div>
         <div
-          className={options === 3 ? "teams-option-selected" : "teams-option"}
+          className={
+            options === 3 ? "teams-option-selected" : "teams-option-notReady"
+          }
           // onClick={() => setOptions(3)}
         >
           Squad
         </div>
       </div>
-      {options === 0 && <TeamResults teamResults={teamResults} id={id} />}
-      {options === 1 && <TeamFixtures />}
+      {options === 0 && (
+        <TeamResultsFixtures
+          teamResults={teamResults}
+          id={id}
+          resultsFixtures={"results"}
+        />
+      )}
+      {options === 1 && (
+        <TeamResultsFixtures
+          teamResults={teamFixtures}
+          id={id}
+          resultsFixtures={"fixtures"}
+        />
+      )}
       {options === 2 && <LeagueTable id={39} />}
       {options === 3 && <TeamSquad />}
     </div>
