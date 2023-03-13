@@ -1,11 +1,13 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApiGetCountries } from "../hooks/UseApi";
+import useInfo from "../hooks/UseInfo";
 import {
   ICountry,
   ILeagueDetails,
+  InfoContextType,
   ITeamInfo,
   ITeamSearchProps,
 } from "../Types";
@@ -16,6 +18,7 @@ function TeamSearch({ country, setCountry }: ITeamSearchProps) {
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
   const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
   const [flag, setFlag] = useState<string>("");
+  const { favouriteTeams, setFavouriteTeams } = useInfo() as InfoContextType;
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -111,21 +114,39 @@ function TeamSearch({ country, setCountry }: ITeamSearchProps) {
     );
   });
 
+  const handleFavToggle = (id: number) => {
+    if (favouriteTeams.includes(id)) {
+      setFavouriteTeams(favouriteTeams.filter((item) => item !== id));
+    } else {
+      setFavouriteTeams((prev) => [...prev, id].sort((a, b) => a - b));
+    }
+  };
+
   const teamElements = filteredTeams.map((team: ITeamInfo) => {
     return (
-      <div
-        className="teamSearch-team"
-        onClick={() => {
-          navigate(`/teams?id=${team.team.id}`);
-        }}
-        key={team.team.id}
-      >
-        <img
-          className="teamSearch-team-logo"
-          src={team.team.logo}
-          alt="team logo"
-        />
-        <span className="teamSearch-team-name">{team.team.name}</span>
+      <div className="teamSearch-team" key={team.team.id}>
+        <div
+          onClick={() => {
+            navigate(`/teams?id=${team.team.id}`);
+          }}
+        >
+          <img
+            className="teamSearch-team-logo"
+            src={team.team.logo}
+            alt="team logo"
+          />
+          <span className="teamSearch-team-name">{team.team.name}</span>
+        </div>
+        <div
+          onClick={() => handleFavToggle(team.team.id)}
+          className={
+            favouriteTeams.includes(team.team.id)
+              ? "teamSearch-star-container"
+              : "teamSearch-star-container-unselected"
+          }
+        >
+          <FontAwesomeIcon icon={faStar} />
+        </div>
       </div>
     );
   });

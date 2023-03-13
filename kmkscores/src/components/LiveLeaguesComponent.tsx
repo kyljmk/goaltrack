@@ -46,11 +46,13 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
   return (
     <div className="league">
       <div className="league-header">
-        <img
-          className="league-header-image"
-          src={fixtures[0].league.logo}
-          alt="logo of selected league"
-        />
+        <div className="league-header-imageContainer">
+          <img
+            className="league-header-image"
+            src={fixtures[0].league.logo}
+            alt="logo of selected league"
+          />
+        </div>
         <div className="league-header-title-container">
           <h2 className="league-header-title" onClick={handleClick}>
             {fixtures[0].league.name}

@@ -150,7 +150,7 @@ function Game() {
                 </div>
               </div>
               {options === 0 &&
-                (fixtureDetails.events?.length === 0 ? (
+                (fixture.status.short === "NS" ? (
                   <div className="game-prematchMessage">
                     The match hasn't kicked off yet.
                   </div>
@@ -181,7 +181,7 @@ function Game() {
                   </div>
                 ))}
               {options === 1 &&
-                (fixtureDetails.statistics?.length === 0 ? (
+                (fixture.status.short === "NS" ? (
                   <div className="game-prematchMessage">
                     The match hasn't kicked off yet.
                   </div>

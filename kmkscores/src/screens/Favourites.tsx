@@ -47,7 +47,7 @@ function Favourites() {
               <img
                 src={team.team.logo}
                 alt="Team's logo"
-                className="team-logo"
+                className="favTeam-logo"
               />
             </div>
             <span className="team-name">{team.team.name}</span>
@@ -64,7 +64,7 @@ function Favourites() {
   if (favouriteTeams.length === 0) {
     favTeamsElements = (
       <div className="team-empty">
-        <span>You have to add your favourite leagues.</span>
+        <span>You have to add your favourite teams.</span>
         <div onClick={() => navigate("/teams")} className="addFavourite">
           <span>+</span>
         </div>

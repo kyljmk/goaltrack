@@ -78,20 +78,15 @@
   cursor: pointer;
 }
 
-.team-logoContainer,
-.league-logoContainer {
-  margin-right: 10px;
-  background-color: lightgray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border-radius: 15px;
-}
-
-.team-logo,
+.favTeam-logo,
 .league-logo {
-  width: 30px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 15px;
+  margin-right: 10px;
+  background-color: white;
+  padding: 5px;
 }
 
 .team-name,
