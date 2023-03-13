@@ -1,10 +1,13 @@
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   useApiGetTeamFixturesResults,
   useApiGetTeamInfo,
 } from "../hooks/UseApi";
-import { FixtureResponse } from "../Types";
+import useInfo from "../hooks/UseInfo";
+import { FixtureResponse, InfoContextType } from "../Types";
 import LeagueTable from "./LeagueTable";
 import TeamResultsFixtures from "./TeamResultsFixtures";
 import TeamSquad from "./TeamSquad";
@@ -13,6 +16,7 @@ function TeamInfo() {
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
   const [options, setOptions] = useState<number>(0);
+  const { favouriteTeams, setFavouriteTeams } = useInfo() as InfoContextType;
 
   const teamInfo = useApiGetTeamInfo(id);
   const teamFixturesResults: FixtureResponse[] =
@@ -26,6 +30,13 @@ function TeamInfo() {
   const teamResults = teamFixturesResults?.filter(
     (fixture) => fixture.fixture.date < todaysDate
   );
+  const handleFavToggle = (id: number) => {
+    if (favouriteTeams.includes(id)) {
+      setFavouriteTeams(favouriteTeams.filter((item) => item !== id));
+    } else {
+      setFavouriteTeams((prev) => [...prev, id].sort((a, b) => a - b));
+    }
+  };
 
   return (
     <div>
@@ -38,6 +49,16 @@ function TeamInfo() {
         <div className="teamHeader-nameContainer">
           <h1 className="teamHeader-name">{teamInfo?.team.name}</h1>
           <div> ({teamInfo?.team.country}) </div>
+        </div>
+        <div
+          onClick={() => handleFavToggle(id)}
+          className={
+            favouriteTeams.includes(id)
+              ? "teamHeader-star-selected"
+              : "teamHeader-star-unselected"
+          }
+        >
+          <FontAwesomeIcon icon={faStar} size="2xl" />
         </div>
       </div>
       <div className="teams-optionsContainer">

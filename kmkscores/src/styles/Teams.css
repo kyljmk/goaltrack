@@ -162,6 +162,15 @@
   margin: 0 0 10px 0;
 }
 
+.teamHeader-star-selected {
+  cursor: pointer;
+}
+
+.teamHeader-star-unselected {
+  cursor: pointer;
+  color: gray;
+}
+
 .teams-optionsContainer {
   display: flex;
   align-items: center;

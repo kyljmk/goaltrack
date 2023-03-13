@@ -554,6 +554,10 @@ export interface ICountry {
 export interface ITeamSearchProps {
   country: string | null;
   setCountry: Dispatch<SetStateAction<string | null>>;
+  searchQuery: string;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+  filteredTeams: ITeamInfo[];
+  setFilteredTeams: Dispatch<SetStateAction<ITeamInfo[]>>;
 }
 
 export interface ITeamStatsResponse {

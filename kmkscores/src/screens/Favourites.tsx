@@ -36,12 +36,23 @@ function Favourites() {
   let favTeamsElements: JSX.Element[] | ReactElement = favouriteTeamsInfo.map(
     (team) => {
       const handleClick = () => {
-        setFavouriteTeams(
-          favouriteTeams.filter((item) => item !== team.team.id)
-        );
+        if (favouriteTeams.includes(team.team.id)) {
+          setFavouriteTeams(
+            favouriteTeams.filter((item) => item !== team.team.id)
+          );
+        } else {
+          setFavouriteTeams((prev) =>
+            [...prev, team.team.id].sort((a, b) => a - b)
+          );
+        }
       };
       return (
-        <div key={team.team.id} className="team">
+        <div
+          key={team.team.id}
+          className={
+            favouriteTeams.includes(team.team.id) ? "team" : "team-unselected"
+          }
+        >
           <div className="teamInfo-container">
             <div className="team-logoContainer">
               <img

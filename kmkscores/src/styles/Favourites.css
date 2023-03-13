@@ -47,7 +47,8 @@
   margin-bottom: 10px;
 }
 
-.favLeague-unselected {
+.favLeague-unselected,
+.team-unselected {
   display: flex;
   width: 100%;
   border: 1px dashed grey;

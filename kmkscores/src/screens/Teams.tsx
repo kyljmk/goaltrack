@@ -17,12 +17,16 @@ function Teams() {
   const [country, setCountry] = useState<string | null>(
     searchParams.get("country")
   );
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
 
   const navigate = useNavigate();
 
   const handleReturn = () => {
     navigate("/teams");
     setCountry("");
+    setSearchQuery("");
+    setFilteredTeams([]);
   };
 
   return (
@@ -46,7 +50,14 @@ function Teams() {
             {id ? (
               <TeamInfo />
             ) : (
-              <TeamSearch country={country} setCountry={setCountry} />
+              <TeamSearch
+                country={country}
+                setCountry={setCountry}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                filteredTeams={filteredTeams}
+                setFilteredTeams={setFilteredTeams}
+              />
             )}
           </div>
         </div>

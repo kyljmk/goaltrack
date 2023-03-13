@@ -12,11 +12,17 @@ import {
   ITeamSearchProps,
 } from "../Types";
 
-function TeamSearch({ country, setCountry }: ITeamSearchProps) {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+function TeamSearch({
+  country,
+  setCountry,
+  searchQuery,
+  setSearchQuery,
+  filteredTeams,
+  setFilteredTeams,
+}: ITeamSearchProps) {
   const countries = useApiGetCountries();
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
-  const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
+
   const [flag, setFlag] = useState<string>("");
   const { favouriteTeams, setFavouriteTeams } = useInfo() as InfoContextType;
 
@@ -124,7 +130,7 @@ function TeamSearch({ country, setCountry }: ITeamSearchProps) {
 
   const teamElements = filteredTeams.map((team: ITeamInfo) => {
     return (
-      <div className="teamSearch-team" key={team.team.id}>
+      <div className="teamSearch-team" key={team.team.name}>
         <div
           onClick={() => {
             navigate(`/teams?id=${team.team.id}`);
