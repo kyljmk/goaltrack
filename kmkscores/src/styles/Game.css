@@ -68,11 +68,20 @@
 .game-home-logo,
 .game-away-logo {
   height: 100px;
+  width: 100px;
+  object-fit: contain;
+}
 
-  margin-bottom: 10px;
+.game-home-logoContainer,
+.game-away-logoContainer {
+  height: 100px;
+  width: 100px;
   background-color: white;
-  border-radius: 15px;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 850px) {

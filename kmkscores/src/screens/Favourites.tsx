@@ -53,7 +53,10 @@ function Favourites() {
             favouriteTeams.includes(team.team.id) ? "team" : "team-unselected"
           }
         >
-          <div className="teamInfo-container">
+          <div
+            className="teamInfo-container"
+            onClick={() => navigate(`/teams?id=${team.team.id}`)}
+          >
             <div className="team-logoContainer">
               <img
                 src={team.team.logo}
@@ -105,7 +108,10 @@ function Favourites() {
               : "favLeague-unselected"
           }
         >
-          <div className="leagueInfo-container">
+          <div
+            className="leagueInfo-container"
+            onClick={() => navigate(`/leagues?id=${league.league.id}`)}
+          >
             <div className="league-logoContainer">
               <img
                 src={league.league.logo}

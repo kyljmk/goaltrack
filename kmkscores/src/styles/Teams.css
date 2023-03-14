@@ -81,7 +81,7 @@
 }
 
 .search-input:focus::placeholder {
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
 .search-input:focus {
@@ -289,7 +289,8 @@
 
 @media (max-width: 450px) {
   .teams-option,
-  .teams-option-selected {
+  .teams-option-selected,
+  .teams-option-notReady {
     font-size: 12px;
   }
 

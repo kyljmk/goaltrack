@@ -53,7 +53,7 @@ function GameHeader({
   }
 
   const date: string = dateTime.slice(0, 10);
-  const refactoredRound: string = round.includes("-")
+  const refactoredRound: string = round.includes("Regular Season")
     ? `Round ${round.split("- ")[1]}`
     : round;
 
@@ -76,11 +76,13 @@ function GameHeader({
           className="game-home"
           onClick={() => navigate(`/teams?id=${home.id}`)}
         >
-          <img
-            className="game-home-logo"
-            src={home.logo}
-            alt="home teams logo"
-          />
+          <div className="game-home-logoContainer">
+            <img
+              className="game-home-logo"
+              src={home.logo}
+              alt="home teams logo"
+            />
+          </div>
           <span className="game-home-name">{home.name}</span>
         </div>
         <div className="game-info">
@@ -112,11 +114,13 @@ function GameHeader({
           className="game-away"
           onClick={() => navigate(`/teams?id=${away.id}`)}
         >
-          <img
-            className="game-away-logo"
-            src={away.logo}
-            alt="home teams logo"
-          />
+          <div className="game-away-logoContainer">
+            <img
+              className="game-away-logo"
+              src={away.logo}
+              alt="home teams logo"
+            />
+          </div>
           <span className="game-away-name">{away.name}</span>
         </div>
       </div>
