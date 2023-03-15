@@ -23,7 +23,6 @@ function Home() {
   const [dateString, setDateString] = useState<string>(
     today.toISOString().split("T")[0]
   );
-  console.log(dateString);
 
   const day = new Date().getDay();
   const date = new Date().getDate();
@@ -38,7 +37,7 @@ function Home() {
   const dayMinusOne = minusOne.toISOString().split("T")[0];
 
   const currentDay = today.toISOString().split("T")[0];
-
+  console.log(currentDay);
   const plusOne = new Date(today);
   plusOne.setDate(plusOne.getDate() + 1);
   const dayPlusOne = plusOne.toISOString().split("T")[0];
@@ -162,6 +161,57 @@ function Home() {
     ];
   }
 
+  const dateFormatter = (dateString: string) => {
+    return `${dateString.slice(8, 10)}.${dateString.slice(5, 7)}`;
+  };
+
+  const dayFormatter = (dayNumber: number) => {
+    let day;
+    switch (dayNumber) {
+      case -2:
+        day = "Fri";
+        break;
+      case -1:
+        day = "Sat";
+        break;
+      case 0:
+        day = "Sun";
+        break;
+      case 1:
+        day = "Mon";
+        break;
+      case 2:
+        day = "Tue";
+        break;
+      case 3:
+        day = "Wed";
+        break;
+      case 4:
+        day = "Thu";
+        break;
+      case 5:
+        day = "Fri";
+        break;
+      case 6:
+        day = "Sat";
+        break;
+      case 7:
+        day = "Sun";
+        break;
+      case 8:
+        day = "Mon";
+        break;
+      case 9:
+        day = "Tues";
+        break;
+      case 10:
+        day = "Wed";
+        break;
+    }
+
+    return day;
+  };
+
   return (
     <div className="App">
       {/* <Helmet>
@@ -253,21 +303,84 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            <div
-              className="datePicker"
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "space-between",
-              }}
-            >
-              <div onClick={() => setDateString(dayMinusTwo)}>-2</div>
-              <div onClick={() => setDateString(dayMinusOne)}>-1</div>
-              <div onClick={() => setDateString(currentDay)}>0</div>
-              <div onClick={() => setDateString(dayPlusOne)}>1</div>
-              <div onClick={() => setDateString(dayPlusTwo)}>2</div>
-              <div onClick={() => setDateString(dayPlusThree)}>3</div>
-              <div onClick={() => setDateString(dayPlusFour)}>4</div>
+            <div className="datePicker">
+              <div
+                className={
+                  dateString === dayMinusTwo
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(dayMinusTwo)}
+              >
+                <div>{dateFormatter(dayMinusTwo)}</div>
+                <div>{dayFormatter(day - 2)}</div>
+              </div>
+              <div
+                className={
+                  dateString === dayMinusOne
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(dayMinusOne)}
+              >
+                <div>{dateFormatter(dayMinusOne)}</div>
+                <div>{dayFormatter(day - 1)}</div>
+              </div>
+              <div
+                className={
+                  dateString === currentDay
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(currentDay)}
+              >
+                <div>{dateFormatter(currentDay)}</div>
+                <div>Today</div>
+              </div>
+              <div
+                className={
+                  dateString === dayPlusOne
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(dayPlusOne)}
+              >
+                <div>{dateFormatter(dayPlusOne)}</div>
+                <div>{dayFormatter(day + 1)}</div>
+              </div>
+              <div
+                className={
+                  dateString === dayPlusTwo
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(dayPlusTwo)}
+              >
+                <div>{dateFormatter(dayPlusTwo)}</div>
+                <div>{dayFormatter(day + 2)}</div>
+              </div>
+              <div
+                className={
+                  dateString === dayPlusThree
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(dayPlusThree)}
+              >
+                <div>{dateFormatter(dayPlusThree)}</div>
+                <div>{dayFormatter(day + 3)}</div>
+              </div>
+              <div
+                className={
+                  dateString === dayPlusFour
+                    ? "datePicker-dates-selected"
+                    : "datePicker-dates"
+                }
+                onClick={() => setDateString(dayPlusFour)}
+              >
+                <div>{dateFormatter(dayPlusFour)}</div>
+                <div>{dayFormatter(day + 4)}</div>
+              </div>
             </div>
             {homeOptions === 0 && leagueElements}
             {homeOptions === 1 && liveElements}

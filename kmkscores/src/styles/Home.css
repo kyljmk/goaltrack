@@ -89,6 +89,40 @@
   justify-content: center;
 }
 
+.datePicker {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.datePicker-dates {
+  border: 2px solid #f4a340;
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.datePicker-dates-selected {
+  border: 2px solid #f4a340;
+  border-radius: 15px;
+  background-color: #f4a340;
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .datePicker-dates {
+    font-size: 13px;
+    padding: 5px;
+  }
+  .datePicker-dates-selected {
+    font-size: 13px;
+    padding: 5px;
+  }
+}
+
 .league {
   width: 100%;
   margin-bottom: 10px;

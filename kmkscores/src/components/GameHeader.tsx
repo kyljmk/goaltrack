@@ -48,6 +48,8 @@ function GameHeader({
     timeStamp = matchStatus;
   } else if (matchStatus === "NS") {
     timeStamp = dateTime.slice(11, 16);
+  } else if (matchStatus === "PST") {
+    timeStamp = "Postponed";
   } else {
     timeStamp = `${minutesPlayed?.toString()}'`;
   }
@@ -94,12 +96,18 @@ function GameHeader({
           <span
             className="game-info-score"
             style={{
-              display: matchStatus === "NS" ? "none" : "inline",
+              display:
+                matchStatus === "NS" || matchStatus === "PST"
+                  ? "none"
+                  : "inline",
             }}
           >{`${homeScore} - ${awayScore}`}</span>
           <span
             className="game-info-minutes"
-            style={{ fontSize: matchStatus === "NS" ? "18px" : "12px" }}
+            style={{
+              fontSize:
+                matchStatus === "NS" || matchStatus === "PST" ? "18px" : "12px",
+            }}
           >
             {timeStamp}
           </span>

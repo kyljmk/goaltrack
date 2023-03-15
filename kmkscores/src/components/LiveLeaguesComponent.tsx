@@ -2,14 +2,24 @@ import { faTable } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IDailyLeagueProps, IFixtureProps } from "../Types";
+import { FixtureResponse, IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
 function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
   const [showFixtures, setShowFixtures] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  const fixtureElements = fixtures.map((fixture) => {
+  function compare(a: FixtureResponse, b: FixtureResponse) {
+    if (a.fixture.date < b.fixture.date) {
+      return -1;
+    }
+    if (a.fixture.date > b.fixture.date) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const fixtureElements = fixtures.sort(compare).map((fixture) => {
     const fixtureDetails: IFixtureProps = {
       details: {
         id: fixture.fixture.id,
