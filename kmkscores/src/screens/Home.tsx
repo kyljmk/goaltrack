@@ -20,22 +20,52 @@ function Home() {
   const [homeOptions, setHomeOptions] = useState<number>(0);
 
   const today: Date = new Date();
-  const dateString: string = today.toISOString().split("T")[0];
+  const [dateString, setDateString] = useState<string>(
+    today.toISOString().split("T")[0]
+  );
+  console.log(dateString);
 
   const day = new Date().getDay();
+  const date = new Date().getDate();
+  const month = new Date().getMonth();
 
-  const from = new Date(today);
-  from.setDate(from.getDate() - 1);
-  const to = new Date(today);
-  to.setDate(to.getDate() + 1);
+  const minusTwo = new Date(today);
+  minusTwo.setDate(minusTwo.getDate() - 2);
+  const dayMinusTwo = minusTwo.toISOString().split("T")[0];
 
-  const fromDate = from.toISOString().split("T")[0];
-  const toDate = to.toISOString().split("T")[0];
-  console.log(fromDate);
+  const minusOne = new Date(today);
+  minusOne.setDate(minusOne.getDate() - 1);
+  const dayMinusOne = minusOne.toISOString().split("T")[0];
 
-  let leaguesDaysFixtures = useApiGetFavouriteLeaguesFixtures(fromDate, toDate);
+  const currentDay = today.toISOString().split("T")[0];
+
+  const plusOne = new Date(today);
+  plusOne.setDate(plusOne.getDate() + 1);
+  const dayPlusOne = plusOne.toISOString().split("T")[0];
+
+  const plusTwo = new Date(today);
+  plusTwo.setDate(plusTwo.getDate() + 2);
+  const dayPlusTwo = plusTwo.toISOString().split("T")[0];
+
+  const plusThree = new Date(today);
+  plusThree.setDate(plusThree.getDate() + 3);
+  const dayPlusThree = plusThree.toISOString().split("T")[0];
+
+  const plusFour = new Date(today);
+  plusFour.setDate(plusFour.getDate() + 4);
+  const dayPlusFour = plusFour.toISOString().split("T")[0];
+
+  let leaguesDaysFixtures = useApiGetFavouriteLeaguesFixtures(
+    dayMinusTwo,
+    dayPlusFour
+  );
   const teamsDaysFixtures = useApiGetFavouriteTeamsFixtures(dateString);
   const liveResults = useApiGetLiveGames();
+
+  // const filteredLeaguesDaysFixtures = leaguesDaysFixtures.map((item) =>
+  //   item.filter((item) => item.fixture.date.split("T")[0] === dateString)
+  // );
+  // console.log(filteredLeaguesDaysFixtures);
 
   const progress = new ProgressBar({
     size: 4,
@@ -49,17 +79,21 @@ function Home() {
     progress.finish();
   }, 700);
 
-  let leagueElements = leaguesDaysFixtures.map((league: FixtureResponse[]) => {
-    if (league.length !== 0) {
-      return (
-        <LiveLeaguesComponent
-          key={league[0].league.id}
-          fixtures={league}
-          menu={menu}
-        />
-      );
-    }
-  });
+  let leagueElements = leaguesDaysFixtures
+    .map((item) =>
+      item.filter((item) => item.fixture.date.split("T")[0] === dateString)
+    )
+    .map((league: FixtureResponse[]) => {
+      if (league.length !== 0) {
+        return (
+          <LiveLeaguesComponent
+            key={league[0].league.id}
+            fixtures={league}
+            menu={menu}
+          />
+        );
+      }
+    });
 
   const lengthZeroCheck = (input: FixtureResponse[][]): boolean => {
     let i: number = 0;
@@ -130,7 +164,7 @@ function Home() {
 
   return (
     <div className="App">
-      <Helmet>
+      {/* <Helmet>
         <title> GoalTrack</title>
         <meta
           name="description"
@@ -156,7 +190,7 @@ function Home() {
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="article" />
         <meta property="fb:app_id" content="ID_APP_FACEBOOK" />
-      </Helmet>
+      </Helmet> */}
       <Header menu={menu} setMenu={setMenu} />
       <div
         className="menu-container"
@@ -171,6 +205,7 @@ function Home() {
             <div
               onClick={() => {
                 setHomeOptions(0);
+                setDateString("2023-03-14");
               }}
               className={
                 homeOptions === 0
@@ -218,6 +253,22 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
+            <div
+              className="datePicker"
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <div onClick={() => setDateString(dayMinusTwo)}>-2</div>
+              <div onClick={() => setDateString(dayMinusOne)}>-1</div>
+              <div onClick={() => setDateString(currentDay)}>0</div>
+              <div onClick={() => setDateString(dayPlusOne)}>1</div>
+              <div onClick={() => setDateString(dayPlusTwo)}>2</div>
+              <div onClick={() => setDateString(dayPlusThree)}>3</div>
+              <div onClick={() => setDateString(dayPlusFour)}>4</div>
+            </div>
             {homeOptions === 0 && leagueElements}
             {homeOptions === 1 && liveElements}
             {homeOptions === 2 && teamsElements}
