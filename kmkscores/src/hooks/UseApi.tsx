@@ -1,4 +1,3 @@
-import { faL, faV } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import {
   blankFixtureObject,
@@ -6,15 +5,10 @@ import {
 } from "../placeholderObjects/BlankStates";
 import {
   tempCups,
-  tempDailyFixtures,
-  tempFavLeagues,
-  tempFavTeams,
   tempLeagues,
   tempLeagueTable,
-  tempLiveFixtures,
 } from "../placeholderObjects/TempDailys";
 import {
-  DailyFixture,
   FixtureResponse,
   ICountry,
   IFixtureDetails,
@@ -23,7 +17,6 @@ import {
   ILeagueTable,
   InfoContextType,
   ITeamInfo,
-  ITeamStatsResponse,
 } from "../Types";
 import { useCurrentSeason } from "./UseCurrentYear";
 import useInfo from "./UseInfo";
@@ -61,7 +54,6 @@ export const useApiGetGame = (fixtureId: number) => {
 export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   const [teamsDaysFixtures, setTeamsDaysFixtures] =
     useState<FixtureResponse[]>(blankFixtureResponse);
-  const [loadingTeams, setLoadingTeams] = useState<boolean>(false);
   const { favouriteTeams } = useInfo() as InfoContextType;
   const season = useCurrentSeason();
 
@@ -75,7 +67,6 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
   };
 
   useEffect(() => {
-    setLoadingTeams(true);
     const promises = fetchApi();
     Promise.all(promises).then((values) => {
       const filteredValues = values.filter((element) => {
@@ -83,7 +74,6 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
       });
       setTeamsDaysFixtures(filteredValues);
     });
-    setLoadingTeams(false);
   }, []);
 
   const fetchApi = () => {
@@ -104,14 +94,16 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
     return data;
   };
 
-  return { teamsDaysFixtures, loadingTeams };
+  return teamsDaysFixtures;
 };
 
-export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
+export const useApiGetFavouriteLeaguesFixtures = (
+  fromDate: string,
+  toDate: string
+) => {
   const [leaguesDaysFixtures, setLeaguesDaysFixtures] = useState<
     FixtureResponse[][]
   >([blankFixtureResponse]);
-  const [loadingLeagues, setLoadingLeagues] = useState<boolean>(false);
   const { favouriteLeagues } = useInfo() as InfoContextType;
   const season = useCurrentSeason();
 
@@ -125,12 +117,10 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
   };
 
   useEffect(() => {
-    setLoadingLeagues(true);
     const promises = fetchApi();
     Promise.all(promises).then((values) => {
       setLeaguesDaysFixtures(values);
     });
-    setLoadingLeagues(false);
   }, []);
 
   const fetchApi = () => {
@@ -140,7 +130,7 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
       })
       .map(async (i) => {
         const response = await fetch(
-          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&league=${i}&season=${season}`,
+          `https://api-football-v1.p.rapidapi.com/v3/fixtures?from=${fromDate}&to=${toDate}&league=${i}&season=${season}`,
           options
         );
         const data = await response.json();
@@ -149,13 +139,12 @@ export const useApiGetFavouriteLeaguesFixtures = (todaysDate: string) => {
     return data;
   };
 
-  return { leaguesDaysFixtures, loadingLeagues };
+  return leaguesDaysFixtures;
 };
 
 export const useApiGetLiveGames = () => {
   const [liveResults, setLiveResults] =
     useState<FixtureResponse[]>(blankFixtureResponse);
-  const [loadingLive, setLoadingLive] = useState<boolean>(false);
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -167,20 +156,18 @@ export const useApiGetLiveGames = () => {
   };
 
   const fetchApi = async () => {
-    setLoadingLive(true);
     const response = await fetch(
       "https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all",
       options
     );
     const data = await response.json();
     setLiveResults(data.response);
-    setLoadingLive(false);
   };
   useEffect(() => {
     fetchApi();
   }, []);
 
-  return { liveResults, loadingLive };
+  return liveResults;
 };
 
 export const useApiGetLeagues = () => {

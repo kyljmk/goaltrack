@@ -22,12 +22,20 @@ function Home() {
   const today: Date = new Date();
   const dateString: string = today.toISOString().split("T")[0];
 
-  const { leaguesDaysFixtures, loadingLeagues } =
-    useApiGetFavouriteLeaguesFixtures(dateString);
-  const { teamsDaysFixtures, loadingTeams } =
-    useApiGetFavouriteTeamsFixtures(dateString);
+  const day = new Date().getDay();
 
-  const { liveResults, loadingLive } = useApiGetLiveGames();
+  const from = new Date(today);
+  from.setDate(from.getDate() - 1);
+  const to = new Date(today);
+  to.setDate(to.getDate() + 1);
+
+  const fromDate = from.toISOString().split("T")[0];
+  const toDate = to.toISOString().split("T")[0];
+  console.log(fromDate);
+
+  let leaguesDaysFixtures = useApiGetFavouriteLeaguesFixtures(fromDate, toDate);
+  const teamsDaysFixtures = useApiGetFavouriteTeamsFixtures(dateString);
+  const liveResults = useApiGetLiveGames();
 
   const progress = new ProgressBar({
     size: 4,
@@ -210,12 +218,9 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            {homeOptions === 0 &&
-              (loadingLeagues ? <div>Loading...</div> : leagueElements)}
-            {homeOptions === 1 &&
-              (loadingLive ? <div>Loading...</div> : liveElements)}
-            {homeOptions === 2 &&
-              (loadingTeams ? <div>Loading...</div> : teamsElements)}
+            {homeOptions === 0 && leagueElements}
+            {homeOptions === 1 && liveElements}
+            {homeOptions === 2 && teamsElements}
           </div>
         </div>
       </div>
