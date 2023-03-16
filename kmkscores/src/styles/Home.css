@@ -83,44 +83,62 @@
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  width: 100%;
   min-height: 100px;
   text-align: center;
   justify-content: center;
 }
 
-.datePicker {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+.datePickerContainer {
+  overflow-x: scroll;
+  border: #f4a340 1px solid;
   margin-bottom: 20px;
 }
 
-.datePicker-dates {
-  border: 2px solid #f4a340;
-  border-radius: 15px;
-  padding: 10px;
-  cursor: pointer;
+.datePicker {
+  display: flex;
+  justify-content: space-between;
+
+  align-self: center;
 }
 
+.datePicker-dates {
+  border-left: 2px solid #f4a340;
+  border-right: 2px solid #f4a340;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-radius: 15px;
+  padding: 15px 10px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+@media (min-width: 650px) {
+  .datePickerContainer {
+    width: 330px;
+    align-self: center;
+  }
+}
+
+@media (min-width: 700px) {
+  .datePickerContainer {
+    width: 370px;
+    align-self: center;
+  }
+}
+@media (min-width: 750px) {
+  .datePickerContainer {
+    width: 425px;
+    align-self: center;
+  }
+}
 .datePicker-dates-selected {
   border: 2px solid #f4a340;
   border-radius: 15px;
-  background-color: #f4a340;
-  color: black;
-  padding: 10px;
+  color: white;
+  padding: 15px 10px;
   cursor: pointer;
-}
-
-@media (max-width: 850px) {
-  .datePicker-dates {
-    font-size: 13px;
-    padding: 5px;
-  }
-  .datePicker-dates-selected {
-    font-size: 13px;
-    padding: 5px;
-  }
+  margin-right: 20px;
 }
 
 .league {

@@ -303,83 +303,85 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            <div className="datePicker">
-              <div
-                className={
-                  dateString === dayMinusTwo
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(dayMinusTwo)}
-              >
-                <div>{dateFormatter(dayMinusTwo)}</div>
-                <div>{dayFormatter(day - 2)}</div>
-              </div>
-              <div
-                className={
-                  dateString === dayMinusOne
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(dayMinusOne)}
-              >
-                <div>{dateFormatter(dayMinusOne)}</div>
-                <div>{dayFormatter(day - 1)}</div>
-              </div>
-              <div
-                className={
-                  dateString === currentDay
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(currentDay)}
-              >
-                <div>{dateFormatter(currentDay)}</div>
-                <div>Today</div>
-              </div>
-              <div
-                className={
-                  dateString === dayPlusOne
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(dayPlusOne)}
-              >
-                <div>{dateFormatter(dayPlusOne)}</div>
-                <div>{dayFormatter(day + 1)}</div>
-              </div>
-              <div
-                className={
-                  dateString === dayPlusTwo
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(dayPlusTwo)}
-              >
-                <div>{dateFormatter(dayPlusTwo)}</div>
-                <div>{dayFormatter(day + 2)}</div>
-              </div>
-              <div
-                className={
-                  dateString === dayPlusThree
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(dayPlusThree)}
-              >
-                <div>{dateFormatter(dayPlusThree)}</div>
-                <div>{dayFormatter(day + 3)}</div>
-              </div>
-              <div
-                className={
-                  dateString === dayPlusFour
-                    ? "datePicker-dates-selected"
-                    : "datePicker-dates"
-                }
-                onClick={() => setDateString(dayPlusFour)}
-              >
-                <div>{dateFormatter(dayPlusFour)}</div>
-                <div>{dayFormatter(day + 4)}</div>
+            <div className="datePickerContainer">
+              <div className="datePicker">
+                <div
+                  className={
+                    dateString === dayMinusTwo
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(dayMinusTwo)}
+                >
+                  <div>{dayFormatter(day - 2)}</div>
+                  <div>{dateFormatter(dayMinusTwo)}</div>
+                </div>
+                <div
+                  className={
+                    dateString === dayMinusOne
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(dayMinusOne)}
+                >
+                  <div>{dayFormatter(day - 1)}</div>
+                  <div>{dateFormatter(dayMinusOne)}</div>
+                </div>
+                <div
+                  className={
+                    dateString === currentDay
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(currentDay)}
+                >
+                  <div>Today</div>
+                  <div>{dateFormatter(currentDay)}</div>
+                </div>
+                <div
+                  className={
+                    dateString === dayPlusOne
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(dayPlusOne)}
+                >
+                  <div>{dayFormatter(day + 1)}</div>
+                  <div>{dateFormatter(dayPlusOne)}</div>
+                </div>
+                <div
+                  className={
+                    dateString === dayPlusTwo
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(dayPlusTwo)}
+                >
+                  <div>{dayFormatter(day + 2)}</div>
+                  <div>{dateFormatter(dayPlusTwo)}</div>
+                </div>
+                <div
+                  className={
+                    dateString === dayPlusThree
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(dayPlusThree)}
+                >
+                  <div>{dayFormatter(day + 3)}</div>
+                  <div>{dateFormatter(dayPlusThree)}</div>
+                </div>
+                <div
+                  className={
+                    dateString === dayPlusFour
+                      ? "datePicker-dates-selected"
+                      : "datePicker-dates"
+                  }
+                  onClick={() => setDateString(dayPlusFour)}
+                >
+                  <div>{dayFormatter(day + 4)}</div>
+                  <div>{dateFormatter(dayPlusFour)}</div>
+                </div>
               </div>
             </div>
             {homeOptions === 0 && leagueElements}
