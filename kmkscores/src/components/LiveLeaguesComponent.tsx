@@ -36,6 +36,7 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
       },
       menu: menu,
     };
+
     return (
       <LiveScore
         key={fixture.fixture.id}

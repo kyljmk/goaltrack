@@ -51,9 +51,13 @@ export const useApiGetGame = (fixtureId: number) => {
   return { fixtureDetails, loadingGame };
 };
 
-export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
-  const [teamsDaysFixtures, setTeamsDaysFixtures] =
-    useState<FixtureResponse[]>(blankFixtureResponse);
+export const useApiGetFavouriteTeamsFixtures = (
+  fromDate: string,
+  toDate: string
+) => {
+  const [teamsDaysFixtures, setTeamsDaysFixtures] = useState<
+    FixtureResponse[][]
+  >([blankFixtureResponse]);
   const { favouriteTeams } = useInfo() as InfoContextType;
   const season = useCurrentSeason();
 
@@ -83,13 +87,11 @@ export const useApiGetFavouriteTeamsFixtures = (todaysDate: string) => {
       })
       .map(async (i) => {
         const response = await fetch(
-          `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${todaysDate}&team=${i}&season=${season}`,
+          `https://api-football-v1.p.rapidapi.com/v3/fixtures?from=${fromDate}&to=${toDate}&team=${i}&season=${season}`,
           options
         );
         const data = await response.json();
-        if (data.response.length !== 0) {
-          return data.response[0];
-        }
+        return data.response;
       });
     return data;
   };

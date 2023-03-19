@@ -658,3 +658,8 @@ export interface ITeamResultsProps {
   id: number;
   resultsFixtures: string;
 }
+
+export interface IDatePickerProps {
+  dateString: string;
+  setDateString: Dispatch<SetStateAction<string>>;
+}

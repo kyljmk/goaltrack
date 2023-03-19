@@ -14,6 +14,7 @@ import {
 import "../styles/Home.css";
 import { FixtureResponse } from "../Types";
 import ProgressBar from "@badrap/bar-of-progress";
+import DatePicker from "../components/DatePicker";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -24,31 +25,11 @@ function Home() {
     today.toISOString().split("T")[0]
   );
 
-  const day = new Date().getDay();
-  const date = new Date().getDate();
-  const month = new Date().getMonth();
-
   const minusTwo = new Date(today);
   minusTwo.setDate(minusTwo.getDate() - 2);
   const dayMinusTwo = minusTwo.toISOString().split("T")[0];
 
-  const minusOne = new Date(today);
-  minusOne.setDate(minusOne.getDate() - 1);
-  const dayMinusOne = minusOne.toISOString().split("T")[0];
-
   const currentDay = today.toISOString().split("T")[0];
-  console.log(currentDay);
-  const plusOne = new Date(today);
-  plusOne.setDate(plusOne.getDate() + 1);
-  const dayPlusOne = plusOne.toISOString().split("T")[0];
-
-  const plusTwo = new Date(today);
-  plusTwo.setDate(plusTwo.getDate() + 2);
-  const dayPlusTwo = plusTwo.toISOString().split("T")[0];
-
-  const plusThree = new Date(today);
-  plusThree.setDate(plusThree.getDate() + 3);
-  const dayPlusThree = plusThree.toISOString().split("T")[0];
 
   const plusFour = new Date(today);
   plusFour.setDate(plusFour.getDate() + 4);
@@ -58,13 +39,12 @@ function Home() {
     dayMinusTwo,
     dayPlusFour
   );
-  const teamsDaysFixtures = useApiGetFavouriteTeamsFixtures(dateString);
-  const liveResults = useApiGetLiveGames();
+  const teamsDaysFixtures = useApiGetFavouriteTeamsFixtures(
+    dayMinusTwo,
+    dayPlusFour
+  );
 
-  // const filteredLeaguesDaysFixtures = leaguesDaysFixtures.map((item) =>
-  //   item.filter((item) => item.fixture.date.split("T")[0] === dateString)
-  // );
-  // console.log(filteredLeaguesDaysFixtures);
+  const liveResults = useApiGetLiveGames();
 
   const progress = new ProgressBar({
     size: 4,
@@ -94,10 +74,10 @@ function Home() {
       }
     });
 
-  const lengthZeroCheck = (input: FixtureResponse[][]): boolean => {
+  const noFixturesCheck = (input: any): boolean => {
     let i: number = 0;
-    input.forEach((array: FixtureResponse[]) => {
-      if (array.length !== 0) {
+    input.forEach((item: any) => {
+      if (item !== undefined) {
         i++;
       }
     });
@@ -105,9 +85,9 @@ function Home() {
     return i === 0;
   };
 
-  if (lengthZeroCheck(leaguesDaysFixtures)) {
+  if (noFixturesCheck(leagueElements)) {
     leagueElements = [
-      <EmptyFixtures message="There are no fixtures from you favourites leages today." />,
+      <EmptyFixtures message="There are no fixtures from you favourite leages on this day." />,
     ];
   }
 
@@ -135,112 +115,34 @@ function Home() {
     ];
   }
 
-  const orderedTeamElements: FixtureResponse[][] = Object.values(
-    teamsDaysFixtures.reduce((x: any, y: any) => {
-      (x[y.league.name] = x[y.league.name] || []).push(y);
+  let teamsElements = teamsDaysFixtures
+    .map((item) =>
+      item.filter(
+        (item) =>
+          item.fixture.date.split("T")[0] === dateString &&
+          item.fixture.status.short !== "PST"
+      )
+    )
+    .map((league) => {
+      if (league.length !== 0) {
+        return (
+          <LiveLeaguesComponent
+            key={league[0].league.id}
+            fixtures={league}
+            menu={menu}
+          />
+        );
+      }
+    });
 
-      return x;
-    }, {})
-  );
-
-  let teamsElements = orderedTeamElements.map((league) => {
-    if (league.length !== 0) {
-      return (
-        <LiveLeaguesComponent
-          key={league[0].league.id}
-          fixtures={league}
-          menu={menu}
-        />
-      );
-    }
-  });
-
-  if (orderedTeamElements.length === 0) {
+  if (noFixturesCheck(teamsElements)) {
     teamsElements = [
-      <EmptyFixtures message="There are no fixtures from your favourite teams right now." />,
+      <EmptyFixtures message="There are no fixtures from your favourite teams on this day." />,
     ];
   }
 
-  const dateFormatter = (dateString: string) => {
-    return `${dateString.slice(8, 10)}.${dateString.slice(5, 7)}`;
-  };
-
-  const dayFormatter = (dayNumber: number) => {
-    let day;
-    switch (dayNumber) {
-      case -2:
-        day = "Fri";
-        break;
-      case -1:
-        day = "Sat";
-        break;
-      case 0:
-        day = "Sun";
-        break;
-      case 1:
-        day = "Mon";
-        break;
-      case 2:
-        day = "Tue";
-        break;
-      case 3:
-        day = "Wed";
-        break;
-      case 4:
-        day = "Thu";
-        break;
-      case 5:
-        day = "Fri";
-        break;
-      case 6:
-        day = "Sat";
-        break;
-      case 7:
-        day = "Sun";
-        break;
-      case 8:
-        day = "Mon";
-        break;
-      case 9:
-        day = "Tues";
-        break;
-      case 10:
-        day = "Wed";
-        break;
-    }
-
-    return day;
-  };
-
   return (
     <div className="App">
-      {/* <Helmet>
-        <title> GoalTrack</title>
-        <meta
-          name="description"
-          content="Up-to-the-minute and live football results."
-        />
-        <meta name="twitter:card" content="summary_large_image" />{" "}
-        <meta name="twitter:site" content="@user" />{" "}
-        <meta name="twitter:creator" content="@user" />{" "}
-        <meta name="twitter:title" content="GoalTrack" />{" "}
-        <meta
-          name="twitter:description"
-          content="Live football results up-to-the-minute"
-        />{" "}
-        <meta name="twitter:image" content="logo-icon.png" />{" "}
-        <meta property="og:title" content="GoalTrack" />{" "}
-        <meta
-          property="og:description"
-          content="Live football results up-to-the-minute"
-        />{" "}
-        <meta property="og:image" content="logo-icon.png" />
-        <meta property="og:url" content="goaltrack.live" />
-        <meta property="og:site_name" content="GoalTrack" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="article" />
-        <meta property="fb:app_id" content="ID_APP_FACEBOOK" />
-      </Helmet> */}
       <Header menu={menu} setMenu={setMenu} />
       <div
         className="menu-container"
@@ -255,7 +157,6 @@ function Home() {
             <div
               onClick={() => {
                 setHomeOptions(0);
-                setDateString("2023-03-14");
               }}
               className={
                 homeOptions === 0
@@ -272,6 +173,7 @@ function Home() {
             <div
               onClick={() => {
                 setHomeOptions(1);
+                setDateString(currentDay);
               }}
               className={
                 homeOptions === 1
@@ -303,87 +205,7 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            <div className="datePickerContainer">
-              <div className="datePicker">
-                <div
-                  className={
-                    dateString === dayMinusTwo
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(dayMinusTwo)}
-                >
-                  <div>{dayFormatter(day - 2)}</div>
-                  <div>{dateFormatter(dayMinusTwo)}</div>
-                </div>
-                <div
-                  className={
-                    dateString === dayMinusOne
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(dayMinusOne)}
-                >
-                  <div>{dayFormatter(day - 1)}</div>
-                  <div>{dateFormatter(dayMinusOne)}</div>
-                </div>
-                <div
-                  className={
-                    dateString === currentDay
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(currentDay)}
-                >
-                  <div>Today</div>
-                  <div>{dateFormatter(currentDay)}</div>
-                </div>
-                <div
-                  className={
-                    dateString === dayPlusOne
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(dayPlusOne)}
-                >
-                  <div>{dayFormatter(day + 1)}</div>
-                  <div>{dateFormatter(dayPlusOne)}</div>
-                </div>
-                <div
-                  className={
-                    dateString === dayPlusTwo
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(dayPlusTwo)}
-                >
-                  <div>{dayFormatter(day + 2)}</div>
-                  <div>{dateFormatter(dayPlusTwo)}</div>
-                </div>
-                <div
-                  className={
-                    dateString === dayPlusThree
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(dayPlusThree)}
-                >
-                  <div>{dayFormatter(day + 3)}</div>
-                  <div>{dateFormatter(dayPlusThree)}</div>
-                </div>
-                <div
-                  className={
-                    dateString === dayPlusFour
-                      ? "datePicker-dates-selected"
-                      : "datePicker-dates"
-                  }
-                  onClick={() => setDateString(dayPlusFour)}
-                >
-                  <div>{dayFormatter(day + 4)}</div>
-                  <div>{dateFormatter(dayPlusFour)}</div>
-                </div>
-              </div>
-            </div>
+            <DatePicker dateString={dateString} setDateString={setDateString} />
             {homeOptions === 0 && leagueElements}
             {homeOptions === 1 && liveElements}
             {homeOptions === 2 && teamsElements}
