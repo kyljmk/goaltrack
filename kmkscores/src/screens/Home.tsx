@@ -205,7 +205,11 @@ function Home() {
             </div>
           </div>
           <div className="homefixtures">
-            <DatePicker dateString={dateString} setDateString={setDateString} />
+            <DatePicker
+              dateString={dateString}
+              setDateString={setDateString}
+              liveGames={homeOptions === 1}
+            />
             {homeOptions === 0 && leagueElements}
             {homeOptions === 1 && liveElements}
             {homeOptions === 2 && teamsElements}

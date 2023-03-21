@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
@@ -7,10 +7,12 @@ import TeamInfo from "../components/TeamInfo";
 import TeamSearch from "../components/TeamSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { ITeamInfo } from "../Types";
+import { InfoContextType, ITeamInfo } from "../Types";
+import useInfo from "../hooks/UseInfo";
 
 function Teams() {
   const [menu, setMenu] = useState<boolean>(false);
+  const { favouriteTeams } = useInfo() as InfoContextType;
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
@@ -19,6 +21,10 @@ function Teams() {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
+
+  useEffect(() => {
+    localStorage.setItem("favouriteTeams", JSON.stringify(favouriteTeams));
+  }, [favouriteTeams]);
 
   const navigate = useNavigate();
 

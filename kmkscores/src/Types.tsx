@@ -662,4 +662,5 @@ export interface ITeamResultsProps {
 export interface IDatePickerProps {
   dateString: string;
   setDateString: Dispatch<SetStateAction<string>>;
+  liveGames: boolean;
 }

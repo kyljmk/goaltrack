@@ -394,3 +394,31 @@ export const useApiGetTeamFixturesResults = (id: number) => {
 
   return teamFixturesResults;
 };
+
+export const useApiGetLeagueId = (id: number) => {
+  const [leagueId, setLeagueId] = useState<number>(0);
+
+  const apiKey: string = process.env.REACT_APP_API_KEY as string;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": apiKey,
+      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+    },
+  };
+
+  const fetchApi = async () => {
+    const response = await fetch(
+      `https://api-football-v1.p.rapidapi.com/v3/leagues?team=${id}&type=league&current=true`,
+      options
+    );
+    const data = await response.json();
+    setLeagueId(data.response[0].league.id);
+  };
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
+  return leagueId;
+};

@@ -1,11 +1,15 @@
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApiGetLeagueTable } from "../hooks/UseApi";
-import { ILeagueInfo, ILeagueTableProps } from "../Types";
+import useInfo from "../hooks/UseInfo";
+import { ILeagueInfo, ILeagueTableProps, InfoContextType } from "../Types";
 
 function LeagueTable({ id }: ILeagueTableProps) {
   const { leagueTable } = useApiGetLeagueTable(id);
-
+  const { favouriteLeagues, setFavouriteLeagues } =
+    useInfo() as InfoContextType;
   const navigate = useNavigate();
 
   console.log(leagueTable);
@@ -78,6 +82,15 @@ function LeagueTable({ id }: ILeagueTableProps) {
           className="leagueTable-title-logo"
         />
         <h1 className="leagueTable-title-text">{leagueTable[0].league.name}</h1>
+        <div
+          className={
+            favouriteLeagues.includes(leagueTable[0].league.id)
+              ? "leagueTable-title-starSelected"
+              : "leagueTable-title-starUnselected"
+          }
+        >
+          <FontAwesomeIcon icon={faStar} size="2xl" />
+        </div>
       </div>
       <div>{tableElements}</div>
     </div>

@@ -1,7 +1,11 @@
 import React from "react";
 import { IDatePickerProps } from "../Types";
 
-function DatePicker({ dateString, setDateString }: IDatePickerProps) {
+function DatePicker({
+  dateString,
+  setDateString,
+  liveGames,
+}: IDatePickerProps) {
   const today: Date = new Date();
   const minusTwo = new Date(today);
   minusTwo.setDate(minusTwo.getDate() - 2);
@@ -66,6 +70,7 @@ function DatePicker({ dateString, setDateString }: IDatePickerProps) {
               : "datePicker-dates"
           }
           onClick={() => setDateString(dayMinusTwo)}
+          style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day - 2)}</div>
           <div>{dateFormatter(dayMinusTwo)}</div>
@@ -77,6 +82,7 @@ function DatePicker({ dateString, setDateString }: IDatePickerProps) {
               : "datePicker-dates"
           }
           onClick={() => setDateString(dayMinusOne)}
+          style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day - 1)}</div>
           <div>{dateFormatter(dayMinusOne)}</div>
@@ -99,6 +105,7 @@ function DatePicker({ dateString, setDateString }: IDatePickerProps) {
               : "datePicker-dates"
           }
           onClick={() => setDateString(dayPlusOne)}
+          style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 1)}</div>
           <div>{dateFormatter(dayPlusOne)}</div>
@@ -110,6 +117,7 @@ function DatePicker({ dateString, setDateString }: IDatePickerProps) {
               : "datePicker-dates"
           }
           onClick={() => setDateString(dayPlusTwo)}
+          style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 2)}</div>
           <div>{dateFormatter(dayPlusTwo)}</div>
@@ -121,6 +129,7 @@ function DatePicker({ dateString, setDateString }: IDatePickerProps) {
               : "datePicker-dates"
           }
           onClick={() => setDateString(dayPlusThree)}
+          style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 3)}</div>
           <div>{dateFormatter(dayPlusThree)}</div>
@@ -132,6 +141,7 @@ function DatePicker({ dateString, setDateString }: IDatePickerProps) {
               : "datePicker-dates"
           }
           onClick={() => setDateString(dayPlusFour)}
+          style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 4)}</div>
           <div>{dateFormatter(dayPlusFour)}</div>

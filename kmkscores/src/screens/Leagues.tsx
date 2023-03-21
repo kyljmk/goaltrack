@@ -1,20 +1,28 @@
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import LeagueSearch from "../components/LeagueSearch";
 import LeagueTable from "../components/LeagueTable";
 import Menu from "../components/Menu";
 import { useCurrentSeason } from "../hooks/UseCurrentYear";
+import useInfo from "../hooks/UseInfo";
 import "../styles/Leagues.css";
+import { InfoContextType } from "../Types";
 
 function Leagues() {
   const [menu, setMenu] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const { favouriteLeagues } = useInfo() as InfoContextType;
+
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
+
+  useEffect(() => {
+    localStorage.setItem("favouriteLeagues", JSON.stringify(favouriteLeagues));
+  }, [favouriteLeagues]);
 
   return (
     <div className="App">
