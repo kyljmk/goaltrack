@@ -60,24 +60,30 @@ function Home() {
     progress.finish();
   }, 700);
 
-  console.log(
-    Object.values(
-      allResults.reduce((x: any, y: any) => {
-        (x[y.league.country] = x[y.league.country] || []).push(y);
-
-        return x;
-      }, {})
-    )
-  );
+  function compare(a: FixtureResponse, b: FixtureResponse) {
+    if (a.league.country < b.league.country) {
+      return -1;
+    }
+    if (a.league.country > b.league.country) {
+      return 1;
+    }
+    return 0;
+  }
 
   const allResultsElements = Object.values(
-    allResults.reduce((x: any, y: any) => {
+    allResults.sort(compare).reduce((x: any, y: any) => {
       (x[y.league.country] = x[y.league.country] || []).push(y);
 
       return x;
     }, {})
   ).map((country: any) => {
-    return <CountryLeagues key={country[0].fixture.id} country={country} />;
+    return (
+      <CountryLeagues
+        key={country[0].fixture.id}
+        country={country}
+        menu={menu}
+      />
+    );
   });
 
   let leagueElements = leaguesDaysFixtures
@@ -109,7 +115,10 @@ function Home() {
 
   if (noFixturesCheck(leagueElements)) {
     leagueElements = [
-      <EmptyFixtures message="There are no fixtures from you favourite leages on this day." />,
+      <EmptyFixtures
+        key="0"
+        message="There are no fixtures from you favourite leages on this day."
+      />,
     ];
   }
 
@@ -133,7 +142,10 @@ function Home() {
 
   if (orderedLiveElements.length === 0) {
     liveElements = [
-      <EmptyFixtures message="There are no live fixtures right now, go to bed." />,
+      <EmptyFixtures
+        key="0"
+        message="There are no live fixtures right now, go to bed."
+      />,
     ];
   }
 
@@ -159,7 +171,10 @@ function Home() {
 
   if (noFixturesCheck(teamsElements)) {
     teamsElements = [
-      <EmptyFixtures message="There are no fixtures from your favourite teams on this day." />,
+      <EmptyFixtures
+        key="0"
+        message="There are no fixtures from your favourite teams on this day."
+      />,
     ];
   }
 
@@ -233,6 +248,7 @@ function Home() {
               liveGames={homeOptions === 1}
             />
             {homeOptions === 0 && leagueElements}
+            {homeOptions === 0 && allResultsElements}
             {homeOptions === 1 && liveElements}
             {homeOptions === 2 && teamsElements}
           </div>

@@ -209,7 +209,7 @@ export const blankFixtureResponse: FixtureResponse[] = [
       },
     },
     league: {
-      id: null,
+      id: 0,
       name: "",
       country: "",
       logo: "logo-icon.png",

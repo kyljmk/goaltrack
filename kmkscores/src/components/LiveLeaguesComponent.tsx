@@ -67,6 +67,7 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
         <div className="league-header-title-container">
           <h2 className="league-header-title" onClick={handleClick}>
             {fixtures[0].league.name}
+            {fixtures[0].league.id}
           </h2>
           <div className="league-header-title-icon" onClick={handleNavigate}>
             <FontAwesomeIcon icon={faTable} size="xl" />

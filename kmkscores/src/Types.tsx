@@ -250,7 +250,7 @@ export interface FixtureResponse {
     };
   };
   league: {
-    id: number | null;
+    id: number;
     name: string;
     country: string;
     logo: string;
@@ -667,4 +667,5 @@ export interface IDatePickerProps {
 
 export interface ICountryLeagueProps {
   country: FixtureResponse[];
+  menu: boolean;
 }
