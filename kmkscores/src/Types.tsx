@@ -664,3 +664,7 @@ export interface IDatePickerProps {
   setDateString: Dispatch<SetStateAction<string>>;
   liveGames: boolean;
 }
+
+export interface ICountryLeagueProps {
+  country: FixtureResponse[];
+}

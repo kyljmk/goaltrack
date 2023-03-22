@@ -6,7 +6,7 @@ import { FixtureResponse, IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
 function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
-  const [showFixtures, setShowFixtures] = useState<boolean>(true);
+  const [showFixtures, setShowFixtures] = useState<boolean>(false);
   const navigate = useNavigate();
 
   function compare(a: FixtureResponse, b: FixtureResponse) {

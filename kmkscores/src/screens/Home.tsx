@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Menu from "../components/Menu";
 import EmptyFixtures from "../components/EmptyFixtures";
 import {
+  useApiGetAllGames,
   useApiGetFavouriteLeaguesFixtures,
   useApiGetFavouriteTeamsFixtures,
   useApiGetLiveGames,
@@ -15,6 +16,7 @@ import "../styles/Home.css";
 import { FixtureResponse } from "../Types";
 import ProgressBar from "@badrap/bar-of-progress";
 import DatePicker from "../components/DatePicker";
+import CountryLeagues from "../components/CountryLeagues";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -35,7 +37,7 @@ function Home() {
   plusFour.setDate(plusFour.getDate() + 4);
   const dayPlusFour = plusFour.toISOString().split("T")[0];
 
-  let leaguesDaysFixtures = useApiGetFavouriteLeaguesFixtures(
+  const leaguesDaysFixtures = useApiGetFavouriteLeaguesFixtures(
     dayMinusTwo,
     dayPlusFour
   );
@@ -43,8 +45,8 @@ function Home() {
     dayMinusTwo,
     dayPlusFour
   );
-
   const liveResults = useApiGetLiveGames();
+  const allResults = useApiGetAllGames();
 
   const progress = new ProgressBar({
     size: 4,
@@ -57,6 +59,26 @@ function Home() {
   setTimeout(() => {
     progress.finish();
   }, 700);
+
+  console.log(
+    Object.values(
+      allResults.reduce((x: any, y: any) => {
+        (x[y.league.country] = x[y.league.country] || []).push(y);
+
+        return x;
+      }, {})
+    )
+  );
+
+  const allResultsElements = Object.values(
+    allResults.reduce((x: any, y: any) => {
+      (x[y.league.country] = x[y.league.country] || []).push(y);
+
+      return x;
+    }, {})
+  ).map((country: any) => {
+    return <CountryLeagues key={country[0].fixture.id} country={country} />;
+  });
 
   let leagueElements = leaguesDaysFixtures
     .map((item) =>
