@@ -6,13 +6,19 @@ import { useApiGetLeagueTable } from "../hooks/UseApi";
 import useInfo from "../hooks/UseInfo";
 import { ILeagueInfo, ILeagueTableProps, InfoContextType } from "../Types";
 
-function LeagueTable({ id }: ILeagueTableProps) {
+function LeagueTable({ id, teamPage }: ILeagueTableProps) {
   const { leagueTable } = useApiGetLeagueTable(id);
   const { favouriteLeagues, setFavouriteLeagues } =
     useInfo() as InfoContextType;
   const navigate = useNavigate();
 
-  console.log(leagueTable);
+  const handleFavToggle = (id: number) => {
+    if (favouriteLeagues.includes(id)) {
+      setFavouriteLeagues(favouriteLeagues.filter((item) => item !== id));
+    } else {
+      setFavouriteLeagues((prev) => [...prev, id].sort((a, b) => a - b));
+    }
+  };
 
   const tableElements = leagueTable[0].league.standings.map((league) => {
     const seperateTableElements = league.map((team) => {
@@ -75,24 +81,29 @@ function LeagueTable({ id }: ILeagueTableProps) {
 
   return (
     <div>
-      <div className="leagueTable-title-container">
-        <img
-          src={leagueTable[0].league.logo}
-          alt="League logo"
-          className="leagueTable-title-logo"
-        />
-        <h1 className="leagueTable-title-text">{leagueTable[0].league.name}</h1>
-        <div
-          className={
-            favouriteLeagues.includes(leagueTable[0].league.id)
-              ? "leagueTable-title-starSelected"
-              : "leagueTable-title-starUnselected"
-          }
-        >
-          <FontAwesomeIcon icon={faStar} size="2xl" />
+      {!teamPage && (
+        <div className="leagueTable-title-container">
+          <img
+            src={leagueTable[0].league.logo}
+            alt="League logo"
+            className="leagueTable-title-logo"
+          />
+          <h1 className="leagueTable-title-text">
+            {leagueTable[0].league.name}
+          </h1>
+          <div
+            onClick={() => handleFavToggle(leagueTable[0].league.id)}
+            className={
+              favouriteLeagues.includes(leagueTable[0].league.id)
+                ? "leagueTable-title-starSelected"
+                : "leagueTable-title-starUnselected"
+            }
+          >
+            <FontAwesomeIcon icon={faStar} size="2xl" />
+          </div>
         </div>
-      </div>
-      <div>{tableElements}</div>
+      )}
+      <div style={{ marginTop: teamPage ? "20px" : "0" }}>{tableElements}</div>
     </div>
   );
 }

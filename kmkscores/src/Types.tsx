@@ -651,6 +651,7 @@ export type HomeAwayTotal = {
 
 export interface ILeagueTableProps {
   id: number;
+  teamPage: boolean;
 }
 
 export interface ITeamResultsProps {

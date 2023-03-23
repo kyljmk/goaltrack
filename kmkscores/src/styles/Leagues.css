@@ -192,6 +192,14 @@
   border-bottom: 1px solid #f4a340;
 }
 
+.leagueTable-title-starSelected {
+  cursor: pointer;
+}
+.leagueTable-title-starUnselected {
+  color: gray;
+  cursor: pointer;
+}
+
 @media (max-width: 450px) {
   .leagueTable-title-text {
     font-size: 17px;
