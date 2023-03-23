@@ -174,8 +174,44 @@ export const useApiGetLiveGames = () => {
 };
 
 export const useApiGetAllGames = () => {
-  const [liveResults, setLiveResults] =
+  const [allResults, setAllResults] =
     useState<FixtureResponse[]>(blankFixtureResponse);
+  const today: Date = new Date();
+  const minusTwo = new Date(today);
+  minusTwo.setDate(minusTwo.getDate() - 2);
+  const dayMinusTwo = minusTwo.toISOString().split("T")[0];
+
+  const minusOne = new Date(today);
+  minusOne.setDate(minusOne.getDate() - 1);
+  const dayMinusOne = minusOne.toISOString().split("T")[0];
+
+  const currentDay = today.toISOString().split("T")[0];
+
+  const plusOne = new Date(today);
+  plusOne.setDate(plusOne.getDate() + 1);
+  const dayPlusOne = plusOne.toISOString().split("T")[0];
+
+  const plusTwo = new Date(today);
+  plusTwo.setDate(plusTwo.getDate() + 2);
+  const dayPlusTwo = plusTwo.toISOString().split("T")[0];
+
+  const plusThree = new Date(today);
+  plusThree.setDate(plusThree.getDate() + 3);
+  const dayPlusThree = plusThree.toISOString().split("T")[0];
+
+  const plusFour = new Date(today);
+  plusFour.setDate(plusFour.getDate() + 4);
+  const dayPlusFour = plusFour.toISOString().split("T")[0];
+
+  const allDays: string[] = [
+    dayMinusTwo,
+    dayMinusOne,
+    currentDay,
+    dayPlusOne,
+    dayPlusTwo,
+    dayPlusThree,
+    dayPlusFour,
+  ];
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -186,19 +222,26 @@ export const useApiGetAllGames = () => {
     },
   };
 
-  const fetchApi = async () => {
-    const response = await fetch(
-      "https://api-football-v1.p.rapidapi.com/v3/fixtures?date=2023-03-25",
-      options
-    );
-    const data = await response.json();
-    setLiveResults(data.response);
+  const fetchApi = () => {
+    const data = allDays.map(async (i) => {
+      const response = await fetch(
+        `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${i}`,
+        options
+      );
+      const data = await response.json();
+      return data.response;
+    });
+    return data;
   };
+
   useEffect(() => {
-    fetchApi();
+    const promises = fetchApi();
+    Promise.all(promises).then((values) => {
+      setAllResults(values);
+    });
   }, []);
 
-  return liveResults;
+  return allResults;
 };
 
 export const useApiGetLeagues = () => {

@@ -1,7 +1,6 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 import LiveLeaguesComponent from "../components/LiveLeaguesComponent";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
@@ -48,6 +47,8 @@ function Home() {
   const liveResults = useApiGetLiveGames();
   const allResults = useApiGetAllGames();
 
+  console.log(allResults);
+
   const progress = new ProgressBar({
     size: 4,
     color: "#f4a340",
@@ -60,6 +61,25 @@ function Home() {
     progress.finish();
   }, 700);
 
+  const newFavLeagues: number[] = [960, 10];
+
+  // const newOrderedLeagues: FixtureResponse[][] = Object.values(
+  //   allResults
+  //     // .filter((item: FixtureResponse) => item.fixture.date === currentDay)
+  //     .filter((item: FixtureResponse) => newFavLeagues.includes(item.league.id))
+  //     .reduce((x: any, y: any) => {
+  //       (x[y.league.name] = x[y.league.name] || []).push(y);
+
+  //       return x;
+  //     }, {})
+  // );
+
+  // const newLeagueElements = newOrderedLeagues.map(
+  //   (league: FixtureResponse[]) => {
+  //     return <LiveLeaguesComponent fixtures={league} menu={menu} />;
+  //   }
+  // );
+
   function compare(a: FixtureResponse, b: FixtureResponse) {
     if (a.league.country < b.league.country) {
       return -1;
@@ -70,21 +90,21 @@ function Home() {
     return 0;
   }
 
-  const allResultsElements = Object.values(
-    allResults.sort(compare).reduce((x: any, y: any) => {
-      (x[y.league.country] = x[y.league.country] || []).push(y);
+  // const allResultsElements = Object.values(
+  //   allResults.sort(compare).reduce((x: any, y: any) => {
+  //     (x[y.league.country] = x[y.league.country] || []).push(y);
 
-      return x;
-    }, {})
-  ).map((country: any) => {
-    return (
-      <CountryLeagues
-        key={country[0].fixture.id}
-        country={country}
-        menu={menu}
-      />
-    );
-  });
+  //     return x;
+  //   }, {})
+  // ).map((country: any) => {
+  //   return (
+  //     <CountryLeagues
+  //       key={country[0].fixture.id}
+  //       country={country}
+  //       menu={menu}
+  //     />
+  //   );
+  // });
 
   let leagueElements = leaguesDaysFixtures
     .map((item) =>
@@ -248,7 +268,7 @@ function Home() {
               liveGames={homeOptions === 1}
             />
             {homeOptions === 0 && leagueElements}
-            {homeOptions === 0 && allResultsElements}
+            {/* {homeOptions === 0 && allResultsElements} */}
             {homeOptions === 1 && liveElements}
             {homeOptions === 2 && teamsElements}
           </div>
