@@ -174,8 +174,11 @@ export const useApiGetLiveGames = () => {
 };
 
 export const useApiGetAllGames = () => {
-  const [allResults, setAllResults] =
-    useState<FixtureResponse[]>(blankFixtureResponse);
+  const [allResults, setAllResults] = useState<FixtureResponse[][]>([
+    blankFixtureResponse,
+    blankFixtureResponse,
+    blankFixtureResponse,
+  ]);
   const today: Date = new Date();
   const minusTwo = new Date(today);
   minusTwo.setDate(minusTwo.getDate() - 2);

@@ -5,6 +5,7 @@ function DatePicker({
   dateString,
   setDateString,
   liveGames,
+  setViewingDate,
 }: IDatePickerProps) {
   const today: Date = new Date();
   const minusTwo = new Date(today);
@@ -69,7 +70,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(dayMinusTwo)}
+          onClick={() => {
+            setDateString(dayMinusTwo);
+            setViewingDate(0);
+          }}
           style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day - 2)}</div>
@@ -81,7 +85,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(dayMinusOne)}
+          onClick={() => {
+            setDateString(dayMinusOne);
+            setViewingDate(1);
+          }}
           style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day - 1)}</div>
@@ -93,7 +100,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(currentDay)}
+          onClick={() => {
+            setDateString(currentDay);
+            setViewingDate(2);
+          }}
         >
           <div>Today</div>
           <div>{dateFormatter(currentDay)}</div>

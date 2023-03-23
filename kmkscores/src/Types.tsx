@@ -664,6 +664,7 @@ export interface IDatePickerProps {
   dateString: string;
   setDateString: Dispatch<SetStateAction<string>>;
   liveGames: boolean;
+  setViewingDate: Dispatch<SetStateAction<number>>;
 }
 
 export interface ICountryLeagueProps {

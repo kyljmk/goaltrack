@@ -21,8 +21,6 @@ function Game() {
   const { fixture, league, teams, goals, score, events, lineups, statistics } =
     fixtureDetails;
 
-  console.log(fixtureDetails);
-
   const firstHalfElements = events
     ?.filter((event) => event.time.elapsed <= 45)
     .map((event, i) => {

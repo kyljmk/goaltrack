@@ -31,10 +31,13 @@
 .game-info-flagContainer {
   margin: 10px 0 0 10px;
   display: flex;
+  align-items: center;
 }
 
 .game-info-flag {
-  width: 25px;
+  height: 20px;
+  width: 30px;
+  object-fit: contain;
   border-radius: 5px;
 }
 

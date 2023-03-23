@@ -47,6 +47,8 @@ function Home() {
   const liveResults = useApiGetLiveGames();
   const allResults = useApiGetAllGames();
 
+  const [viewingDay, setViewingDay] = useState<number>(2);
+
   console.log(allResults);
 
   const progress = new ProgressBar({
@@ -63,22 +65,22 @@ function Home() {
 
   const newFavLeagues: number[] = [960, 10];
 
-  // const newOrderedLeagues: FixtureResponse[][] = Object.values(
-  //   allResults
-  //     // .filter((item: FixtureResponse) => item.fixture.date === currentDay)
-  //     .filter((item: FixtureResponse) => newFavLeagues.includes(item.league.id))
-  //     .reduce((x: any, y: any) => {
-  //       (x[y.league.name] = x[y.league.name] || []).push(y);
+  const newOrderedLeagues: FixtureResponse[][] = Object.values(
+    allResults[viewingDay]
+      // .filter((item: FixtureResponse) => item.fixture.date === currentDay)
+      .filter((item: FixtureResponse) => newFavLeagues.includes(item.league.id))
+      .reduce((x: any, y: any) => {
+        (x[y.league.name] = x[y.league.name] || []).push(y);
 
-  //       return x;
-  //     }, {})
-  // );
+        return x;
+      }, {})
+  );
 
-  // const newLeagueElements = newOrderedLeagues.map(
-  //   (league: FixtureResponse[]) => {
-  //     return <LiveLeaguesComponent fixtures={league} menu={menu} />;
-  //   }
-  // );
+  const newLeagueElements = newOrderedLeagues.map(
+    (league: FixtureResponse[]) => {
+      return <LiveLeaguesComponent fixtures={league} menu={menu} />;
+    }
+  );
 
   function compare(a: FixtureResponse, b: FixtureResponse) {
     if (a.league.country < b.league.country) {
@@ -90,21 +92,21 @@ function Home() {
     return 0;
   }
 
-  // const allResultsElements = Object.values(
-  //   allResults.sort(compare).reduce((x: any, y: any) => {
-  //     (x[y.league.country] = x[y.league.country] || []).push(y);
+  const allResultsElements = Object.values(
+    allResults[viewingDay].sort(compare).reduce((x: any, y: any) => {
+      (x[y.league.country] = x[y.league.country] || []).push(y);
 
-  //     return x;
-  //   }, {})
-  // ).map((country: any) => {
-  //   return (
-  //     <CountryLeagues
-  //       key={country[0].fixture.id}
-  //       country={country}
-  //       menu={menu}
-  //     />
-  //   );
-  // });
+      return x;
+    }, {})
+  ).map((country: any) => {
+    return (
+      <CountryLeagues
+        key={country[0].fixture.id}
+        country={country}
+        menu={menu}
+      />
+    );
+  });
 
   let leagueElements = leaguesDaysFixtures
     .map((item) =>
@@ -266,9 +268,10 @@ function Home() {
               dateString={dateString}
               setDateString={setDateString}
               liveGames={homeOptions === 1}
+              setViewingDate={setViewingDay}
             />
             {homeOptions === 0 && leagueElements}
-            {/* {homeOptions === 0 && allResultsElements} */}
+            {homeOptions === 0 && allResultsElements}
             {homeOptions === 1 && liveElements}
             {homeOptions === 2 && teamsElements}
           </div>
