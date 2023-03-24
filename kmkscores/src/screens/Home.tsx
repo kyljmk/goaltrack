@@ -5,17 +5,13 @@ import LiveLeaguesComponent from "../components/LiveLeaguesComponent";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import EmptyFixtures from "../components/EmptyFixtures";
-import {
-  useApiGetAllGames,
-  useApiGetFavouriteLeaguesFixtures,
-  useApiGetFavouriteTeamsFixtures,
-  useApiGetLiveGames,
-} from "../hooks/UseApi";
+import { useApiGetAllGames } from "../hooks/UseApi";
 import "../styles/Home.css";
-import { FixtureResponse } from "../Types";
+import { FixtureResponse, InfoContextType } from "../Types";
 import ProgressBar from "@badrap/bar-of-progress";
 import DatePicker from "../components/DatePicker";
 import CountryLeagues from "../components/CountryLeagues";
+import useInfo from "../hooks/UseInfo";
 
 function Home() {
   const [menu, setMenu] = useState<boolean>(false);
@@ -26,25 +22,8 @@ function Home() {
     today.toISOString().split("T")[0]
   );
 
-  const minusTwo = new Date(today);
-  minusTwo.setDate(minusTwo.getDate() - 2);
-  const dayMinusTwo = minusTwo.toISOString().split("T")[0];
-
   const currentDay = today.toISOString().split("T")[0];
 
-  const plusFour = new Date(today);
-  plusFour.setDate(plusFour.getDate() + 4);
-  const dayPlusFour = plusFour.toISOString().split("T")[0];
-
-  const leaguesDaysFixtures = useApiGetFavouriteLeaguesFixtures(
-    dayMinusTwo,
-    dayPlusFour
-  );
-  const teamsDaysFixtures = useApiGetFavouriteTeamsFixtures(
-    dayMinusTwo,
-    dayPlusFour
-  );
-  const liveResults = useApiGetLiveGames();
   const allResults = useApiGetAllGames();
 
   const [viewingDay, setViewingDay] = useState<number>(2);
@@ -61,11 +40,14 @@ function Home() {
     progress.finish();
   }, 700);
 
-  const newFavLeagues: number[] = [960, 10];
+  const { favouriteLeagues } = useInfo() as InfoContextType;
+  const { favouriteTeams } = useInfo() as InfoContextType;
 
   const newLeagueElements = Object.values(
     allResults[viewingDay]
-      .filter((item: FixtureResponse) => newFavLeagues.includes(item.league.id))
+      .filter((item: FixtureResponse) =>
+        favouriteLeagues.includes(item.league.id)
+      )
       .reduce((x: any, y: any) => {
         (x[y.league.name] = x[y.league.name] || []).push(y);
 
@@ -80,31 +62,70 @@ function Home() {
       />
     );
   });
+
+  const newTeamsElements = allResults[viewingDay].filter(
+    (item: FixtureResponse) =>
+      favouriteTeams.includes(item.teams.home.id) ||
+      favouriteTeams.includes(item.teams.away.id)
+  ) ? (
+    Object.values(
+      allResults[viewingDay]
+        .filter(
+          (item: FixtureResponse) =>
+            favouriteTeams.includes(item.teams.home.id) ||
+            favouriteTeams.includes(item.teams.away.id)
+        )
+        .reduce((x: any, y: any) => {
+          (x[y.league.name] = x[y.league.name] || []).push(y);
+
+          return x;
+        }, {})
+    ).map((league: any) => {
+      return (
+        <LiveLeaguesComponent
+          key={league[0].league.id}
+          fixtures={league}
+          menu={menu}
+        />
+      );
+    })
+  ) : (
+    <EmptyFixtures message="There are no games from your favourite teams on this day." />
+  );
 
   const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
 
-  const newLiveElements = Object.values(
-    allResults[viewingDay]
-      .filter((item: FixtureResponse) =>
-        liveStatuses.includes(item.fixture.status.short)
-      )
-      .sort(
-        (a: FixtureResponse, b: FixtureResponse) => a.league.id - b.league.id
-      )
-      .reduce((x: any, y: any) => {
-        (x[y.league.name] = x[y.league.name] || []).push(y);
+  const newLiveElements = allResults[viewingDay].filter(
+    (item: FixtureResponse) => liveStatuses.includes(item.fixture.status.short)
+  ) ? (
+    Object.values(
+      allResults[viewingDay]
+        .filter((item: FixtureResponse) =>
+          liveStatuses.includes(item.fixture.status.short)
+        )
+        .sort(
+          (a: FixtureResponse, b: FixtureResponse) => a.league.id - b.league.id
+        )
+        .reduce((x: any, y: any) => {
+          (x[y.league.name] = x[y.league.name] || []).push(y);
 
-        return x;
-      }, {})
-  ).map((league: any) => {
-    return (
-      <LiveLeaguesComponent
-        key={league[0].league.id}
-        fixtures={league}
-        menu={menu}
-      />
-    );
-  });
+          return x;
+        }, {})
+    ).map((league: any) => {
+      return (
+        <LiveLeaguesComponent
+          key={league[0].league.id}
+          fixtures={league}
+          menu={menu}
+        />
+      );
+    })
+  ) : (
+    <EmptyFixtures
+      key="0"
+      message="There are no live fixtures right now, go to bed."
+    />
+  );
 
   function compare(a: FixtureResponse, b: FixtureResponse) {
     if (a.league.country < b.league.country) {
@@ -131,98 +152,6 @@ function Home() {
       />
     );
   });
-
-  let leagueElements = leaguesDaysFixtures
-    .map((item) =>
-      item.filter((item) => item.fixture.date.split("T")[0] === dateString)
-    )
-    .map((league: FixtureResponse[]) => {
-      if (league.length !== 0) {
-        return (
-          <LiveLeaguesComponent
-            key={league[0].league.id}
-            fixtures={league}
-            menu={menu}
-          />
-        );
-      }
-    });
-
-  const noFixturesCheck = (input: any): boolean => {
-    let i: number = 0;
-    input.forEach((item: any) => {
-      if (item !== undefined) {
-        i++;
-      }
-    });
-
-    return i === 0;
-  };
-
-  if (noFixturesCheck(leagueElements)) {
-    leagueElements = [
-      <EmptyFixtures
-        key="0"
-        message="There are no fixtures from you favourite leages on this day."
-      />,
-    ];
-  }
-
-  const orderedLiveElements: FixtureResponse[][] = Object.values(
-    liveResults.reduce((x: any, y: any) => {
-      (x[y.league.name] = x[y.league.name] || []).push(y);
-
-      return x;
-    }, {})
-  );
-
-  let liveElements: JSX.Element[] = orderedLiveElements.map((leagues) => {
-    return (
-      <LiveLeaguesComponent
-        key={leagues[0].league.id}
-        fixtures={leagues}
-        menu={menu}
-      />
-    );
-  });
-
-  if (orderedLiveElements.length === 0) {
-    liveElements = [
-      <EmptyFixtures
-        key="0"
-        message="There are no live fixtures right now, go to bed."
-      />,
-    ];
-  }
-
-  let teamsElements = teamsDaysFixtures
-    .map((item) =>
-      item.filter(
-        (item) =>
-          item.fixture.date.split("T")[0] === dateString &&
-          item.fixture.status.short !== "PST"
-      )
-    )
-    .map((league) => {
-      if (league.length !== 0) {
-        return (
-          <LiveLeaguesComponent
-            key={league[0].league.id}
-            fixtures={league}
-            menu={menu}
-          />
-        );
-      }
-    });
-
-  if (noFixturesCheck(teamsElements)) {
-    teamsElements = [
-      <EmptyFixtures
-        key="0"
-        message="There are no fixtures from your favourite teams on this day."
-      />,
-    ];
-  }
 
   return (
     <div className="App">
@@ -298,7 +227,7 @@ function Home() {
             {homeOptions === 0 && newLeagueElements}
             {homeOptions === 0 && allResultsElements}
             {homeOptions === 1 && newLiveElements}
-            {homeOptions === 2 && teamsElements}
+            {homeOptions === 2 && newTeamsElements}
           </div>
         </div>
       </div>

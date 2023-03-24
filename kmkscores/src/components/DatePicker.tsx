@@ -114,7 +114,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(dayPlusOne)}
+          onClick={() => {
+            setDateString(dayPlusOne);
+            setViewingDate(3);
+          }}
           style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 1)}</div>
@@ -126,7 +129,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(dayPlusTwo)}
+          onClick={() => {
+            setDateString(dayPlusTwo);
+            setViewingDate(4);
+          }}
           style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 2)}</div>
@@ -138,7 +144,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(dayPlusThree)}
+          onClick={() => {
+            setDateString(dayPlusThree);
+            setViewingDate(5);
+          }}
           style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 3)}</div>
@@ -150,7 +159,10 @@ function DatePicker({
               ? "datePicker-dates-selected"
               : "datePicker-dates"
           }
-          onClick={() => setDateString(dayPlusFour)}
+          onClick={() => {
+            setDateString(dayPlusFour);
+            setViewingDate(6);
+          }}
           style={{ pointerEvents: liveGames ? "none" : "auto" }}
         >
           <div>{dayFormatter(day + 4)}</div>

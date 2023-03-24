@@ -272,7 +272,7 @@ export interface FixtureResponse {
 }
 
 export interface ITeam {
-  id: number | null;
+  id: number;
   name: string;
   logo: string;
   winner: boolean | null;

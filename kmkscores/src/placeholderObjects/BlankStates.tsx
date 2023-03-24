@@ -219,13 +219,13 @@ export const blankFixtureResponse: FixtureResponse[] = [
     },
     teams: {
       home: {
-        id: null,
+        id: 0,
         name: "LOADING..",
         logo: "logo-icon.png",
         winner: null,
       },
       away: {
-        id: null,
+        id: 0,
         name: "LOADING.",
         logo: "logo-icon.png",
         winner: null,
