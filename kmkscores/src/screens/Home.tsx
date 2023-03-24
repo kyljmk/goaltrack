@@ -49,8 +49,6 @@ function Home() {
 
   const [viewingDay, setViewingDay] = useState<number>(2);
 
-  console.log(allResults);
-
   const progress = new ProgressBar({
     size: 4,
     color: "#f4a340",
@@ -65,22 +63,48 @@ function Home() {
 
   const newFavLeagues: number[] = [960, 10];
 
-  const newOrderedLeagues: FixtureResponse[][] = Object.values(
+  const newLeagueElements = Object.values(
     allResults[viewingDay]
-      // .filter((item: FixtureResponse) => item.fixture.date === currentDay)
       .filter((item: FixtureResponse) => newFavLeagues.includes(item.league.id))
       .reduce((x: any, y: any) => {
         (x[y.league.name] = x[y.league.name] || []).push(y);
 
         return x;
       }, {})
-  );
+  ).map((league: any) => {
+    return (
+      <LiveLeaguesComponent
+        key={league[0].league.id}
+        fixtures={league}
+        menu={menu}
+      />
+    );
+  });
 
-  const newLeagueElements = newOrderedLeagues.map(
-    (league: FixtureResponse[]) => {
-      return <LiveLeaguesComponent fixtures={league} menu={menu} />;
-    }
-  );
+  const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
+
+  const newLiveElements = Object.values(
+    allResults[viewingDay]
+      .filter((item: FixtureResponse) =>
+        liveStatuses.includes(item.fixture.status.short)
+      )
+      .sort(
+        (a: FixtureResponse, b: FixtureResponse) => a.league.id - b.league.id
+      )
+      .reduce((x: any, y: any) => {
+        (x[y.league.name] = x[y.league.name] || []).push(y);
+
+        return x;
+      }, {})
+  ).map((league: any) => {
+    return (
+      <LiveLeaguesComponent
+        key={league[0].league.id}
+        fixtures={league}
+        menu={menu}
+      />
+    );
+  });
 
   function compare(a: FixtureResponse, b: FixtureResponse) {
     if (a.league.country < b.league.country) {
@@ -233,6 +257,7 @@ function Home() {
               onClick={() => {
                 setHomeOptions(1);
                 setDateString(currentDay);
+                setViewingDay(2);
               }}
               className={
                 homeOptions === 1
@@ -270,9 +295,9 @@ function Home() {
               liveGames={homeOptions === 1}
               setViewingDate={setViewingDay}
             />
-            {homeOptions === 0 && leagueElements}
+            {homeOptions === 0 && newLeagueElements}
             {homeOptions === 0 && allResultsElements}
-            {homeOptions === 1 && liveElements}
+            {homeOptions === 1 && newLiveElements}
             {homeOptions === 2 && teamsElements}
           </div>
         </div>
