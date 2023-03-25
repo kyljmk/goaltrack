@@ -18,30 +18,36 @@ function Favourites() {
   const favouriteLeaguesInfo = useApiGetFavouriteLeagues();
 
   const {
-    favouriteTeams,
-    setFavouriteTeams,
-    favouriteLeagues,
-    setFavouriteLeagues,
+    newFavouriteTeams,
+    setNewFavouriteTeams,
+    newFavouriteLeagues,
+    setNewFavouriteLeagues,
   } = useInfo() as InfoContextType;
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem("favouriteTeams", JSON.stringify(favouriteTeams));
-  }, [favouriteTeams]);
+    localStorage.setItem(
+      "newFavouriteTeams",
+      JSON.stringify(newFavouriteTeams)
+    );
+  }, [newFavouriteTeams]);
 
   useEffect(() => {
-    localStorage.setItem("favouriteLeagues", JSON.stringify(favouriteLeagues));
-  }, [favouriteLeagues]);
+    localStorage.setItem(
+      "newFavouriteLeagues",
+      JSON.stringify(newFavouriteLeagues)
+    );
+  }, [newFavouriteLeagues]);
 
   let favTeamsElements: JSX.Element[] | ReactElement = favouriteTeamsInfo.map(
     (team) => {
       const handleClick = () => {
-        if (favouriteTeams.includes(team.team.id)) {
-          setFavouriteTeams(
-            favouriteTeams.filter((item) => item !== team.team.id)
+        if (newFavouriteTeams.includes(team.team.id)) {
+          setNewFavouriteTeams(
+            newFavouriteTeams.filter((item) => item !== team.team.id)
           );
         } else {
-          setFavouriteTeams((prev) =>
+          setNewFavouriteTeams((prev) =>
             [...prev, team.team.id].sort((a, b) => a - b)
           );
         }
@@ -50,7 +56,9 @@ function Favourites() {
         <div
           key={team.team.id}
           className={
-            favouriteTeams.includes(team.team.id) ? "team" : "team-unselected"
+            newFavouriteTeams.includes(team.team.id)
+              ? "team"
+              : "team-unselected"
           }
         >
           <div
@@ -75,7 +83,7 @@ function Favourites() {
     }
   );
 
-  if (favouriteTeams.length === 0) {
+  if (newFavouriteTeams.length === 0) {
     favTeamsElements = (
       <div className="team-empty">
         <span>You have to add your favourite teams.</span>
@@ -89,12 +97,12 @@ function Favourites() {
   let favLeaguesElements: JSX.Element[] | ReactElement =
     favouriteLeaguesInfo.map((league) => {
       const handleClick = () => {
-        if (favouriteLeagues.includes(league.league.id)) {
-          setFavouriteLeagues(
-            favouriteLeagues.filter((item) => item !== league.league.id)
+        if (newFavouriteLeagues.includes(league.league.id)) {
+          setNewFavouriteLeagues(
+            newFavouriteLeagues.filter((item) => item !== league.league.id)
           );
         } else {
-          setFavouriteLeagues((prev) =>
+          setNewFavouriteLeagues((prev) =>
             [...prev, league.league.id].sort((a, b) => a - b)
           );
         }
@@ -103,7 +111,7 @@ function Favourites() {
         <div
           key={league.league.id}
           className={
-            favouriteLeagues.includes(league.league.id)
+            newFavouriteLeagues.includes(league.league.id)
               ? "favLeague"
               : "favLeague-unselected"
           }
@@ -129,7 +137,7 @@ function Favourites() {
       );
     });
 
-  if (favouriteLeagues.length === 0) {
+  if (newFavouriteLeagues.length === 0) {
     favLeaguesElements = (
       <div className="favLeague-empty" style={{ fontSize: "16px" }}>
         <span>You have to add your favourite leagues.</span>
@@ -156,7 +164,7 @@ function Favourites() {
             <h1 className="favourites-title">Favourites</h1>
             <div className="title-container">
               <h2 style={{ marginRight: "10px" }}>Teams</h2>
-              {favouriteTeams.length !== 0 && (
+              {newFavouriteTeams.length !== 0 && (
                 <div
                   onClick={() => navigate("/teams")}
                   className="addFavourite"
@@ -168,7 +176,7 @@ function Favourites() {
             <div className="team-container">{favTeamsElements}</div>
             <div className="title-container">
               <h2 style={{ marginRight: "10px" }}>Leagues</h2>
-              {favouriteLeagues.length !== 0 && (
+              {newFavouriteLeagues.length !== 0 && (
                 <div
                   onClick={() => navigate("/leagues")}
                   className="addFavourite"

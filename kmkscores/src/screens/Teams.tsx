@@ -12,7 +12,7 @@ import useInfo from "../hooks/UseInfo";
 
 function Teams() {
   const [menu, setMenu] = useState<boolean>(false);
-  const { favouriteTeams } = useInfo() as InfoContextType;
+  const { newFavouriteTeams } = useInfo() as InfoContextType;
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
@@ -23,8 +23,11 @@ function Teams() {
   const [filteredTeams, setFilteredTeams] = useState<ITeamInfo[]>([]);
 
   useEffect(() => {
-    localStorage.setItem("favouriteTeams", JSON.stringify(favouriteTeams));
-  }, [favouriteTeams]);
+    localStorage.setItem(
+      "newFavouriteTeams",
+      JSON.stringify(newFavouriteTeams)
+    );
+  }, [newFavouriteTeams]);
 
   const navigate = useNavigate();
 

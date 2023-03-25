@@ -15,14 +15,17 @@ function Leagues() {
   const [menu, setMenu] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { favouriteLeagues } = useInfo() as InfoContextType;
+  const { newFavouriteLeagues } = useInfo() as InfoContextType;
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
 
   useEffect(() => {
-    localStorage.setItem("favouriteLeagues", JSON.stringify(favouriteLeagues));
-  }, [favouriteLeagues]);
+    localStorage.setItem(
+      "newFavouriteLeagues",
+      JSON.stringify(newFavouriteLeagues)
+    );
+  }, [newFavouriteLeagues]);
 
   return (
     <div className="App">

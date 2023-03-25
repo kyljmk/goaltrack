@@ -17,7 +17,8 @@ function TeamInfo() {
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
   const [options, setOptions] = useState<number>(0);
-  const { favouriteTeams, setFavouriteTeams } = useInfo() as InfoContextType;
+  const { newFavouriteTeams, setNewFavouriteTeams } =
+    useInfo() as InfoContextType;
 
   const teamInfo = useApiGetTeamInfo(id);
   const teamFixturesResults: FixtureResponse[] =
@@ -34,10 +35,10 @@ function TeamInfo() {
     (fixture) => fixture.fixture.date < todaysDate
   );
   const handleFavToggle = (id: number) => {
-    if (favouriteTeams.includes(id)) {
-      setFavouriteTeams(favouriteTeams.filter((item) => item !== id));
+    if (newFavouriteTeams.includes(id)) {
+      setNewFavouriteTeams(newFavouriteTeams.filter((item) => item !== id));
     } else {
-      setFavouriteTeams((prev) => [...prev, id].sort((a, b) => a - b));
+      setNewFavouriteTeams((prev) => [...prev, id].sort((a, b) => a - b));
     }
   };
 
@@ -56,7 +57,7 @@ function TeamInfo() {
         <div
           onClick={() => handleFavToggle(id)}
           className={
-            favouriteTeams.includes(id)
+            newFavouriteTeams.includes(id)
               ? "teamHeader-star-selected"
               : "teamHeader-star-unselected"
           }

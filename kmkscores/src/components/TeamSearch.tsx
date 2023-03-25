@@ -24,7 +24,8 @@ function TeamSearch({
   const [filteredCountries, setFilteredCountries] = useState<ICountry[]>([]);
 
   const [flag, setFlag] = useState<string>("");
-  const { favouriteTeams, setFavouriteTeams } = useInfo() as InfoContextType;
+  const { newFavouriteTeams, setNewFavouriteTeams } =
+    useInfo() as InfoContextType;
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -121,10 +122,10 @@ function TeamSearch({
   });
 
   const handleFavToggle = (id: number) => {
-    if (favouriteTeams.includes(id)) {
-      setFavouriteTeams(favouriteTeams.filter((item) => item !== id));
+    if (newFavouriteTeams.includes(id)) {
+      setNewFavouriteTeams(newFavouriteTeams.filter((item) => item !== id));
     } else {
-      setFavouriteTeams((prev) => [...prev, id].sort((a, b) => a - b));
+      setNewFavouriteTeams((prev) => [...prev, id].sort((a, b) => a - b));
     }
   };
 
@@ -146,7 +147,7 @@ function TeamSearch({
         <div
           onClick={() => handleFavToggle(team.team.id)}
           className={
-            favouriteTeams.includes(team.team.id)
+            newFavouriteTeams.includes(team.team.id)
               ? "teamSearch-star-container"
               : "teamSearch-star-container-unselected"
           }
