@@ -7,7 +7,7 @@ import { ILeagueDetails, InfoContextType } from "../Types";
 import useInfo from "../hooks/UseInfo";
 
 function LeagueSearch() {
-  const { favouriteLeagues, setFavouriteLeagues } =
+  const { newFavouriteLeagues, setNewFavouriteLeagues } =
     useInfo() as InfoContextType;
   const [options, setOptions] = useState<string>("league");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -65,10 +65,10 @@ function LeagueSearch() {
   };
 
   const handleFavToggle = (id: number) => {
-    if (favouriteLeagues.includes(id)) {
-      setFavouriteLeagues(favouriteLeagues.filter((item) => item !== id));
+    if (newFavouriteLeagues.includes(id)) {
+      setNewFavouriteLeagues(newFavouriteLeagues.filter((item) => item !== id));
     } else {
-      setFavouriteLeagues((prev) => [...prev, id].sort((a, b) => a - b));
+      setNewFavouriteLeagues((prev) => [...prev, id].sort((a, b) => a - b));
     }
   };
 
@@ -98,7 +98,7 @@ function LeagueSearch() {
             <div
               onClick={() => handleFavToggle(league.league.id)}
               className={
-                favouriteLeagues.includes(league.league.id)
+                newFavouriteLeagues.includes(league.league.id)
                   ? "searchLeague-star-container"
                   : "searchLeague-star-container-unselected"
               }

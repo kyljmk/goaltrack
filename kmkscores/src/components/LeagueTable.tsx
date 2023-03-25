@@ -8,15 +8,15 @@ import { ILeagueInfo, ILeagueTableProps, InfoContextType } from "../Types";
 
 function LeagueTable({ id, teamPage }: ILeagueTableProps) {
   const { leagueTable } = useApiGetLeagueTable(id);
-  const { favouriteLeagues, setFavouriteLeagues } =
+  const { newFavouriteLeagues, setNewFavouriteLeagues } =
     useInfo() as InfoContextType;
   const navigate = useNavigate();
 
   const handleFavToggle = (id: number) => {
-    if (favouriteLeagues.includes(id)) {
-      setFavouriteLeagues(favouriteLeagues.filter((item) => item !== id));
+    if (newFavouriteLeagues.includes(id)) {
+      setNewFavouriteLeagues(newFavouriteLeagues.filter((item) => item !== id));
     } else {
-      setFavouriteLeagues((prev) => [...prev, id].sort((a, b) => a - b));
+      setNewFavouriteLeagues((prev) => [...prev, id].sort((a, b) => a - b));
     }
   };
 
@@ -94,7 +94,7 @@ function LeagueTable({ id, teamPage }: ILeagueTableProps) {
           <div
             onClick={() => handleFavToggle(leagueTable[0].league.id)}
             className={
-              favouriteLeagues.includes(leagueTable[0].league.id)
+              newFavouriteLeagues.includes(leagueTable[0].league.id)
                 ? "leagueTable-title-starSelected"
                 : "leagueTable-title-starUnselected"
             }

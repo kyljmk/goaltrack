@@ -4,32 +4,31 @@ import { InfoContextType } from "../Types";
 const InfoContext = createContext<InfoContextType | null>(null);
 
 export const InfoProvider = ({ children }: { children: ReactNode }) => {
-  const [favouriteLeagues, setFavouriteLeagues] = useState<number[]>(
+  const [newFavouriteLeagues, setNewFavouriteLeagues] = useState<number[]>(
     //@ts-ignore
-    JSON.parse(localStorage.getItem("favouriteLeagues")) || [
+    JSON.parse(localStorage.getItem("newFavouriteLeagues")) || [
       39, 40, 140, 78, 135, 2, 3,
     ]
   );
 
   // World Cup - 1
   // Euros - 4
-  // Friendlies - 10
   // World Cup Qual - 32
   // UEFA Nations League - 5
   // Euro Qual - 960
 
-  const [favouriteTeams, setFavouriteTeams] = useState<number[]>(
+  const [newFavouriteTeams, setNewFavouriteTeams] = useState<number[]>(
     //@ts-ignore
-    JSON.parse(localStorage.getItem("favouriteTeams")) || []
+    JSON.parse(localStorage.getItem("newFavouriteTeams")) || [10]
   );
 
   return (
     <InfoContext.Provider
       value={{
-        favouriteLeagues,
-        setFavouriteLeagues,
-        favouriteTeams,
-        setFavouriteTeams,
+        newFavouriteLeagues,
+        setNewFavouriteLeagues,
+        newFavouriteTeams,
+        setNewFavouriteTeams,
       }}
     >
       {children}

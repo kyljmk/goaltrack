@@ -51,128 +51,6 @@ export const useApiGetGame = (fixtureId: number) => {
   return { fixtureDetails, loadingGame };
 };
 
-export const useApiGetFavouriteTeamsFixtures = (
-  fromDate: string,
-  toDate: string
-) => {
-  const [teamsDaysFixtures, setTeamsDaysFixtures] = useState<
-    FixtureResponse[][]
-  >([blankFixtureResponse]);
-  const { favouriteTeams } = useInfo() as InfoContextType;
-  const season = useCurrentSeason();
-
-  const apiKey: string = process.env.REACT_APP_API_KEY as string;
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": apiKey,
-      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-    },
-  };
-
-  useEffect(() => {
-    const promises = fetchApi();
-    Promise.all(promises).then((values) => {
-      const filteredValues = values.filter((element) => {
-        return element !== undefined;
-      });
-      setTeamsDaysFixtures(filteredValues);
-    });
-  }, []);
-
-  const fetchApi = () => {
-    const data = favouriteTeams
-      .sort(function (a, b) {
-        return a - b;
-      })
-      .map(async (i) => {
-        const response = await fetch(
-          `https://api-football-v1.p.rapidapi.com/v3/fixtures?from=${fromDate}&to=${toDate}&team=${i}&season=${season}`,
-          options
-        );
-        const data = await response.json();
-        return data.response;
-      });
-    return data;
-  };
-
-  return teamsDaysFixtures;
-};
-
-export const useApiGetFavouriteLeaguesFixtures = (
-  fromDate: string,
-  toDate: string
-) => {
-  const [leaguesDaysFixtures, setLeaguesDaysFixtures] = useState<
-    FixtureResponse[][]
-  >([blankFixtureResponse]);
-  const { favouriteLeagues } = useInfo() as InfoContextType;
-  const season = useCurrentSeason();
-
-  const apiKey: string = process.env.REACT_APP_API_KEY as string;
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": apiKey,
-      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-    },
-  };
-
-  useEffect(() => {
-    const promises = fetchApi();
-    Promise.all(promises).then((values) => {
-      setLeaguesDaysFixtures(values);
-    });
-  }, []);
-
-  const fetchApi = () => {
-    const data = favouriteLeagues
-      .sort(function (a, b) {
-        return a - b;
-      })
-      .map(async (i) => {
-        const response = await fetch(
-          `https://api-football-v1.p.rapidapi.com/v3/fixtures?from=${fromDate}&to=${toDate}&league=${i}&season=${season}`,
-          options
-        );
-        const data = await response.json();
-        return data.response;
-      });
-    return data;
-  };
-
-  return leaguesDaysFixtures;
-};
-
-export const useApiGetLiveGames = () => {
-  const [liveResults, setLiveResults] =
-    useState<FixtureResponse[]>(blankFixtureResponse);
-
-  const apiKey: string = process.env.REACT_APP_API_KEY as string;
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": apiKey,
-      "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-    },
-  };
-
-  const fetchApi = async () => {
-    const response = await fetch(
-      "https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all",
-      options
-    );
-
-    const data = await response.json();
-    setLiveResults(data.response);
-  };
-  useEffect(() => {
-    fetchApi();
-  }, []);
-
-  return liveResults;
-};
-
 export const useApiGetAllGames = () => {
   const [allResults, setAllResults] = useState<FixtureResponse[][]>([
     blankFixtureResponse,
@@ -313,7 +191,7 @@ export const useApiGetLeagueTable = (id: number) => {
 };
 
 export const useApiGetFavouriteTeams = () => {
-  const { favouriteTeams } = useInfo() as InfoContextType;
+  const { newFavouriteTeams } = useInfo() as InfoContextType;
   const [favouriteTeamsInfo, setFavouriteTeamsInfo] = useState<ITeamInfo[]>([]);
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -331,7 +209,7 @@ export const useApiGetFavouriteTeams = () => {
     });
   }, []);
   const fetchApi = () => {
-    const data = favouriteTeams.map(async (i) => {
+    const data = newFavouriteTeams.map(async (i) => {
       const response = await fetch(
         `https://api-football-v1.p.rapidapi.com/v3/teams?id=${i}`,
         options
@@ -346,7 +224,7 @@ export const useApiGetFavouriteTeams = () => {
 };
 
 export const useApiGetFavouriteLeagues = () => {
-  const { favouriteLeagues } = useInfo() as InfoContextType;
+  const { newFavouriteLeagues } = useInfo() as InfoContextType;
   const [favouriteLeaguesInfo, setFavouriteLeaguesInfo] = useState<
     ILeagueInfo[]
   >([]);
@@ -368,7 +246,7 @@ export const useApiGetFavouriteLeagues = () => {
     });
   }, []);
   const fetchApi = () => {
-    const data = favouriteLeagues.map(async (i) => {
+    const data = newFavouriteLeagues.map(async (i) => {
       const response = await fetch(
         `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${i}&&season=${season}`,
         options

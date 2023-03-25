@@ -40,13 +40,13 @@ function Home() {
     progress.finish();
   }, 700);
 
-  const { favouriteLeagues } = useInfo() as InfoContextType;
-  const { favouriteTeams } = useInfo() as InfoContextType;
+  const { newFavouriteLeagues } = useInfo() as InfoContextType;
+  const { newFavouriteTeams } = useInfo() as InfoContextType;
 
   const newLeagueElements = Object.values(
     allResults[viewingDay]
       .filter((item: FixtureResponse) =>
-        favouriteLeagues.includes(item.league.id)
+        newFavouriteLeagues.includes(item.league.id)
       )
       .reduce((x: any, y: any) => {
         (x[y.league.name] = x[y.league.name] || []).push(y);
@@ -65,15 +65,15 @@ function Home() {
 
   const newTeamsElements = allResults[viewingDay].filter(
     (item: FixtureResponse) =>
-      favouriteTeams.includes(item.teams.home.id) ||
-      favouriteTeams.includes(item.teams.away.id)
+      newFavouriteTeams.includes(item.teams.home.id) ||
+      newFavouriteTeams.includes(item.teams.away.id)
   ) ? (
     Object.values(
       allResults[viewingDay]
         .filter(
           (item: FixtureResponse) =>
-            favouriteTeams.includes(item.teams.home.id) ||
-            favouriteTeams.includes(item.teams.away.id)
+            newFavouriteTeams.includes(item.teams.home.id) ||
+            newFavouriteTeams.includes(item.teams.away.id)
         )
         .reduce((x: any, y: any) => {
           (x[y.league.name] = x[y.league.name] || []).push(y);

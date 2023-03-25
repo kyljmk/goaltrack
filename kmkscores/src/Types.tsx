@@ -134,10 +134,10 @@ export interface IGameHeaderProps {
 }
 
 export interface InfoContextType {
-  favouriteLeagues: number[];
-  setFavouriteLeagues: Dispatch<SetStateAction<number[]>>;
-  favouriteTeams: number[];
-  setFavouriteTeams: Dispatch<SetStateAction<number[]>>;
+  newFavouriteLeagues: number[];
+  setNewFavouriteLeagues: Dispatch<SetStateAction<number[]>>;
+  newFavouriteTeams: number[];
+  setNewFavouriteTeams: Dispatch<SetStateAction<number[]>>;
 }
 
 export interface IMatchEvent {
