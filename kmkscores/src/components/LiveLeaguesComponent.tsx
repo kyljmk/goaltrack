@@ -6,7 +6,19 @@ import { FixtureResponse, IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
 function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
-  const [showFixtures, setShowFixtures] = useState<boolean>(false);
+  const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
+  const liveMatchesCheck = (input: FixtureResponse[]) => {
+    let count: number = 0;
+    input.forEach((item: FixtureResponse) => {
+      if (liveStatuses.includes(item.fixture.status.short)) {
+        count++;
+      }
+    });
+    return count > 0;
+  };
+  const [showFixtures, setShowFixtures] = useState<boolean>(
+    liveMatchesCheck(fixtures)
+  );
   const navigate = useNavigate();
 
   function compare(a: FixtureResponse, b: FixtureResponse) {

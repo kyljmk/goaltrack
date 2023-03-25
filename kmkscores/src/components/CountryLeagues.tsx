@@ -3,7 +3,19 @@ import { FixtureResponse, ICountryLeagueProps } from "../Types";
 import LiveLeaguesComponent from "./LiveLeaguesComponent";
 
 function CountryLeagues({ country, menu }: ICountryLeagueProps) {
-  const [showLeagues, setShowLeagues] = useState<boolean>(false);
+  const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
+  const liveMatchesCheck = (input: FixtureResponse[]) => {
+    let count: number = 0;
+    input.forEach((item: FixtureResponse) => {
+      if (liveStatuses.includes(item.fixture.status.short)) {
+        count++;
+      }
+    });
+    return count > 0;
+  };
+  const [showLeagues, setShowLeagues] = useState<boolean>(
+    liveMatchesCheck(country)
+  );
   const orderedCountryElements: FixtureResponse[][] = Object.values(
     country
       .sort((a, b) => a.league.id - b.league.id)
