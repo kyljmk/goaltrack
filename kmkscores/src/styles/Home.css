@@ -160,6 +160,19 @@
   margin-right: 20px;
 }
 
+.country-container {
+  display: flex;
+  align-items: center;
+  border: 1px white solid;
+}
+
+.country-flag {
+  height: 30px;
+}
+.country-title {
+  margin: 0;
+}
+
 .league {
   width: 100%;
   margin-bottom: 10px;

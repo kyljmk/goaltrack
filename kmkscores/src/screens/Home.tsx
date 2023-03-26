@@ -1,7 +1,7 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import LiveLeaguesComponent from "../components/LiveLeaguesComponent";
+import LiveLeaguesComponent from "../components/LeagueFixtures";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import EmptyFixtures from "../components/EmptyFixtures";

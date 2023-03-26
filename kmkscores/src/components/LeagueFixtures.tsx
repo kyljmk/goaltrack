@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FixtureResponse, IDailyLeagueProps, IFixtureProps } from "../Types";
 import LiveScore from "./LiveScore";
 
-function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
+function LeagueFixtures({ fixtures, menu }: IDailyLeagueProps) {
   const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
   const liveMatchesCheck = (input: FixtureResponse[]) => {
     let count: number = 0;
@@ -14,10 +14,10 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
         count++;
       }
     });
-    return count > 0;
+    return count;
   };
   const [showFixtures, setShowFixtures] = useState<boolean>(
-    liveMatchesCheck(fixtures)
+    liveMatchesCheck(fixtures) > 0
   );
   const navigate = useNavigate();
 
@@ -79,11 +79,14 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
         <div className="league-header-title-container">
           <h2 className="league-header-title" onClick={handleClick}>
             {fixtures[0].league.name}
-            {fixtures[0].league.id}
+            <span>{liveMatchesCheck(fixtures)}</span>
+            <span>{fixtures.length}</span>
           </h2>
-          <div className="league-header-title-icon" onClick={handleNavigate}>
-            <FontAwesomeIcon icon={faTable} size="xl" />
-          </div>
+          {showFixtures && (
+            <div className="league-header-title-icon" onClick={handleNavigate}>
+              <FontAwesomeIcon icon={faTable} size="xl" />
+            </div>
+          )}
         </div>
       </div>
       {showFixtures && fixtureElements}
@@ -91,4 +94,4 @@ function LiveLeagues({ fixtures, menu }: IDailyLeagueProps) {
   );
 }
 
-export default LiveLeagues;
+export default LeagueFixtures;

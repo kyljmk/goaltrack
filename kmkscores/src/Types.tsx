@@ -131,6 +131,7 @@ export interface IGameHeaderProps {
   country: string;
   round: string;
   dateTime: string;
+  international: boolean;
 }
 
 export interface InfoContextType {

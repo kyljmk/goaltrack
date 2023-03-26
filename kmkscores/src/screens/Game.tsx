@@ -104,7 +104,9 @@ function Game() {
                 round={league.round}
                 dateTime={fixture.date}
                 country={league.country}
+                international={league.country === "World"}
               />
+
               <div className="game-refVenue-container">
                 <span className="game-referee">{fixture.referee}</span>
                 <span className="game-venue">{fixture.venue.name}</span>

@@ -15,6 +15,7 @@ function GameHeader({
   dateTime,
   matchStatus,
   minutesPlayed,
+  international,
 }: IGameHeaderProps) {
   const navigate = useNavigate();
 
@@ -78,7 +79,10 @@ function GameHeader({
           className="game-home"
           onClick={() => navigate(`/teams?id=${home.id}`)}
         >
-          <div className="game-home-logoContainer">
+          <div
+            className="game-home-logoContainer"
+            style={{ backgroundColor: international ? "black" : "white" }}
+          >
             <img
               className="game-home-logo"
               src={home.logo}
@@ -122,11 +126,15 @@ function GameHeader({
           className="game-away"
           onClick={() => navigate(`/teams?id=${away.id}`)}
         >
-          <div className="game-away-logoContainer">
+          <div
+            className="game-away-logoContainer"
+            style={{ backgroundColor: international ? "black" : "white" }}
+          >
             <img
               className="game-away-logo"
               src={away.logo}
               alt="home teams logo"
+              style={{ borderRadius: international ? "20px" : "0" }}
             />
           </div>
           <span className="game-away-name">{away.name}</span>

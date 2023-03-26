@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FixtureResponse, ICountryLeagueProps } from "../Types";
-import LiveLeaguesComponent from "./LiveLeaguesComponent";
+import LeaguesFixtures from "./LeagueFixtures";
 
 function CountryLeagues({ country, menu }: ICountryLeagueProps) {
   const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
@@ -11,11 +11,9 @@ function CountryLeagues({ country, menu }: ICountryLeagueProps) {
         count++;
       }
     });
-    return count > 0;
+    return count;
   };
-  const [showLeagues, setShowLeagues] = useState<boolean>(
-    liveMatchesCheck(country)
-  );
+  const [showLeagues, setShowLeagues] = useState<boolean>(false);
   const orderedCountryElements: FixtureResponse[][] = Object.values(
     country
       .sort((a, b) => a.league.id - b.league.id)
@@ -28,7 +26,7 @@ function CountryLeagues({ country, menu }: ICountryLeagueProps) {
 
   let countryElements: JSX.Element[] = orderedCountryElements.map((leagues) => {
     return (
-      <LiveLeaguesComponent
+      <LeaguesFixtures
         key={leagues[0].league.id}
         fixtures={leagues}
         menu={menu}
@@ -38,9 +36,15 @@ function CountryLeagues({ country, menu }: ICountryLeagueProps) {
 
   return (
     <div>
-      <h2 onClick={() => setShowLeagues((prev) => !prev)}>
-        {country[0].league.country}
-      </h2>
+      <div className="country-container">
+        <img src={country[0].league.flag} className="country-flag" />
+        <h2
+          className="country-title"
+          onClick={() => setShowLeagues((prev) => !prev)}
+        >
+          {country[0].league.country}
+        </h2>
+      </div>
       {showLeagues && countryElements}
     </div>
   );
