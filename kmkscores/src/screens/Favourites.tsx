@@ -94,8 +94,9 @@ function Favourites() {
     );
   }
 
-  let favLeaguesElements: JSX.Element[] | ReactElement =
-    favouriteLeaguesInfo.map((league) => {
+  let favLeaguesElements: JSX.Element[] | ReactElement = favouriteLeaguesInfo
+    .filter((team) => team !== undefined)
+    .map((league) => {
       const handleClick = () => {
         if (newFavouriteLeagues.includes(league.league.id)) {
           setNewFavouriteLeagues(

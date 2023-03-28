@@ -28,7 +28,7 @@ function LeagueTable({ id, teamPage }: ILeagueTableProps) {
       return (
         <tr className="team-row">
           <td>{team.rank}</td>
-          <td>
+          <td style={{ width: "50%" }}>
             <div
               className="team-name"
               onClick={() => navigate(`/teams?id=${team.team.id}`)}
@@ -40,7 +40,7 @@ function LeagueTable({ id, teamPage }: ILeagueTableProps) {
                   className="team-logo"
                 />
               </div>
-              <div className="team-name-text">{team.team.name}</div>
+              <span className="team-name-text">{team.team.name}</span>
             </div>
           </td>
           <td>{team.all.played}</td>
