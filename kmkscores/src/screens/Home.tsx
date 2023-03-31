@@ -224,8 +224,22 @@ function Home() {
               liveGames={homeOptions === 1}
               setViewingDate={setViewingDay}
             />
-            {homeOptions === 0 && newLeagueElements}
-            {homeOptions === 0 && allResultsElements}
+            {homeOptions === 0 && (
+              <>
+                <span style={{ width: "100%", textAlign: "left" }}>
+                  Favourite Leagues
+                </span>
+                {newLeagueElements}
+              </>
+            )}
+            {homeOptions === 0 && (
+              <>
+                <span style={{ width: "100px", textAlign: "left" }}>
+                  All Games
+                </span>
+                {allResultsElements}
+              </>
+            )}
             {homeOptions === 1 && newLiveElements}
             {homeOptions === 2 && newTeamsElements}
           </div>

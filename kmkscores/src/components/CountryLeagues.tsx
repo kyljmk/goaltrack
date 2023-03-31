@@ -37,7 +37,6 @@ function CountryLeagues({ country, menu }: ICountryLeagueProps) {
   return (
     <div>
       <div className="country-container">
-        <img src={country[0].league.flag} className="country-flag" />
         <h2
           className="country-title"
           onClick={() => setShowLeagues((prev) => !prev)}

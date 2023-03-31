@@ -1,4 +1,8 @@
-import { faTable } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAngleUp,
+  faTable,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -65,6 +69,22 @@ function LeagueFixtures({ fixtures, menu }: IDailyLeagueProps) {
   const handleNavigate = () => {
     navigate(`/leagues?id=${fixtures[0].league.id}`);
   };
+  if (fixtures[0].league.country === "England") {
+    fixtures[0].league.flag =
+      "https://media-2.api-sports.io/football/teams/10.png";
+  }
+  if (fixtures[0].league.country === "Scotland") {
+    fixtures[0].league.flag =
+      "https://media-1.api-sports.io/football/teams/1775.png";
+  }
+  if (fixtures[0].league.country === "Wales") {
+    fixtures[0].league.flag =
+      "https://media-2.api-sports.io/football/teams/767.png";
+  }
+  if (fixtures[0].league.country === "Northern-Ireland") {
+    fixtures[0].league.flag =
+      "https://media-2.api-sports.io/football/teams/8213.png";
+  }
 
   return (
     <div className="league">
@@ -72,15 +92,26 @@ function LeagueFixtures({ fixtures, menu }: IDailyLeagueProps) {
         <div className="league-header-imageContainer">
           <img
             className="league-header-image"
-            src={fixtures[0].league.logo}
+            src={fixtures[0].league.flag}
             alt="logo of selected league"
           />
         </div>
         <div className="league-header-title-container">
           <h2 className="league-header-title" onClick={handleClick}>
             {fixtures[0].league.name}
-            <span>{liveMatchesCheck(fixtures)}</span>
-            <span>{fixtures.length}</span>
+            {!showFixtures && (
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{ marginLeft: "5px" }}
+              />
+            )}
+            {showFixtures && (
+              <FontAwesomeIcon icon={faAngleUp} style={{ marginLeft: "5px" }} />
+            )}
+            <span className="league-header-liveGames">
+              {liveMatchesCheck(fixtures)}
+            </span>
+            <span className="league-header-allGames">{fixtures.length}</span>
           </h2>
           {showFixtures && (
             <div className="league-header-title-icon" onClick={handleNavigate}>

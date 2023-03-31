@@ -163,14 +163,13 @@
 .country-container {
   display: flex;
   align-items: center;
-  border: 1px white solid;
 }
 
-.country-flag {
-  height: 30px;
-}
 .country-title {
   margin: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
 }
 
 .league {
@@ -190,18 +189,17 @@
 }
 
 .league-header-image {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  padding: 5px;
-  border-radius: 15px;
-  background-color: white;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 1px #f4a340 solid;
+  border-radius: 25px;
   margin-right: 10px;
 }
 
 .league-header-title {
   width: 100%;
-  font-size: 22px;
+  font-size: 16px;
   cursor: pointer;
   width: auto;
   margin: 0;
@@ -210,9 +208,25 @@
 .league-header-title-container {
   display: flex;
   border-bottom: 1px solid #f4a340;
+  padding-bottom: 5px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.league-header-liveGames {
+  margin-left: 15px;
+  background-color: #f4a340;
+  color: black;
+  padding: 0 5px;
+  border-radius: 10px;
+}
+
+.league-header-allGames {
+  margin-left: 5px;
+  border: #f4a340 solid 1px;
+  padding: 0 5px;
+  border-radius: 20px;
 }
 
 .league-header-title-icon {

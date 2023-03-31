@@ -142,7 +142,10 @@ function TeamSearch({
             src={team.team.logo}
             alt="team logo"
           />
-          <span className="teamSearch-team-name">{team.team.name}</span>
+          <span className="teamSearch-team-name">
+            {team.team.name}
+            {team.team.id}
+          </span>
         </div>
         <div
           onClick={() => handleFavToggle(team.team.id)}
