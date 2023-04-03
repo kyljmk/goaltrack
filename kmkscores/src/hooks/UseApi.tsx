@@ -156,12 +156,11 @@ export const useApiGetLeagues = () => {
   return { leagues, cups };
 };
 
-export const useApiGetLeagueTable = (id: number) => {
+export const useApiGetLeagueTable = (id: number, season: number) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [leagueTable, setLeagueTable] = useState<ILeagueTable[]>([
     tempLeagueTable,
   ]);
-  const season = useCurrentSeason();
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -345,8 +344,9 @@ export const useApiGetTeamFixturesResults = (id: number) => {
   return teamFixturesResults;
 };
 
-export const useApiGetLeagueId = (id: number) => {
+export const useApiGetLeagueIdAndSeason = (id: number) => {
   const [leagueId, setLeagueId] = useState<number>(0);
+  const [season, setSeason] = useState<number>(0);
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {
@@ -363,6 +363,7 @@ export const useApiGetLeagueId = (id: number) => {
       options
     );
     const data = await response.json();
+    setSeason(data.response[0].seasons[0].year);
     setLeagueId(data.response[0].league.id);
   };
 
@@ -370,5 +371,5 @@ export const useApiGetLeagueId = (id: number) => {
     fetchApi();
   }, []);
 
-  return leagueId;
+  return { leagueId, season };
 };

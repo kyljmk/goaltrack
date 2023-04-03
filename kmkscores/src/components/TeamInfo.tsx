@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
-  useApiGetLeagueId,
+  useApiGetLeagueIdAndSeason,
   useApiGetTeamFixturesResults,
   useApiGetTeamInfo,
 } from "../hooks/UseApi";
@@ -25,7 +25,7 @@ function TeamInfo() {
     useApiGetTeamFixturesResults(id);
   const todaysDate = new Date().toISOString();
 
-  const leagueId = useApiGetLeagueId(id);
+  const { leagueId, season } = useApiGetLeagueIdAndSeason(id);
 
   // greater than new Date === fixture
   const teamFixtures = teamFixturesResults?.filter(
@@ -107,7 +107,9 @@ function TeamInfo() {
           resultsFixtures={"fixtures"}
         />
       )}
-      {options === 2 && <LeagueTable id={leagueId} teamPage={true} />}
+      {options === 2 && (
+        <LeagueTable id={leagueId} currentSeason={season} teamPage={true} />
+      )}
       {options === 3 && <TeamSquad />}
     </div>
   );

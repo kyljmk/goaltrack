@@ -6,8 +6,8 @@ import { useApiGetLeagueTable } from "../hooks/UseApi";
 import useInfo from "../hooks/UseInfo";
 import { ILeagueInfo, ILeagueTableProps, InfoContextType } from "../Types";
 
-function LeagueTable({ id, teamPage }: ILeagueTableProps) {
-  const { leagueTable } = useApiGetLeagueTable(id);
+function LeagueTable({ id, teamPage, currentSeason }: ILeagueTableProps) {
+  const { leagueTable } = useApiGetLeagueTable(id, currentSeason);
   const { newFavouriteLeagues, setNewFavouriteLeagues } =
     useInfo() as InfoContextType;
   const navigate = useNavigate();
@@ -22,8 +22,11 @@ function LeagueTable({ id, teamPage }: ILeagueTableProps) {
 
   const tableElements = leagueTable[0].league.standings.map((league) => {
     const seperateTableElements = league.map((team) => {
-      const regExArray = team.form.match(/.{1,1}/g);
-      const formattedForm = regExArray?.join(" ");
+      let formattedForm: string | undefined = "";
+      if (team.form) {
+        const regExArray = team.form.match(/.{1,1}/g);
+        formattedForm = regExArray?.join(" ");
+      }
 
       return (
         <tr className="team-row">

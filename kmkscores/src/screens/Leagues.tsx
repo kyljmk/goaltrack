@@ -49,7 +49,15 @@ function Leagues() {
                 </div>
               )}
             </div>
-            {id ? <LeagueTable id={id} teamPage={false} /> : <LeagueSearch />}
+            {id ? (
+              <LeagueTable
+                id={id}
+                currentSeason={currentSeason}
+                teamPage={false}
+              />
+            ) : (
+              <LeagueSearch />
+            )}
           </div>
         </div>
       </div>

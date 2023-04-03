@@ -67,7 +67,9 @@ function LeagueFixtures({ fixtures, menu }: IDailyLeagueProps) {
   };
 
   const handleNavigate = () => {
-    navigate(`/leagues?id=${fixtures[0].league.id}`);
+    navigate(
+      `/leagues?id=${fixtures[0].league.id}&currentSeason=${fixtures[0].league.season}`
+    );
   };
   if (fixtures[0].league.country === "England") {
     fixtures[0].league.flag =
