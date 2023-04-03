@@ -87,10 +87,15 @@ function LeagueSearch() {
     .map((country) => {
       country.sort((a, b) => a.league.id - b.league.id);
       const leagueElements = country.map((league) => {
+        const season = league.seasons[league.seasons.length - 1].year;
         return (
           <div className="searchLeague" key={league.league.id}>
             <span
-              onClick={() => navigate(`/leagues?id=${league.league.id}`)}
+              onClick={() =>
+                navigate(
+                  `/leagues?id=${league.league.id}&currentSeason=${season}`
+                )
+              }
               className="searchLeague-name"
             >
               {league.league.name}

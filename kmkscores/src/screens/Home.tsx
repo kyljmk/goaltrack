@@ -63,35 +63,36 @@ function Home() {
     );
   });
 
-  const newTeamsElements = allResults[viewingDay].filter(
-    (item: FixtureResponse) =>
-      newFavouriteTeams.includes(item.teams.home.id) ||
-      newFavouriteTeams.includes(item.teams.away.id)
-  ) ? (
-    Object.values(
-      allResults[viewingDay]
-        .filter(
-          (item: FixtureResponse) =>
-            newFavouriteTeams.includes(item.teams.home.id) ||
-            newFavouriteTeams.includes(item.teams.away.id)
-        )
-        .reduce((x: any, y: any) => {
-          (x[y.league.name] = x[y.league.name] || []).push(y);
+  const newTeamsElements =
+    allResults[viewingDay].filter(
+      (item: FixtureResponse) =>
+        newFavouriteTeams.includes(item.teams.home.id) ||
+        newFavouriteTeams.includes(item.teams.away.id)
+    ).length > 0 ? (
+      Object.values(
+        allResults[viewingDay]
+          .filter(
+            (item: FixtureResponse) =>
+              newFavouriteTeams.includes(item.teams.home.id) ||
+              newFavouriteTeams.includes(item.teams.away.id)
+          )
+          .reduce((x: any, y: any) => {
+            (x[y.league.name] = x[y.league.name] || []).push(y);
 
-          return x;
-        }, {})
-    ).map((league: any) => {
-      return (
-        <LiveLeaguesComponent
-          key={league[0].league.id}
-          fixtures={league}
-          menu={menu}
-        />
-      );
-    })
-  ) : (
-    <EmptyFixtures message="There are no games from your favourite teams on this day." />
-  );
+            return x;
+          }, {})
+      ).map((league: any) => {
+        return (
+          <LiveLeaguesComponent
+            key={league[0].league.id}
+            fixtures={league}
+            menu={menu}
+          />
+        );
+      })
+    ) : (
+      <EmptyFixtures message="There are no games from your favourite teams on this day." />
+    );
 
   const liveStatuses: string[] = ["1H", "HT", "2H", "ET", "BT", "P", "INT"];
 
@@ -226,7 +227,7 @@ function Home() {
             />
             {homeOptions === 0 && (
               <>
-                <span style={{ width: "100%", textAlign: "left" }}>
+                <span className="homefixtures-favLeagues-title">
                   Favourite Leagues
                 </span>
                 {newLeagueElements}
@@ -234,9 +235,7 @@ function Home() {
             )}
             {homeOptions === 0 && (
               <>
-                <span style={{ width: "100px", textAlign: "left" }}>
-                  All Games
-                </span>
+                <span className="homefixtures-favLeagues-title">All Games</span>
                 {allResultsElements}
               </>
             )}

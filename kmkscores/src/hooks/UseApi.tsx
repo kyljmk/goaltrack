@@ -141,7 +141,7 @@ export const useApiGetLeagues = () => {
 
   const fetchApi = async (option: string) => {
     const response = await fetch(
-      `https://api-football-v1.p.rapidapi.com/v3/leagues?season=${season}&type=${option}`,
+      `https://api-football-v1.p.rapidapi.com/v3/leagues?&type=${option}`,
       options
     );
     const data = await response.json();

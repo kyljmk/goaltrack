@@ -19,6 +19,7 @@ function Leagues() {
 
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
+  const currentSeason = Number(searchParams.get("currentSeason"));
 
   useEffect(() => {
     localStorage.setItem(

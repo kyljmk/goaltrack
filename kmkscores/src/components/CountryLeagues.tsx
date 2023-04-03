@@ -1,3 +1,5 @@
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { FixtureResponse, ICountryLeagueProps } from "../Types";
 import LeaguesFixtures from "./LeagueFixtures";
@@ -34,6 +36,10 @@ function CountryLeagues({ country, menu }: ICountryLeagueProps) {
     );
   });
 
+  if (country[0].league.country.includes("-")) {
+    country[0].league.country = country[0].league.country.replace("-", " ");
+  }
+
   return (
     <div>
       <div className="country-container">
@@ -42,6 +48,13 @@ function CountryLeagues({ country, menu }: ICountryLeagueProps) {
           onClick={() => setShowLeagues((prev) => !prev)}
         >
           {country[0].league.country}
+
+          {!showLeagues && (
+            <FontAwesomeIcon icon={faAngleDown} style={{ marginLeft: "5px" }} />
+          )}
+          {showLeagues && (
+            <FontAwesomeIcon icon={faAngleUp} style={{ marginLeft: "5px" }} />
+          )}
         </h2>
       </div>
       {showLeagues && countryElements}
