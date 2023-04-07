@@ -83,7 +83,10 @@ function LeagueFixtures({ fixtures, menu }: IDailyLeagueProps) {
     fixtures[0].league.flag =
       "https://media-2.api-sports.io/football/teams/767.png";
   }
-  if (fixtures[0].league.country === "Northern Ireland") {
+  if (
+    fixtures[0].league.country === "Northern Ireland" ||
+    fixtures[0].league.country === "Northern-Ireland"
+  ) {
     fixtures[0].league.flag =
       "https://media-2.api-sports.io/football/teams/8213.png";
   }

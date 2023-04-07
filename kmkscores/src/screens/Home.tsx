@@ -108,7 +108,7 @@ function Home() {
           (a: FixtureResponse, b: FixtureResponse) => a.league.id - b.league.id
         )
         .reduce((x: any, y: any) => {
-          (x[y.league.name] = x[y.league.name] || []).push(y);
+          (x[y.league.id] = x[y.league.id] || []).push(y);
 
           return x;
         }, {})

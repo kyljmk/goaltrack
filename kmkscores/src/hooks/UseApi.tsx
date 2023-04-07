@@ -313,11 +313,10 @@ export const useApiGetTeamInfo = (id: number) => {
   return teamInfo;
 };
 
-export const useApiGetTeamFixturesResults = (id: number) => {
+export const useApiGetTeamFixturesResults = (id: number, season: number) => {
   const [teamFixturesResults, setTeamFixturesResults] = useState<
     FixtureResponse[]
   >([]);
-  const season = useCurrentSeason();
 
   const apiKey: string = process.env.REACT_APP_API_KEY as string;
   const options = {

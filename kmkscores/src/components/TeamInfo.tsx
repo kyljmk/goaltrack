@@ -16,24 +16,13 @@ import TeamSquad from "./TeamSquad";
 function TeamInfo() {
   const [searchParams] = useSearchParams();
   const id = Number(searchParams.get("id"));
-  const [options, setOptions] = useState<number>(0);
+  const [options, setOptions] = useState<number>(5);
   const { newFavouriteTeams, setNewFavouriteTeams } =
     useInfo() as InfoContextType;
 
   const teamInfo = useApiGetTeamInfo(id);
-  const teamFixturesResults: FixtureResponse[] =
-    useApiGetTeamFixturesResults(id);
-  const todaysDate = new Date().toISOString();
-
   const { leagueId, season } = useApiGetLeagueIdAndSeason(id);
 
-  // greater than new Date === fixture
-  const teamFixtures = teamFixturesResults?.filter(
-    (fixture) => fixture.fixture.date > todaysDate
-  );
-  const teamResults = teamFixturesResults?.filter(
-    (fixture) => fixture.fixture.date < todaysDate
-  );
   const handleFavToggle = (id: number) => {
     if (newFavouriteTeams.includes(id)) {
       setNewFavouriteTeams(newFavouriteTeams.filter((item) => item !== id));
@@ -95,14 +84,14 @@ function TeamInfo() {
       </div>
       {options === 0 && (
         <TeamResultsFixtures
-          teamResults={teamResults}
+          season={season}
           id={id}
           resultsFixtures={"results"}
         />
       )}
       {options === 1 && (
         <TeamResultsFixtures
-          teamResults={teamFixtures}
+          season={season}
           id={id}
           resultsFixtures={"fixtures"}
         />

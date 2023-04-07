@@ -1,14 +1,26 @@
-import { match } from "assert";
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useApiGetTeamFixturesResults } from "../hooks/UseApi";
 import { FixtureResponse, ITeamResultsProps } from "../Types";
 
 function TeamResultsFixtures({
-  teamResults,
+  season,
   id,
   resultsFixtures,
 }: ITeamResultsProps) {
   const navigate = useNavigate();
+  const teamFixturesResults: FixtureResponse[] = useApiGetTeamFixturesResults(
+    id,
+    season
+  );
+  const todaysDate = new Date().toISOString();
+  const teamResults =
+    resultsFixtures === "fixtures"
+      ? teamFixturesResults?.filter(
+          (fixture) => fixture.fixture.date > todaysDate
+        )
+      : teamFixturesResults?.filter(
+          (fixture) => fixture.fixture.date < todaysDate
+        );
 
   function compare(a: FixtureResponse, b: FixtureResponse) {
     if (resultsFixtures === "results") {
