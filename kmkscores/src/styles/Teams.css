@@ -42,14 +42,21 @@
   text-align: center;
 }
 
+.search-container {
+  margin-bottom: 10px;
+}
+
+.search-question {
+  font-size: 18px;
+}
+
 @media (max-width: 450px) {
   .teams-container {
     padding: 20px;
   }
-}
-
-.search-container {
-  margin-bottom: 10px;
+  .search-question {
+    font-size: 13px;
+  }
 }
 
 .teamSearch-form {

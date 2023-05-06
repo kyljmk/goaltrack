@@ -6,7 +6,12 @@ import { useApiGetLeagueTable } from "../hooks/UseApi";
 import useInfo from "../hooks/UseInfo";
 import { ILeagueInfo, ILeagueTableProps, InfoContextType } from "../Types";
 
-function LeagueTable({ id, teamPage, currentSeason }: ILeagueTableProps) {
+function LeagueTable({
+  id,
+  setId,
+  teamPage,
+  currentSeason,
+}: ILeagueTableProps) {
   const { leagueTable } = useApiGetLeagueTable(id, currentSeason);
   const { newFavouriteLeagues, setNewFavouriteLeagues } =
     useInfo() as InfoContextType;
@@ -20,7 +25,7 @@ function LeagueTable({ id, teamPage, currentSeason }: ILeagueTableProps) {
     }
   };
 
-  const tableElements = leagueTable[0].league.standings.map((league) => {
+  const tableElements = leagueTable[0].league.standings.map((league, i) => {
     const seperateTableElements = league.map((team) => {
       let formattedForm: string | undefined = "";
       if (team.form) {
@@ -29,12 +34,17 @@ function LeagueTable({ id, teamPage, currentSeason }: ILeagueTableProps) {
       }
 
       return (
-        <tr className="team-row">
+        <tr key={team.team.id} className="team-row">
           <td>{team.rank}</td>
           <td style={{ width: "50%" }}>
             <div
               className="team-name"
-              onClick={() => navigate(`/teams?id=${team.team.id}`)}
+              onClick={() => {
+                navigate(`/teams?id=${team.team.id}`);
+                if (teamPage) {
+                  window.location.reload();
+                }
+              }}
             >
               <div className="logo-container">
                 <img
@@ -61,7 +71,7 @@ function LeagueTable({ id, teamPage, currentSeason }: ILeagueTableProps) {
       );
     });
     return (
-      <div>
+      <div key={i}>
         <table style={{ width: "100%" }}>
           <thead>
             <tr>

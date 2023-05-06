@@ -15,7 +15,7 @@ import TeamSquad from "./TeamSquad";
 
 function TeamInfo() {
   const [searchParams] = useSearchParams();
-  const id = Number(searchParams.get("id"));
+  const [id, setId] = useState<number>(Number(searchParams.get("id")));
   const [options, setOptions] = useState<number>(5);
   const { newFavouriteTeams, setNewFavouriteTeams } =
     useInfo() as InfoContextType;
@@ -97,7 +97,12 @@ function TeamInfo() {
         />
       )}
       {options === 2 && (
-        <LeagueTable id={leagueId} currentSeason={season} teamPage={true} />
+        <LeagueTable
+          id={leagueId}
+          setId={setId}
+          currentSeason={season}
+          teamPage={true}
+        />
       )}
       {options === 3 && <TeamSquad />}
     </div>

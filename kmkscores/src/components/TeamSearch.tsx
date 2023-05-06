@@ -135,6 +135,8 @@ function TeamSearch({
         <div
           onClick={() => {
             navigate(`/teams?id=${team.team.id}`);
+            setCountry("");
+            setSearchQuery("");
           }}
         >
           <img
@@ -160,6 +162,9 @@ function TeamSearch({
 
   return (
     <div className="search-container">
+      {!country && (
+        <h2 className="search-question">What country is the team from?</h2>
+      )}
       <form className="teamSearch-form">
         {country && (
           <img className="search-countryFlag" src={flag} alt="country's flag" />

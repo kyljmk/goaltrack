@@ -18,7 +18,7 @@ function Leagues() {
   const { newFavouriteLeagues } = useInfo() as InfoContextType;
 
   const [searchParams] = useSearchParams();
-  const id = Number(searchParams.get("id"));
+  const [id, setId] = useState<number>(Number(searchParams.get("id")));
   const currentSeason = Number(searchParams.get("currentSeason"));
 
   useEffect(() => {
@@ -52,6 +52,7 @@ function Leagues() {
             {id ? (
               <LeagueTable
                 id={id}
+                setId={setId}
                 currentSeason={currentSeason}
                 teamPage={false}
               />
