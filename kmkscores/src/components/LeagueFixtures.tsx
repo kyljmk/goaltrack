@@ -90,6 +90,10 @@ function LeagueFixtures({ fixtures, menu }: IDailyLeagueProps) {
     fixtures[0].league.flag =
       "https://media-2.api-sports.io/football/teams/8213.png";
   }
+  if (fixtures[0].league.country === "World") {
+    fixtures[0].league.flag =
+      "https://www.flashscore.com/res/_fs/build/world.b7d16db.png";
+  }
 
   return (
     <div className="league">

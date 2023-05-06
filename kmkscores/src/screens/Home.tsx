@@ -1,7 +1,7 @@
 import { faClock, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import LiveLeaguesComponent from "../components/LeagueFixtures";
+import LeagueFixtures from "../components/LeagueFixtures";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import EmptyFixtures from "../components/EmptyFixtures";
@@ -48,6 +48,9 @@ function Home() {
       .filter((item: FixtureResponse) =>
         newFavouriteLeagues.includes(item.league.id)
       )
+      .sort(
+        (a: FixtureResponse, b: FixtureResponse) => a.league.id - b.league.id
+      )
       .reduce((x: any, y: any) => {
         (x[y.league.name] = x[y.league.name] || []).push(y);
 
@@ -55,11 +58,7 @@ function Home() {
       }, {})
   ).map((league: any) => {
     return (
-      <LiveLeaguesComponent
-        key={league[0].league.id}
-        fixtures={league}
-        menu={menu}
-      />
+      <LeagueFixtures key={league[0].league.id} fixtures={league} menu={menu} />
     );
   });
 
@@ -83,7 +82,7 @@ function Home() {
           }, {})
       ).map((league: any) => {
         return (
-          <LiveLeaguesComponent
+          <LeagueFixtures
             key={league[0].league.id}
             fixtures={league}
             menu={menu}
@@ -114,7 +113,7 @@ function Home() {
         }, {})
     ).map((league: any) => {
       return (
-        <LiveLeaguesComponent
+        <LeagueFixtures
           key={league[0].league.id}
           fixtures={league}
           menu={menu}
