@@ -3,7 +3,7 @@ import "../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faEnvelope,
+  faCircleInfo,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -37,9 +37,9 @@ function Header({ menu, setMenu }: IHeaderProps) {
           }}
           className="header-title"
         />
-        <a href="mailto:contact@goaltrack.live">
-          <FontAwesomeIcon size="2xl" icon={faEnvelope} />
-        </a>
+        <div className="header-info" onClick={() => navigate("/contact")}>
+          <FontAwesomeIcon size="2xl" icon={faCircleInfo} />
+        </div>
       </div>
     </div>
   );

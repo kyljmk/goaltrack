@@ -41,6 +41,10 @@
   margin-top: 5px;
 }
 
+.startLineups-away-player {
+  text-align: right;
+}
+
 .startLineups-home-player-number-container,
 .startLineups-away-player-number-container {
   width: 30px;

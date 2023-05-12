@@ -52,6 +52,7 @@ function Menu({ menu, dropdown, setMenu }: IMenuProps) {
         onClick={() => {
           navigate("/leagues");
           setMenu(false);
+          window.location.reload();
         }}
       >
         <div className="header-dropdown-item">

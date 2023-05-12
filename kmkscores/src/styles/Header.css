@@ -29,6 +29,15 @@
   cursor: pointer;
 }
 
+.header-info {
+  cursor: pointer;
+}
+
+.header-info:hover {
+  scale: 1.1;
+  transition: ease 0.2s;
+}
+
 @media (min-width: 650px) {
   .header-menuIcon {
     color: lightgray;

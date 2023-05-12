@@ -9,6 +9,11 @@ function Lineups({ lineups }: ILineUpProps) {
 
   if (lineups !== null) {
     const startHomeElements = lineups[0]?.startXI.map((x) => {
+      if (x.player.name.split(" ").length > 1) {
+        var names = x.player.name.split(" ");
+        names[0] = names[0].substring(0, 1) + ".";
+        x.player.name = names.join(" ");
+      }
       return (
         <div key={x.player.number} className="startLineups-home-player">
           <div className="startLineups-home-player-number-container">
@@ -27,6 +32,11 @@ function Lineups({ lineups }: ILineUpProps) {
     });
 
     const subHomeElements = lineups[0]?.substitutes.map((x) => {
+      if (x.player.name.split(" ").length > 1) {
+        var names = x.player.name.split(" ");
+        names[0] = names[0].substring(0, 1) + ".";
+        x.player.name = names.join(" ");
+      }
       return (
         <div key={x.player.number} className="startLineups-home-player">
           <div className="startLineups-home-player-number-container">
@@ -45,6 +55,11 @@ function Lineups({ lineups }: ILineUpProps) {
     });
 
     const startAwayElements = lineups[1]?.startXI.map((x) => {
+      if (x.player.name.split(" ").length > 1) {
+        var names = x.player.name.split(" ");
+        names[0] = names[0].substring(0, 1) + ".";
+        x.player.name = names.join(" ");
+      }
       return (
         <div key={x.player.number} className="startLineups-away-player">
           <span className="startLineups-away-player-name">{x.player.name}</span>
@@ -63,6 +78,11 @@ function Lineups({ lineups }: ILineUpProps) {
     });
 
     const subAwayElements = lineups[1]?.substitutes.map((x) => {
+      if (x.player.name.split(" ").length > 1) {
+        var names = x.player.name.split(" ");
+        names[0] = names[0].substring(0, 1) + ".";
+        x.player.name = names.join(" ");
+      }
       return (
         <div key={x.player.number} className="startLineups-away-player">
           <span className="startLineups-away-player-name">{x.player.name}</span>

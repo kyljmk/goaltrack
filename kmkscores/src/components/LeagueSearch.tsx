@@ -91,11 +91,12 @@ function LeagueSearch() {
         return (
           <div className="searchLeague" key={league.league.id}>
             <span
-              onClick={() =>
+              onClick={() => {
                 navigate(
                   `/leagues?id=${league.league.id}&currentSeason=${season}`
-                )
-              }
+                );
+                window.location.reload();
+              }}
               className="searchLeague-name"
             >
               {league.league.name}
