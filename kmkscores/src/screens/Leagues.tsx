@@ -57,7 +57,7 @@ function Leagues() {
                 teamPage={false}
               />
             ) : (
-              <LeagueSearch />
+              <LeagueSearch setId={setId} />
             )}
           </div>
         </div>

@@ -663,6 +663,10 @@ export interface ITeamResultsProps {
   resultsFixtures: string;
 }
 
+export interface ILeagueSearchProps {
+  setId: Dispatch<SetStateAction<number>>;
+}
+
 export interface IDatePickerProps {
   dateString: string;
   setDateString: Dispatch<SetStateAction<string>>;

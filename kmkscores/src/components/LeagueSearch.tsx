@@ -3,10 +3,10 @@ import { faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApiGetLeagues } from "../hooks/UseApi";
-import { ILeagueDetails, InfoContextType } from "../Types";
+import { ILeagueDetails, ILeagueSearchProps, InfoContextType } from "../Types";
 import useInfo from "../hooks/UseInfo";
 
-function LeagueSearch() {
+function LeagueSearch({ setId }: ILeagueSearchProps) {
   const { newFavouriteLeagues, setNewFavouriteLeagues } =
     useInfo() as InfoContextType;
   const [options, setOptions] = useState<string>("league");
@@ -95,7 +95,7 @@ function LeagueSearch() {
                 navigate(
                   `/leagues?id=${league.league.id}&currentSeason=${season}`
                 );
-                window.location.reload();
+                setId(league.league.id);
               }}
               className="searchLeague-name"
             >
