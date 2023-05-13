@@ -78,7 +78,7 @@ export const blankFixtureObject: IFixtureDetails = {
       },
       type: "",
       detail: "",
-      comment: null,
+      comments: null,
     },
   ],
   lineups: [

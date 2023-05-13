@@ -247,7 +247,7 @@ export const useApiGetFavouriteLeagues = () => {
   const fetchApi = () => {
     const data = newFavouriteLeagues.map(async (i) => {
       const response = await fetch(
-        `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${i}&&season=${season}`,
+        `https://api-football-v1.p.rapidapi.com/v3/leagues?id=${i}`,
         options
       );
       const data = await response.json();

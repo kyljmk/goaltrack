@@ -161,7 +161,7 @@ export interface IMatchEvent {
   };
   type: string;
   detail: string;
-  comment: string | null;
+  comments: string | null;
 }
 
 export interface IEventProps {
@@ -540,6 +540,13 @@ export interface ILeagueInfo {
     code: string;
     flag: string;
   };
+  seasons: {
+    coverage: null;
+    current: boolean;
+    end: string;
+    start: string;
+    year: number;
+  }[];
 }
 
 export interface ISearchProps {

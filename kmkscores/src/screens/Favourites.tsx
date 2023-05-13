@@ -108,6 +108,7 @@ function Favourites() {
           );
         }
       };
+      const season = league.seasons[league.seasons.length - 1].year;
       return (
         <div
           key={league.league.id}
@@ -119,7 +120,11 @@ function Favourites() {
         >
           <div
             className="leagueInfo-container"
-            onClick={() => navigate(`/leagues?id=${league.league.id}`)}
+            onClick={() =>
+              navigate(
+                `/leagues?id=${league.league.id}&currentSeason=${season}`
+              )
+            }
           >
             <div className="league-logoContainer">
               <img

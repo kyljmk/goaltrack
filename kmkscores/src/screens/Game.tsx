@@ -18,6 +18,8 @@ function Game() {
   const id = Number(searchParams.get("id"));
   const { fixtureDetails, loadingGame } = useApiGetGame(id);
 
+  console.log(fixtureDetails);
+
   const { fixture, league, teams, goals, score, events, lineups, statistics } =
     fixtureDetails;
 
@@ -34,7 +36,7 @@ function Game() {
           assist={event.assist}
           type={event.type}
           detail={event.detail}
-          comment={event.comment}
+          comment={event.comments}
           scoreCount={scoreCount}
           setScoreCount={setScoreCount}
         />
@@ -42,7 +44,7 @@ function Game() {
     });
 
   const secondHalfElements = events
-    ?.filter((event) => event.time.elapsed > 45)
+    ?.filter((event) => event.time.elapsed > 45 && event.time.elapsed < 91)
     .map((event, i) => {
       return (
         <Events
@@ -54,7 +56,50 @@ function Game() {
           assist={event.assist}
           type={event.type}
           detail={event.detail}
-          comment={event.comment}
+          comment={event.comments}
+          scoreCount={scoreCount}
+          setScoreCount={setScoreCount}
+        />
+      );
+    });
+
+  const aetElements = events
+    ?.filter(
+      (event) =>
+        event.time.elapsed > 90 && event.comments !== "Penalty Shootout"
+    )
+    .map((event, i) => {
+      return (
+        <Events
+          key={i}
+          homeName={teams.home.name}
+          time={event.time}
+          team={event.team}
+          player={event.player}
+          assist={event.assist}
+          type={event.type}
+          detail={event.detail}
+          comment={event.comments}
+          scoreCount={scoreCount}
+          setScoreCount={setScoreCount}
+        />
+      );
+    });
+
+  const penaltyElements = events
+    ?.filter((event) => event.comments === "Penalty Shootout")
+    .map((event, i) => {
+      return (
+        <Events
+          key={i}
+          homeName={teams.home.name}
+          time={event.time}
+          team={event.team}
+          player={event.player}
+          assist={event.assist}
+          type={event.type}
+          detail={event.detail}
+          comment={event.comments}
           scoreCount={scoreCount}
           setScoreCount={setScoreCount}
         />
@@ -176,6 +221,20 @@ function Game() {
                         <span className="events-fulltimeScore">
                           {fulltimeScore}
                         </span>
+                      </div>
+                    )}
+                    {aetElements}
+                    {aetCheck.includes(fixtureDetails.fixture.status.short) && (
+                      <div className="events-fulltimeBanner">
+                        <span className="events-fulltimeText">AET</span>
+                        <span className="events-fulltimeScore">{aetScore}</span>
+                      </div>
+                    )}
+                    {penaltyElements}
+                    {penaltyElements !== undefined && (
+                      <div className="events-fulltimeBanner">
+                        <span className="events-fulltimeText">PEN</span>
+                        <span className="events-fulltimeScore">{penScore}</span>
                       </div>
                     )}
                   </div>
